@@ -1,6 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PCBManufacturing.Models;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace PCBManufacturing.Features.Quote;
 
@@ -9,10 +10,67 @@ namespace PCBManufacturing.Features.Quote;
 /// </summary>
 public partial class QuoteViewModel : ObservableObject
 {
-    public QuoteViewModel()
+    private readonly string _defaultSolderMaskColor = "#008C4A";
+    private readonly PcbConfiguration _configuration;
+
+    public QuoteViewModel(PcbConfiguration configuration)
     {
-        Parameters = SampleData.PcbParameters;
+        _configuration = configuration;
+
+        Parameters = new ObservableCollection<PcbParameter>
+        {
+            new(
+                "Dimensions",
+                "Width",
+                $"{_configuration.Width} mm"),
+
+            new(
+                "Dimensions",
+                "Height",
+                $"{_configuration.Height} mm"),
+
+            new(
+                "Layers",
+                "Layer count",
+                _configuration.LayerCount.ToString()),
+
+            new(
+                "Finish",
+                "Finish type",
+                _configuration.FinishType)
+        };
+
+        _configuration.PropertyChanged += OnConfigurationPropertyChanged;
     }
 
     public ObservableCollection<PcbParameter> Parameters { get; }
+
+    public string SolderMaskColorCode =>
+        _configuration.SolderMaskColor?.ColorCode ?? _defaultSolderMaskColor;
+
+    public string BoardDimensions => $"{_configuration.Width} × {_configuration.Height} mm";
+
+    public string BoardDetails => $"{_configuration.LayerCount} Layers · {_configuration.FinishType}";
+
+    private void OnConfigurationPropertyChanged(
+        object? sender,
+        PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(PcbConfiguration.SolderMaskColor):
+                OnPropertyChanged(nameof(SolderMaskColorCode));
+                break;
+
+            case nameof(PcbConfiguration.Width):
+            case nameof(PcbConfiguration.Height):
+                OnPropertyChanged(nameof(BoardDimensions));
+                break;
+
+            case nameof(PcbConfiguration.LayerCount):
+            case nameof(PcbConfiguration.FinishType):
+                OnPropertyChanged(nameof(BoardDetails));
+                break;
+        }
+    }
 }

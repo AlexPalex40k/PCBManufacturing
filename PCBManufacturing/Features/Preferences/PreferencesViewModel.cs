@@ -10,6 +10,8 @@ namespace PCBManufacturing.Features.Preferences;
 /// </summary>
 public partial class PreferencesViewModel : ObservableValidator
 {
+    private readonly PcbConfiguration _configuration;
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(PriceModifier))]
     [NotifyPropertyChangedFor(nameof(ProductionDays))]
@@ -32,8 +34,9 @@ public partial class PreferencesViewModel : ObservableValidator
     /// Initializes a new instance of the <see cref="PreferencesViewModel"/> class
     /// with predefined PCB manufacturing options.
     /// </summary>
-    public PreferencesViewModel()
+    public PreferencesViewModel(PcbConfiguration configuration)
     {
+        _configuration = configuration;
         Materials = SampleData.Materials;
         SolderMaskColors = SampleData.SolderMaskColors;
         BoardThicknesses = SampleData.BoardThicknesses;
@@ -52,4 +55,25 @@ public partial class PreferencesViewModel : ObservableValidator
     public decimal PriceModifier => SelectedMaterial?.PriceModifier ?? 1.0m;
 
     public int ProductionDays => SelectedMaterial?.ProductionDays ?? 0;
+
+    //TODO ALEX check generated partial hooks
+    partial void OnSelectedMaterialChanged(Material? value)
+    {
+        _configuration.Material = value;
+    }
+
+    partial void OnSelectedSolderMaskColorChanged(SolderMaskColor? value)
+    {
+        _configuration.SolderMaskColor = value;
+    }
+
+    partial void OnSelectedBoardThicknessChanged(BoardThickness? value)
+    {
+        _configuration.BoardThickness = value;
+    }
+
+    partial void OnPostcodeChanged(string value)
+    {
+        _configuration.Postcode = value;
+    }
 }

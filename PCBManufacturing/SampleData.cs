@@ -28,11 +28,4 @@ public static class SampleData
             new("1.6 mm", 1.6),
             new("2.0 mm", 2.0)
         };
-    public static ObservableCollection<PcbParameter> PcbParameters { get; } = new()
-        {
-            new("Dimensions", "Width", "100 mm"),
-            new("Dimensions", "Height", "80 mm"),
-            new("Layers", "Layer count", "4"),
-            new("Finish", "Finish type", "HASL")
-        };
 }
