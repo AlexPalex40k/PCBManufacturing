@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PCBManufacturing.Features.Preferences;
+using PCBManufacturing.Features.Quote;
 using PCBManufacturing.ViewModels;
 
 namespace PCBManufacturing;
@@ -13,6 +14,7 @@ public static class Module
         services.AddSingleton<MainWindow>();
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<PreferencesViewModel>();
+        services.AddSingleton<QuoteViewModel>();
 
         return services.BuildServiceProvider();
     }
