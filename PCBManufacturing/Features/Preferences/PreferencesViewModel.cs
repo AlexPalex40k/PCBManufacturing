@@ -1,14 +1,33 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PCBManufacturing.Models;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PCBManufacturing.Features.Preferences;
 
 /// <summary>
 /// Provides data and state for configuring PCB manufacturing preferences.
 /// </summary>
-public partial class PreferencesViewModel : ObservableObject
+public partial class PreferencesViewModel : ObservableValidator
 {
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(PriceModifier))]
+    [NotifyPropertyChangedFor(nameof(ProductionDays))]
+    private Material? _selectedMaterial;
+
+    [ObservableProperty]
+    private SolderMaskColor? _selectedSolderMaskColor;
+
+    [ObservableProperty]
+    private BoardThickness? _selectedBoardThickness;
+
+    //TODO ALEX check DataAnnotations validation
+    [ObservableProperty]
+    [NotifyDataErrorInfo]
+    [Required(ErrorMessage = "Postcode is required.")]
+    [RegularExpression(@"^\d{4,10}$", ErrorMessage = "Postcode must contain 4 to 10 digits.")]
+    private string _postcode = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="PreferencesViewModel"/> class
     /// with predefined PCB manufacturing options.
@@ -30,15 +49,7 @@ public partial class PreferencesViewModel : ObservableObject
 
     public ObservableCollection<BoardThickness> BoardThicknesses { get; }
 
-    [ObservableProperty]
-    private Material? _selectedMaterial;
+    public decimal PriceModifier => SelectedMaterial?.PriceModifier ?? 1.0m;
 
-    [ObservableProperty]
-    private SolderMaskColor? _selectedSolderMaskColor;
-
-    [ObservableProperty]
-    private BoardThickness? _selectedBoardThickness;
-
-    [ObservableProperty]
-    private string _postcode = string.Empty;
+    public int ProductionDays => SelectedMaterial?.ProductionDays ?? 0;
 }

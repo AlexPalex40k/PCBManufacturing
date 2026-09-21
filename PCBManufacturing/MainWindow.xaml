@@ -17,7 +17,8 @@
 
     <TabControl>
         <TabItem Header="Preferences">
-            <ContentControl Content="{Binding Preferences}" />
+            <ContentControl Content="{Binding Preferences}"
+                            Validation.ErrorTemplate="{x:Null}"/>
         </TabItem>
 
         <TabItem Header="Quote" />

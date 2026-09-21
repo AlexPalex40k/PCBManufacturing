@@ -29,6 +29,48 @@
                   SelectedItem="{Binding SelectedMaterial}"
                   DisplayMemberPath="Name" />
 
+        <Border Grid.Row="0"
+                Grid.RowSpan="4"
+                Grid.Column="2"
+                Margin="40,0,0,0"
+                Padding="16"
+                BorderBrush="Gray"
+                BorderThickness="1">
+
+            <StackPanel>
+                <TextBlock Margin="0,0,0,16"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           Text="Summary" />
+
+                <TextBlock Margin="0,0,0,6">
+                    <Run Text="Material: " />
+                    <Run Text="{Binding SelectedMaterial.Name, Mode=OneWay}" />
+                </TextBlock>
+
+                <TextBlock Margin="0,0,0,6">
+                    <Run Text="Solder mask: " />
+                    <Run Text="{Binding SelectedSolderMaskColor.Name, Mode=OneWay}" />
+                </TextBlock>
+
+                <TextBlock Margin="0,0,0,6">
+                    <Run Text="Thickness: " />
+                    <Run Text="{Binding SelectedBoardThickness.Name, Mode=OneWay}" />
+                </TextBlock>
+
+                <TextBlock Margin="0,0,0,6">
+                    <Run Text="Price modifier: ×" />
+                    <Run Text="{Binding PriceModifier, Mode=OneWay}" />
+                </TextBlock>
+
+                <TextBlock>
+                    <Run Text="Production time: " />
+                    <Run Text="{Binding ProductionDays, Mode=OneWay}" />
+                    <Run Text=" days" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
+
         <TextBlock Grid.Row="1"
                    Grid.Column="0"
                    Margin="0,0,16,12"
@@ -63,7 +105,9 @@
 
         <TextBox Grid.Row="3"
                  Grid.Column="1"
-                 Text="{Binding Postcode, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Postcode,
+                        UpdateSourceTrigger=PropertyChanged,
+                        ValidatesOnNotifyDataErrors=True}" />
     </Grid>
 
 </UserControl>
