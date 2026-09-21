@@ -4,9 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PCBManufacturing"
+        xmlns:preferences="clr-namespace:PCBManufacturing.Features.Preferences"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
-    </Grid>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type preferences:PreferencesViewModel}">
+            <preferences:PreferencesView />
+        </DataTemplate>
+    </Window.Resources>
+
+
+    <TabControl>
+        <TabItem Header="Preferences">
+            <ContentControl Content="{Binding Preferences}" />
+        </TabItem>
+
+        <TabItem Header="Quote" />
+
+        <TabItem Header="Order" />
+    </TabControl>
+
 </Window>
