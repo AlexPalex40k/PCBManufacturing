@@ -13,13 +13,16 @@ public partial class OrderViewModel : ObservableObject
 {
     private readonly PcbConfiguration _configuration;
     private readonly IDialogService _dialogService;
+    private readonly IPostcodeValidator _postcodeValidator;
 
     public OrderViewModel(
         PcbConfiguration configuration,
-        IDialogService dialogService)
+        IDialogService dialogService,
+        IPostcodeValidator postcodeValidator)
     {
         _configuration = configuration;
         _dialogService = dialogService;
+        _postcodeValidator = postcodeValidator;
 
         _configuration.PropertyChanged += OnConfigurationPropertyChanged;
     }
@@ -109,6 +112,6 @@ public partial class OrderViewModel : ObservableObject
         return _configuration.Material != null
                && _configuration.SolderMaskColor != null
                && _configuration.BoardThickness != null
-               && !string.IsNullOrWhiteSpace(_configuration.Postcode);
+               && _postcodeValidator.IsValid(_configuration.Postcode);
     }
 }

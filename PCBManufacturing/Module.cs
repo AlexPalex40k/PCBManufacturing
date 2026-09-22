@@ -16,6 +16,7 @@ public static class Module
 
         services.AddSingleton<PcbConfiguration>();
         services.AddSingleton<IDialogService, DialogService>();
+        services.AddSingleton<IPostcodeValidator, PostcodeValidator>();
 
         services.AddSingleton<MainWindow>();
         services.AddSingleton<MainWindowViewModel>();
