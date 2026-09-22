@@ -1,6 +1,7 @@
-﻿<UserControl x:Class="PCBManufacturing.Features.Quote.QuoteView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<UserControl
+    x:Class="PCBManufacturing.Features.Quote.QuoteView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Grid Margin="24">
         <Grid.ColumnDefinitions>
@@ -9,35 +10,41 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <GroupBox Grid.Column="0"
-                  Header="Parameters">
+        <GroupBox
+            Grid.Column="0"
+            Header="{Binding [Parameters], Source={StaticResource Localization}}">
 
-            <DataGrid ItemsSource="{Binding Parameters}"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserDeleteRows="False"
-                      IsReadOnly="True"
-                      HeadersVisibility="Column">
+            <DataGrid
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                HeadersVisibility="Column"
+                IsReadOnly="True"
+                ItemsSource="{Binding Parameters}">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Group"
-                                        Binding="{Binding Group}"
-                                        Width="*" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Group}"
+                        Header="{Binding [Group], Source={StaticResource Localization}}" />
 
-                    <DataGridTextColumn Header="Parameter"
-                                        Binding="{Binding Name}"
-                                        Width="*" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Name}"
+                        Header="{Binding [Parameter], Source={StaticResource Localization}}" />
 
-                    <DataGridTextColumn Header="Value"
-                                        Binding="{Binding Value}"
-                                        Width="*" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Value}"
+                        Header="{Binding [Value], Source={StaticResource Localization}}" />
                 </DataGrid.Columns>
 
             </DataGrid>
         </GroupBox>
 
-        <GroupBox Grid.Column="2"
-          Header="PCB Preview">
+        <GroupBox
+            Grid.Column="2"
+            Header="{Binding [PCB Preview], Source={StaticResource Localization}}">
 
             <Grid Margin="20">
                 <Grid.RowDefinitions>
@@ -46,147 +53,156 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0"
-                           Margin="0,0,0,10"
-                           HorizontalAlignment="Center"
-                           FontSize="14"
-                           Text="{Binding BoardDimensions, Mode=OneWay}" />
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding BoardDimensions, Mode=OneWay}" />
 
-                <Viewbox Grid.Row="1"
-                 Stretch="Uniform">
+                <Viewbox
+                    Grid.Row="1"
+                    Stretch="Uniform">
 
-                    <Canvas Width="400"
-                    Height="320">
+                    <Canvas
+                        Width="400"
+                        Height="320">
 
-                        <!-- PCB substrate -->
-                        <Border Canvas.Left="20"
-                        Canvas.Top="20"
-                        Width="360"
-                        Height="280"
-                        Background="{Binding SolderMaskColorCode, Mode=OneWay}"
-                        BorderBrush="#404040"
-                        BorderThickness="2"
-                        CornerRadius="5" />
+                        <!--  PCB substrate  -->
+                        <Border
+                            Canvas.Left="20"
+                            Canvas.Top="20"
+                            Width="360"
+                            Height="280"
+                            Background="{Binding SolderMaskColorCode, Mode=OneWay}"
+                            BorderBrush="#404040"
+                            BorderThickness="2"
+                            CornerRadius="5" />
 
-                        <!-- Mounting holes -->
-                        <Ellipse Canvas.Left="38"
-                         Canvas.Top="38"
-                         Width="18"
-                         Height="18"
-                         Fill="#E0E0E0"
-                         Stroke="#606060"
-                         StrokeThickness="2" />
+                        <!--  Mounting holes  -->
+                        <Ellipse
+                            Canvas.Left="38"
+                            Canvas.Top="38"
+                            Width="18"
+                            Height="18"
+                            Fill="#E0E0E0"
+                            Stroke="#606060"
+                            StrokeThickness="2" />
 
-                        <Ellipse Canvas.Left="344"
-                         Canvas.Top="38"
-                         Width="18"
-                         Height="18"
-                         Fill="#E0E0E0"
-                         Stroke="#606060"
-                         StrokeThickness="2" />
+                        <Ellipse
+                            Canvas.Left="344"
+                            Canvas.Top="38"
+                            Width="18"
+                            Height="18"
+                            Fill="#E0E0E0"
+                            Stroke="#606060"
+                            StrokeThickness="2" />
 
-                        <Ellipse Canvas.Left="38"
-                         Canvas.Top="264"
-                         Width="18"
-                         Height="18"
-                         Fill="#E0E0E0"
-                         Stroke="#606060"
-                         StrokeThickness="2" />
+                        <Ellipse
+                            Canvas.Left="38"
+                            Canvas.Top="264"
+                            Width="18"
+                            Height="18"
+                            Fill="#E0E0E0"
+                            Stroke="#606060"
+                            StrokeThickness="2" />
 
-                        <Ellipse Canvas.Left="344"
-                         Canvas.Top="264"
-                         Width="18"
-                         Height="18"
-                         Fill="#E0E0E0"
-                         Stroke="#606060"
-                         StrokeThickness="2" />
+                        <Ellipse
+                            Canvas.Left="344"
+                            Canvas.Top="264"
+                            Width="18"
+                            Height="18"
+                            Fill="#E0E0E0"
+                            Stroke="#606060"
+                            StrokeThickness="2" />
 
-                        <!-- Copper traces -->
-                        <Path Stroke="#D6B84C"
-                      StrokeThickness="5"
-                      StrokeLineJoin="Round"
-                      Data="M 90,90
-                            L 170,90
-                            L 170,145
-                            L 270,145
-                            L 270,200
-                            L 325,200" />
+                        <!--  Copper traces  -->
+                        <Path
+                            Data="M 90,90                             L 170,90                             L 170,145                             L 270,145                             L 270,200                             L 325,200"
+                            Stroke="#D6B84C"
+                            StrokeLineJoin="Round"
+                            StrokeThickness="5" />
 
-                        <Path Stroke="#D6B84C"
-                      StrokeThickness="5"
-                      StrokeLineJoin="Round"
-                      Data="M 95,225
-                            L 190,225
-                            L 190,185
-                            L 235,185" />
+                        <Path
+                            Data="M 95,225                             L 190,225                             L 190,185                             L 235,185"
+                            Stroke="#D6B84C"
+                            StrokeLineJoin="Round"
+                            StrokeThickness="5" />
 
-                        <Path Stroke="#D6B84C"
-                      StrokeThickness="4"
-                      StrokeLineJoin="Round"
-                      Data="M 110,130
-                            L 130,130
-                            L 130,180
-                            L 160,180" />
+                        <Path
+                            Data="M 110,130                             L 130,130                             L 130,180                             L 160,180"
+                            Stroke="#D6B84C"
+                            StrokeLineJoin="Round"
+                            StrokeThickness="4" />
 
-                        <!-- Pads -->
-                        <Ellipse Canvas.Left="82"
-                         Canvas.Top="82"
-                         Width="16"
-                         Height="16"
-                         Fill="#D6B84C" />
+                        <!--  Pads  -->
+                        <Ellipse
+                            Canvas.Left="82"
+                            Canvas.Top="82"
+                            Width="16"
+                            Height="16"
+                            Fill="#D6B84C" />
 
-                        <Ellipse Canvas.Left="162"
-                         Canvas.Top="82"
-                         Width="16"
-                         Height="16"
-                         Fill="#D6B84C" />
+                        <Ellipse
+                            Canvas.Left="162"
+                            Canvas.Top="82"
+                            Width="16"
+                            Height="16"
+                            Fill="#D6B84C" />
 
-                        <Ellipse Canvas.Left="262"
-                         Canvas.Top="137"
-                         Width="16"
-                         Height="16"
-                         Fill="#D6B84C" />
+                        <Ellipse
+                            Canvas.Left="262"
+                            Canvas.Top="137"
+                            Width="16"
+                            Height="16"
+                            Fill="#D6B84C" />
 
-                        <Ellipse Canvas.Left="317"
-                         Canvas.Top="192"
-                         Width="16"
-                         Height="16"
-                         Fill="#D6B84C" />
+                        <Ellipse
+                            Canvas.Left="317"
+                            Canvas.Top="192"
+                            Width="16"
+                            Height="16"
+                            Fill="#D6B84C" />
 
-                        <Ellipse Canvas.Left="87"
-                         Canvas.Top="217"
-                         Width="16"
-                         Height="16"
-                         Fill="#D6B84C" />
+                        <Ellipse
+                            Canvas.Left="87"
+                            Canvas.Top="217"
+                            Width="16"
+                            Height="16"
+                            Fill="#D6B84C" />
 
-                        <Ellipse Canvas.Left="227"
-                         Canvas.Top="177"
-                         Width="16"
-                         Height="16"
-                         Fill="#D6B84C" />
+                        <Ellipse
+                            Canvas.Left="227"
+                            Canvas.Top="177"
+                            Width="16"
+                            Height="16"
+                            Fill="#D6B84C" />
 
-                        <!-- Simplified IC -->
-                        <Rectangle Canvas.Left="205"
-                           Canvas.Top="70"
-                           Width="70"
-                           Height="45"
-                           Fill="#252525"
-                           Stroke="#AAAAAA"
-                           StrokeThickness="1" />
+                        <!--  Simplified IC  -->
+                        <Rectangle
+                            Canvas.Left="205"
+                            Canvas.Top="70"
+                            Width="70"
+                            Height="45"
+                            Fill="#252525"
+                            Stroke="#AAAAAA"
+                            StrokeThickness="1" />
 
-                        <TextBlock Canvas.Left="220"
-                           Canvas.Top="84"
-                           Foreground="#DDDDDD"
-                           FontSize="12"
-                           Text="PCB1" />
+                        <TextBlock
+                            Canvas.Left="220"
+                            Canvas.Top="84"
+                            FontSize="12"
+                            Foreground="#DDDDDD"
+                            Text="{Binding [PCB1], Source={StaticResource Localization}}" />
 
                     </Canvas>
                 </Viewbox>
 
-                <TextBlock Grid.Row="2"
-                           Margin="0,10,0,0"
-                           HorizontalAlignment="Center"
-                           Text="{Binding BoardDetails, Mode=OneWay}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Center"
+                    Text="{Binding BoardDetails, Mode=OneWay}" />
 
             </Grid>
         </GroupBox>

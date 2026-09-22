@@ -1,6 +1,7 @@
-﻿using System.Windows;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PCBManufacturing.Services;
 using PCBManufacturing.ViewModels;
+using System.Windows;
 
 namespace PCBManufacturing;
 
@@ -23,8 +24,7 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
-        var mainWindowViewModel =
-            _serviceProvider.GetRequiredService<MainWindowViewModel>();
+        var mainWindowViewModel = _serviceProvider.GetRequiredService<MainWindowViewModel>();
 
         mainWindowViewModel.SaveState();
 

@@ -12,7 +12,7 @@
 
         <GroupBox
             Grid.Column="0"
-            Header="Order Summary">
+            Header="{Binding [Order Summary], Source={StaticResource Localization}}">
 
             <Grid Margin="16">
                 <Grid.ColumnDefinitions>
@@ -34,7 +34,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Margin="0,0,16,10"
-                    Text="Material" />
+                    Text="{Binding [Material], Source={StaticResource Localization}}" />
 
                 <TextBlock
                     Grid.Row="0"
@@ -47,7 +47,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Margin="0,0,16,10"
-                    Text="Solder mask" />
+                    Text="{Binding [Solder mask], Source={StaticResource Localization}}" />
 
                 <TextBlock
                     Grid.Row="1"
@@ -60,7 +60,7 @@
                     Grid.Row="2"
                     Grid.Column="0"
                     Margin="0,0,16,10"
-                    Text="Board thickness" />
+                    Text="{Binding [Board thickness], Source={StaticResource Localization}}" />
 
                 <TextBlock
                     Grid.Row="2"
@@ -73,7 +73,7 @@
                     Grid.Row="3"
                     Grid.Column="0"
                     Margin="0,0,16,10"
-                    Text="Dimensions" />
+                    Text="{Binding [Dimensions], Source={StaticResource Localization}}" />
 
                 <TextBlock
                     Grid.Row="3"
@@ -86,7 +86,7 @@
                     Grid.Row="4"
                     Grid.Column="0"
                     Margin="0,0,16,10"
-                    Text="Layers" />
+                    Text="{Binding [Layers], Source={StaticResource Localization}}" />
 
                 <TextBlock
                     Grid.Row="4"
@@ -99,7 +99,7 @@
                     Grid.Row="5"
                     Grid.Column="0"
                     Margin="0,0,16,10"
-                    Text="Finish" />
+                    Text="{Binding [Finish], Source={StaticResource Localization}}" />
 
                 <TextBlock
                     Grid.Row="5"
@@ -112,7 +112,7 @@
                     Grid.Row="6"
                     Grid.Column="0"
                     Margin="0,0,16,0"
-                    Text="Postcode" />
+                    Text="{Binding [Postcode], Source={StaticResource Localization}}" />
 
                 <TextBlock
                     Grid.Row="6"
@@ -128,17 +128,17 @@
             VerticalAlignment="Top">
             <TextBlock
                 Style="{StaticResource SectionTitleStyle}"
-                Text="Ready to order" />
+                Text="{Binding [Ready to order], Source={StaticResource Localization}}" />
 
             <TextBlock
                 Margin="0,10,0,20"
-                Text="Review the PCB configuration before placing the order."
+                Text="{Binding [Review the PCB configuration before placing the order], Source={StaticResource Localization}}"
                 TextWrapping="Wrap" />
 
             <Button
                 HorizontalAlignment="Left"
                 Command="{Binding PlaceOrderCommand}"
-                Content="Place Order"
+                Content="{Binding [Place Order], Source={StaticResource Localization}}"
                 Style="{StaticResource PrimaryButtonStyle}" />
 
         </StackPanel>

@@ -41,7 +41,22 @@
             <TextBlock
                 Margin="0,0,8,0"
                 VerticalAlignment="Center"
-                Text="Dark theme" />
+                Text="EN" />
+
+            <CheckBox
+                Margin="0,0,8,0"
+                VerticalAlignment="Center"
+                IsChecked="{Binding IsRussian}" />
+
+            <TextBlock
+                Margin="0,0,24,0"
+                VerticalAlignment="Center"
+                Text="RU" />
+
+            <TextBlock
+                Margin="0,0,8,0"
+                VerticalAlignment="Center"
+                Text="{Binding [Dark theme], Source={StaticResource Localization}}" />
 
             <CheckBox
                 VerticalAlignment="Center"
@@ -50,17 +65,17 @@
         </StackPanel>
 
         <TabControl Grid.Row="1">
-            <TabItem Header="Preferences">
+            <TabItem Header="{Binding [Preferences], Source={StaticResource Localization}}">
                 <ContentControl
                     Content="{Binding Preferences}"
                     Validation.ErrorTemplate="{x:Null}" />
             </TabItem>
 
-            <TabItem Header="Quote">
+            <TabItem Header="{Binding [Quote], Source={StaticResource Localization}}">
                 <ContentControl Content="{Binding Quote}" />
             </TabItem>
 
-            <TabItem Header="Order">
+            <TabItem Header="{Binding [Order], Source={StaticResource Localization}}">
                 <ContentControl Content="{Binding Order}" />
             </TabItem>
         </TabControl>
