@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:preferences="clr-namespace:PCBManufacturing.Features.Preferences"
         xmlns:quote="clr-namespace:PCBManufacturing.Features.Quote"
+        xmlns:order="clr-namespace:PCBManufacturing.Features.Order"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
@@ -14,6 +15,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type quote:QuoteViewModel}">
             <quote:QuoteView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type order:OrderViewModel}">
+            <order:OrderView />
         </DataTemplate>
     </Window.Resources>
 
@@ -28,7 +32,9 @@
             <ContentControl Content="{Binding Quote}" />
         </TabItem>
 
-        <TabItem Header="Order" />
+        <TabItem Header="Order">
+            <ContentControl Content="{Binding Order}" />
+        </TabItem>
     </TabControl>
 
 </Window>

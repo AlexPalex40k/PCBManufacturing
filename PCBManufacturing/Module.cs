@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PCBManufacturing.Features.Order;
 using PCBManufacturing.Features.Preferences;
 using PCBManufacturing.Features.Quote;
 using PCBManufacturing.Models;
+using PCBManufacturing.Services;
 using PCBManufacturing.ViewModels;
 
 namespace PCBManufacturing;
@@ -12,12 +14,15 @@ public static class Module
     {
         var services = new ServiceCollection();
 
+        services.AddSingleton<PcbConfiguration>();
+        services.AddSingleton<IDialogService, DialogService>();
+
         services.AddSingleton<MainWindow>();
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<PreferencesViewModel>();
         services.AddSingleton<QuoteViewModel>();
+        services.AddSingleton<OrderViewModel>();
 
-        services.AddSingleton<PcbConfiguration>();
 
         return services.BuildServiceProvider();
     }
