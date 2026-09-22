@@ -25,6 +25,7 @@ public static class Module
         services.AddSingleton<OrderViewModel>();
 
         services.AddSingleton<IThemeService, ThemeService>();
+        services.AddSingleton<IConfigurationStorage, JsonConfigurationStorage>();
 
         return services.BuildServiceProvider();
     }

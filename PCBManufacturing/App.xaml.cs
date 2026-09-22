@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using PCBManufacturing.ViewModels;
 
 namespace PCBManufacturing;
 
@@ -22,6 +23,11 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
+        var mainWindowViewModel =
+            _serviceProvider.GetRequiredService<MainWindowViewModel>();
+
+        mainWindowViewModel.SaveState();
+
         _serviceProvider.Dispose();
 
         base.OnExit(e);

@@ -33,6 +33,14 @@ public partial class MainWindowViewModel : ObservableObject
     public QuoteViewModel Quote { get; }
     public OrderViewModel Order { get; }
 
+    /// <summary>
+    /// Saves application state before shutdown.
+    /// </summary>
+    public void SaveState()
+    {
+        Preferences.SaveConfiguration();
+    }
+
     partial void OnIsDarkThemeChanged(bool value)
     {
         if (value)
