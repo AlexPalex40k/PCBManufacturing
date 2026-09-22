@@ -26,21 +26,44 @@
         </DataTemplate>
     </Window.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-    <TabControl>
-        <TabItem Header="Preferences">
-            <ContentControl
-                Content="{Binding Preferences}"
-                Validation.ErrorTemplate="{x:Null}" />
-        </TabItem>
+        <StackPanel
+            Grid.Row="0"
+            Margin="12,8"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
 
-        <TabItem Header="Quote">
-            <ContentControl Content="{Binding Quote}" />
-        </TabItem>
+            <TextBlock
+                Margin="0,0,8,0"
+                VerticalAlignment="Center"
+                Text="Dark theme" />
 
-        <TabItem Header="Order">
-            <ContentControl Content="{Binding Order}" />
-        </TabItem>
-    </TabControl>
+            <CheckBox
+                VerticalAlignment="Center"
+                IsChecked="{Binding IsDarkTheme}" />
 
+        </StackPanel>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="Preferences">
+                <ContentControl
+                    Content="{Binding Preferences}"
+                    Validation.ErrorTemplate="{x:Null}" />
+            </TabItem>
+
+            <TabItem Header="Quote">
+                <ContentControl Content="{Binding Quote}" />
+            </TabItem>
+
+            <TabItem Header="Order">
+                <ContentControl Content="{Binding Order}" />
+            </TabItem>
+        </TabControl>
+
+    </Grid>
 </Window>

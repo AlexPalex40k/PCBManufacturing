@@ -24,6 +24,7 @@ public static class Module
         services.AddSingleton<QuoteViewModel>();
         services.AddSingleton<OrderViewModel>();
 
+        services.AddSingleton<IThemeService, ThemeService>();
 
         return services.BuildServiceProvider();
     }
