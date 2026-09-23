@@ -2,41 +2,82 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Color x:Key="TextPrimaryColor">#1F2937</Color>
+    <Color x:Key="TextSecondaryColor">#6B7280</Color>
     <Color x:Key="WindowBackgroundColor">#F3F4F6</Color>
     <Color x:Key="SurfaceColor">#FFFFFF</Color>
     <Color x:Key="BorderColor">#D1D5DB</Color>
     <Color x:Key="PrimaryColor">#2563EB</Color>
     <Color x:Key="PrimaryHoverColor">#1D4ED8</Color>
-    <Color x:Key="TextPrimaryColor">#1F2937</Color>
-    <Color x:Key="TextSecondaryColor">#6B7280</Color>
     <Color x:Key="ErrorColor">#DC2626</Color>
+
+    <Color x:Key="SuccessColor">#008C4A</Color>
+    <Color x:Key="TitleBarColor">#263545</Color>
+    <Color x:Key="TitleTextColor">#F4F7FA</Color>
+    <Color x:Key="CopperColor">#E2C457</Color>
+
+    <Color x:Key="ComboBoxBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="ComboBoxTextColor">#20252B</Color>
+    <Color x:Key="ComboBoxHoverColor">#C7E7F1</Color>
+
+
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WindowBackgroundColor}" />
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryHoverColor}" />
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}" />
+    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
+
+    <SolidColorBrush x:Key="DefaultSolderMaskBrush" Color="{StaticResource SuccessColor}" />
+    <SolidColorBrush x:Key="TitleBarBrush" Color="{StaticResource TitleBarColor}" />
+    <SolidColorBrush x:Key="TitleTextBrush" Color="{StaticResource TitleTextColor}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
+    <SolidColorBrush x:Key="CopperBrush" Color="{StaticResource CopperColor}" />
+    <SolidColorBrush x:Key="InputBrush" Color="{StaticResource SurfaceColor}" />
+
+
+    <SolidColorBrush x:Key="ComboBoxBackgroundBrush" Color="{StaticResource ComboBoxBackgroundColor}" />
+    <SolidColorBrush x:Key="ComboBoxTextBrush" Color="{StaticResource ComboBoxTextColor}" />
+    <SolidColorBrush x:Key="ComboBoxHoverBrush" Color="{StaticResource ComboBoxHoverColor}" />
+
+
+
+    <Color x:Key="SurfaceAltColor">#ECEFF2</Color>
+    <Color x:Key="PanelHeaderColor">#E2E6EA</Color>
+    <Color x:Key="ToolbarColor">#F1F3F5</Color>
+    <Color x:Key="StatusBarColor">#E8EBEF</Color>
+    <Color x:Key="InputColor">#FFFFFF</Color>
+    <Color x:Key="GridLineColor">#D6DAE0</Color>
+    <Color x:Key="SelectionColor">#C7E7F1</Color>
+    <Color x:Key="WarningColor">#CA8700</Color>
+
+    <!-- PCB editor palette -->
+    <Color x:Key="PreviewCanvasColor">#333942</Color>
+    <Color x:Key="CanvasGridColor">#48505B</Color>
+    <Color x:Key="BoardOutlineColor">#76D6A2</Color>
+    <Color x:Key="SilkscreenColor">#D7EEE0</Color>
+    <Color x:Key="ComponentColor">#202327</Color>
+    <Color x:Key="HoleColor">#D9DDE1</Color>
     <Color x:Key="DefaultSolderMaskColor">#008C4A</Color>
 
-    <SolidColorBrush x:Key="WindowBackgroundBrush"
-                     Color="{StaticResource WindowBackgroundColor}" />
 
-    <SolidColorBrush x:Key="SurfaceBrush"
-                     Color="{StaticResource SurfaceColor}" />
 
-    <SolidColorBrush x:Key="BorderBrush"
-                     Color="{StaticResource BorderColor}" />
+    <SolidColorBrush x:Key="SurfaceAltBrush" Color="{StaticResource SurfaceAltColor}" />
+    <SolidColorBrush x:Key="PanelHeaderBrush" Color="{StaticResource PanelHeaderColor}" />
+    <SolidColorBrush x:Key="ToolbarBrush" Color="{StaticResource ToolbarColor}" />
+    <SolidColorBrush x:Key="StatusBarBrush" Color="{StaticResource StatusBarColor}" />
+    <SolidColorBrush x:Key="GridLineBrush" Color="{StaticResource GridLineColor}" />
+    <SolidColorBrush x:Key="SelectionBrush" Color="{StaticResource SelectionColor}" />
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}" />
+    <SolidColorBrush x:Key="PreviewCanvasBrush" Color="{StaticResource PreviewCanvasColor}" />
+    <SolidColorBrush x:Key="CanvasGridBrush" Color="{StaticResource CanvasGridColor}" />
+    <SolidColorBrush x:Key="BoardOutlineBrush" Color="{StaticResource BoardOutlineColor}" />
+    <SolidColorBrush x:Key="SilkscreenBrush" Color="{StaticResource SilkscreenColor}" />
+    <SolidColorBrush x:Key="ComponentBrush" Color="{StaticResource ComponentColor}" />
+    <SolidColorBrush x:Key="HoleBrush" Color="{StaticResource HoleColor}" />
 
-    <SolidColorBrush x:Key="PrimaryBrush"
-                     Color="{StaticResource PrimaryColor}" />
 
-    <SolidColorBrush x:Key="PrimaryHoverBrush"
-                     Color="{StaticResource PrimaryHoverColor}" />
-
-    <SolidColorBrush x:Key="TextPrimaryBrush"
-                     Color="{StaticResource TextPrimaryColor}" />
-
-    <SolidColorBrush x:Key="TextSecondaryBrush"
-                     Color="{StaticResource TextSecondaryColor}" />
-
-    <SolidColorBrush x:Key="ErrorBrush"
-                     Color="{StaticResource ErrorColor}" />
-
-    <SolidColorBrush x:Key="DefaultSolderMaskBrush"
-                     Color="{StaticResource DefaultSolderMaskColor}" />
 
 </ResourceDictionary>

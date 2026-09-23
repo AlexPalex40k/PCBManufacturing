@@ -32,50 +32,121 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel
+        <Border
             Grid.Row="0"
-            Margin="12,8"
-            HorizontalAlignment="Right"
-            Orientation="Horizontal">
+            Padding="12,0"
+            Background="{DynamicResource TitleBarBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <TextBlock
-                Margin="0,0,8,0"
-                VerticalAlignment="Center"
-                Text="EN" />
+                <StackPanel Orientation="Horizontal">
+                    <Border
+                        Width="20"
+                        Height="20"
+                        Margin="0,0,9,0"
+                        VerticalAlignment="Center"
+                        BorderBrush="#65CDEB"
+                        BorderThickness="1">
+                        <Grid>
+                            <Rectangle
+                                Width="10"
+                                Height="10"
+                                Stroke="#65CDEB"
+                                StrokeThickness="1" />
+                            <Ellipse
+                                Width="3"
+                                Height="3"
+                                Fill="#65CDEB" />
+                        </Grid>
+                    </Border>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        FontWeight="SemiBold"
+                        Foreground="{DynamicResource TitleTextBrush}"
+                        Text="PCB MANUFACTURING" />
+                </StackPanel>
 
-            <CheckBox
-                Margin="0,0,8,0"
-                VerticalAlignment="Center"
-                IsChecked="{Binding IsRussian}" />
+                <StackPanel
+                    Grid.Column="2"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Margin="0,0,6,0"
+                        Foreground="{DynamicResource TitleTextBrush}"
+                        Text="EN" />
+                    <ToggleButton
+                        Margin="0,0,6,0"
+                        IsChecked="{Binding IsRussian}"
+                        Style="{StaticResource SwitchToggleStyle}"
+                        ToolTip="English / Русский" />
+                    <TextBlock
+                        Margin="0,0,18,0"
+                        Foreground="{DynamicResource TitleTextBrush}"
+                        Text="RU" />
 
-            <TextBlock
-                Margin="0,0,24,0"
-                VerticalAlignment="Center"
-                Text="RU" />
-
-            <TextBlock
-                Margin="0,0,8,0"
-                VerticalAlignment="Center"
-                Text="{Binding [Dark theme], Source={StaticResource Localization}}" />
-
-            <CheckBox
-                VerticalAlignment="Center"
-                IsChecked="{Binding IsDarkTheme}" />
-
-        </StackPanel>
+                    <TextBlock
+                        Margin="0,0,7,0"
+                        MinWidth="70"
+                        Foreground="{DynamicResource TitleTextBrush}"
+                        Text="{Binding [Dark theme], Source={StaticResource Localization}}" />
+                    <ToggleButton
+                        IsChecked="{Binding IsDarkTheme}"
+                        Style="{StaticResource SwitchToggleStyle}" />
+                </StackPanel>
+            </Grid>
+        </Border>
 
         <TabControl Grid.Row="1">
-            <TabItem Header="{Binding [Preferences], Source={StaticResource Localization}}">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle
+                            Width="8"
+                            Height="8"
+                            Margin="0,0,5,0"
+                            Fill="{DynamicResource PrimaryBrush}" />
+                        <TextBlock Text="{Binding [Preferences], Source={StaticResource Localization}}" />
+                    </StackPanel>
+                </TabItem.Header>
+
                 <ContentControl
                     Content="{Binding Preferences}"
                     Validation.ErrorTemplate="{x:Null}" />
             </TabItem>
 
-            <TabItem Header="{Binding [Quote], Source={StaticResource Localization}}">
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse
+                            Width="8"
+                            Height="8"
+                            Margin="0,0,5,0"
+                            Fill="{DynamicResource CopperBrush}" />
+                        <TextBlock Text="{Binding [Quote], Source={StaticResource Localization}}" />
+                    </StackPanel>
+                </TabItem.Header>
                 <ContentControl Content="{Binding Quote}" />
             </TabItem>
 
-            <TabItem Header="{Binding [Order], Source={StaticResource Localization}}">
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Path
+                            Width="9"
+                            Height="9"
+                            Margin="0,0,7,0"
+                            Data="M 0,4 L 3,7 L 8,0"
+                            Stretch="Fill"
+                            Stroke="{DynamicResource SuccessBrush}"
+                            StrokeThickness="1.8" />
+                        <TextBlock Text="{Binding [Order], Source={StaticResource Localization}}" />
+                    </StackPanel>
+                </TabItem.Header>
                 <ContentControl Content="{Binding Order}" />
             </TabItem>
         </TabControl>

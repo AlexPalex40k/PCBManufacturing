@@ -31,7 +31,7 @@
             Margin="0,0,0,12"
             DisplayMemberPath="Name"
             ItemsSource="{Binding Materials}"
-            SelectedItem="{Binding SelectedMaterial}" />
+            SelectedItem="{Binding SelectedMaterial}"/>
 
         <Border
             Grid.Row="0"
@@ -39,7 +39,7 @@
             Grid.Column="2"
             Margin="40,0,0,0"
             Padding="16"
-            BorderBrush="Gray"
+            BorderBrush="{DynamicResource BorderBrush}"
             BorderThickness="1">
 
             <StackPanel>
