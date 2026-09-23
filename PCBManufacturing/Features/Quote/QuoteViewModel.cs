@@ -12,6 +12,11 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
 {
     private readonly PcbConfiguration _configuration;
 
+    private const double PreviewScale = 4;
+
+    [ObservableProperty]
+    private string _boardLabel = "PCB1";
+
     public QuoteViewModel(PcbConfiguration configuration)
     {
         _configuration = configuration;
@@ -50,6 +55,10 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
 
     public string BoardDetails => $"{_configuration.LayerCount} Layers · {_configuration.FinishType}";
 
+    public double PreviewWidth => _configuration.Width * PreviewScale;
+
+    public double PreviewHeight => _configuration.Height * PreviewScale;
+
     private void OnConfigurationPropertyChanged(
         object? sender,
         PropertyChangedEventArgs e)
@@ -61,15 +70,44 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
                 break;
 
             case nameof(PcbConfiguration.Width):
-            case nameof(PcbConfiguration.Height):
+                UpdateParameter("Width", $"{_configuration.Width} mm");
                 OnPropertyChanged(nameof(BoardDimensions));
+                OnPropertyChanged(nameof(PreviewWidth));
+                break;
+
+            case nameof(PcbConfiguration.Height):
+                UpdateParameter("Height", $"{_configuration.Height} mm");
+                OnPropertyChanged(nameof(BoardDimensions));
+                OnPropertyChanged(nameof(PreviewHeight));
                 break;
 
             case nameof(PcbConfiguration.LayerCount):
+                UpdateParameter("Layer count", _configuration.LayerCount.ToString());
+                OnPropertyChanged(nameof(BoardDetails));
+                break;
+
             case nameof(PcbConfiguration.FinishType):
+                UpdateParameter("Finish type", _configuration.FinishType);
                 OnPropertyChanged(nameof(BoardDetails));
                 break;
         }
+    }
+
+    private void UpdateParameter(string name, string value)
+    {
+        var parameter = Parameters.FirstOrDefault(x => x.Name == name);
+
+        if (parameter == null)
+        {
+            return;
+        }
+
+        var index = Parameters.IndexOf(parameter);
+
+        Parameters[index] = parameter with
+        {
+            Value = value
+        };
     }
 
     public void Dispose()

@@ -196,15 +196,6 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PCB1.
-        /// </summary>
-        public static string PCB1 {
-            get {
-                return ResourceManager.GetString("PCB1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Place Order.
         /// </summary>
         public static string Place_Order {
