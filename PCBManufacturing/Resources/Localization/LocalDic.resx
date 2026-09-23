@@ -183,4 +183,31 @@
   <data name="PCB1" xml:space="preserve">
     <value>PCB1</value>
   </data>
+  <data name="days" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="Please complete all required PCB configuration fields before placing the order." xml:space="preserve">
+    <value>Please complete all required PCB configuration fields before placing the order.</value>
+  </data>
+  <data name="Invalid order" xml:space="preserve">
+    <value>Invalid order</value>
+  </data>
+  <data name="Dimensions" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+  <data name="Layers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="Finish type" xml:space="preserve">
+    <value>Finish type</value>
+  </data>
+  <data name="Order placed" xml:space="preserve">
+    <value>Order placed</value>
+  </data>
+  <data name="Postcode is required" xml:space="preserve">
+    <value>Postcode is required.</value>
+  </data>
+  <data name="Postcode must contain 4 to 10 digits" xml:space="preserve">
+    <value>Postcode must contain 4 to 10 digits.</value>
+  </data>
 </root>

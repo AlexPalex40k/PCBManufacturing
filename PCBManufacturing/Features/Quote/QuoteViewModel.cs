@@ -8,9 +8,8 @@ namespace PCBManufacturing.Features.Quote;
 /// <summary>
 /// Provides PCB manufacturing parameters and quote preview state.
 /// </summary>
-public partial class QuoteViewModel : ObservableObject
+public partial class QuoteViewModel : ObservableObject, IDisposable
 {
-    private readonly string _defaultSolderMaskColor = "#008C4A";
     private readonly PcbConfiguration _configuration;
 
     public QuoteViewModel(PcbConfiguration configuration)
@@ -45,8 +44,7 @@ public partial class QuoteViewModel : ObservableObject
 
     public ObservableCollection<PcbParameter> Parameters { get; }
 
-    public string SolderMaskColorCode =>
-        _configuration.SolderMaskColor?.ColorCode ?? _defaultSolderMaskColor;
+    public string? SolderMaskColorCode => _configuration.SolderMaskColor?.ColorCode;
 
     public string BoardDimensions => $"{_configuration.Width} × {_configuration.Height} mm";
 
@@ -72,5 +70,10 @@ public partial class QuoteViewModel : ObservableObject
                 OnPropertyChanged(nameof(BoardDetails));
                 break;
         }
+    }
+
+    public void Dispose()
+    {
+        _configuration.PropertyChanged -= OnConfigurationPropertyChanged;
     }
 }

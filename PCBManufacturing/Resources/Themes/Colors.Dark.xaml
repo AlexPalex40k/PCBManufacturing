@@ -10,8 +10,9 @@
 	<Color x:Key="TextPrimaryColor">#E5E7EB</Color>
 	<Color x:Key="TextSecondaryColor">#9CA3AF</Color>
 	<Color x:Key="ErrorColor">#F87171</Color>
+    <Color x:Key="DefaultSolderMaskColor">#008C4A</Color>
 
-	<SolidColorBrush x:Key="WindowBackgroundBrush"
+    <SolidColorBrush x:Key="WindowBackgroundBrush"
 	                 Color="{StaticResource WindowBackgroundColor}" />
 
 	<SolidColorBrush x:Key="SurfaceBrush"
@@ -34,5 +35,8 @@
 
 	<SolidColorBrush x:Key="ErrorBrush"
 	                 Color="{StaticResource ErrorColor}" />
+
+    <SolidColorBrush x:Key="DefaultSolderMaskBrush"
+                     Color="{StaticResource DefaultSolderMaskColor}" />
 
 </ResourceDictionary>

@@ -3,13 +3,14 @@ using PCBManufacturing.Models;
 using PCBManufacturing.Services;
 using System.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PCBManufacturing.Resources.Localization;
 
 namespace PCBManufacturing.Features.Order;
 
 /// <summary>
 /// Provides order summary state for the configured PCB.
 /// </summary>
-public partial class OrderViewModel : ObservableObject
+public partial class OrderViewModel : ObservableObject, IDisposable
 {
     private readonly PcbConfiguration _configuration;
     private readonly IDialogService _dialogService;
@@ -87,24 +88,24 @@ public partial class OrderViewModel : ObservableObject
         if (!IsOrderValid())
         {
             _dialogService.ShowError(
-                "Please complete all required PCB configuration fields before placing the order.",
-                "Invalid Order");
+                LocalDic.Please_complete_all_required_PCB_configuration_fields_before_placing_the_order_,
+                LocalDic.Invalid_order);
 
             return;
         }
 
         var message =
-            $"Material: {Material}\n" +
-            $"Solder mask: {SolderMask}\n" +
-            $"Board thickness: {BoardThickness}\n" +
-            $"Dimensions: {Dimensions}\n" +
-            $"Layers: {LayerCount}\n" +
-            $"Finish: {FinishType}\n" +
-            $"Postcode: {Postcode}";
+            $"{LocalDic.Material}: {Material}\n" +
+            $"{LocalDic.Solder_mask}: {SolderMask}\n" +
+            $"{LocalDic.Board_thickness}: {BoardThickness}\n" +
+            $"{LocalDic.Dimensions}: {Dimensions}\n" +
+            $"{LocalDic.Layers}: {LayerCount}\n" +
+            $"{LocalDic.Finish_type}: {FinishType}\n" +
+            $"{LocalDic.Postcode}: {Postcode}";
 
         _dialogService.ShowInformation(
             message,
-            "Order Placed");
+            LocalDic.Order_placed);
     }
 
     private bool IsOrderValid()
@@ -113,5 +114,10 @@ public partial class OrderViewModel : ObservableObject
                && _configuration.SolderMaskColor != null
                && _configuration.BoardThickness != null
                && _postcodeValidator.IsValid(_configuration.Postcode);
+    }
+
+    public void Dispose()
+    {
+        _configuration.PropertyChanged -= OnConfigurationPropertyChanged;
     }
 }

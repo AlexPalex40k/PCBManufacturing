@@ -3,6 +3,7 @@ using PCBManufacturing.Models;
 using PCBManufacturing.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using PCBManufacturing.Resources.Localization;
 
 namespace PCBManufacturing.Features.Preferences;
 
@@ -28,8 +29,13 @@ public partial class PreferencesViewModel : ObservableValidator
     //TODO ALEX check DataAnnotations validation
     [ObservableProperty]
     [NotifyDataErrorInfo]
-    [Required(ErrorMessage = "Postcode is required.")]
-    [RegularExpression(@"^\d{4,10}$", ErrorMessage = "Postcode must contain 4 to 10 digits.")]
+    [Required(
+        ErrorMessageResourceType = typeof(LocalDic),
+        ErrorMessageResourceName = "Postcode_is_required")]
+    [RegularExpression(
+        @"^\d{4,10}$",
+        ErrorMessageResourceType = typeof(LocalDic),
+        ErrorMessageResourceName = "Postcode_must_contain_4_to_10_digits")]
     private string _postcode = string.Empty;
 
     /// <summary>

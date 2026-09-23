@@ -79,11 +79,56 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to days.
+        /// </summary>
+        public static string days {
+            get {
+                return ResourceManager.GetString("days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dimensions.
+        /// </summary>
+        public static string Dimensions {
+            get {
+                return ResourceManager.GetString("Dimensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finish type.
+        /// </summary>
+        public static string Finish_type {
+            get {
+                return ResourceManager.GetString("Finish type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group.
         /// </summary>
         public static string Group {
             get {
                 return ResourceManager.GetString("Group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid order.
+        /// </summary>
+        public static string Invalid_order {
+            get {
+                return ResourceManager.GetString("Invalid order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layers.
+        /// </summary>
+        public static string Layers {
+            get {
+                return ResourceManager.GetString("Layers", resourceCulture);
             }
         }
         
@@ -102,6 +147,15 @@ namespace PCBManufacturing.Resources.Localization {
         public static string Order {
             get {
                 return ResourceManager.GetString("Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order placed.
+        /// </summary>
+        public static string Order_placed {
+            get {
+                return ResourceManager.GetString("Order placed", resourceCulture);
             }
         }
         
@@ -160,11 +214,38 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please complete all required PCB configuration fields before placing the order..
+        /// </summary>
+        public static string Please_complete_all_required_PCB_configuration_fields_before_placing_the_order_ {
+            get {
+                return ResourceManager.GetString("Please complete all required PCB configuration fields before placing the order.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Postcode.
         /// </summary>
         public static string Postcode {
             get {
                 return ResourceManager.GetString("Postcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postcode is required..
+        /// </summary>
+        public static string Postcode_is_required {
+            get {
+                return ResourceManager.GetString("Postcode is required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postcode must contain 4 to 10 digits..
+        /// </summary>
+        public static string Postcode_must_contain_4_to_10_digits {
+            get {
+                return ResourceManager.GetString("Postcode must contain 4 to 10 digits", resourceCulture);
             }
         }
         

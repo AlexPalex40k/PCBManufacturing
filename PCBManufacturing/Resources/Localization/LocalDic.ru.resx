@@ -183,4 +183,31 @@
   <data name="PCB1" xml:space="preserve">
     <value>PCB1</value>
   </data>
+  <data name="days" xml:space="preserve">
+    <value>дней</value>
+  </data>
+  <data name="Please complete all required PCB configuration fields before placing the order." xml:space="preserve">
+    <value>Пожалуйста, заполните все обязательные поля для настройки печатной платы перед оформлением заказа.</value>
+  </data>
+  <data name="Invalid order" xml:space="preserve">
+    <value>Неверный заказ</value>
+  </data>
+  <data name="Dimensions" xml:space="preserve">
+    <value>Размеры</value>
+  </data>
+  <data name="Layers" xml:space="preserve">
+    <value>Слои</value>
+  </data>
+  <data name="Finish type" xml:space="preserve">
+    <value>Покрытие</value>
+  </data>
+  <data name="Order placed" xml:space="preserve">
+    <value>Заказ оформлен</value>
+  </data>
+  <data name="Postcode is required" xml:space="preserve">
+    <value>Требуется указать почтовый индекс.</value>
+  </data>
+  <data name="Postcode must contain 4 to 10 digits" xml:space="preserve">
+    <value>Почтовый индекс должен содержать от 4 до 10 цифр.</value>
+  </data>
 </root>
