@@ -20,14 +20,14 @@ public partial class PcbConfiguration : ObservableObject
     private string _postcode = string.Empty;
 
     [ObservableProperty]
-    private double _width = 100;
+    private double _width = SampleData.PcbWidth;
 
     [ObservableProperty]
-    private double _height = 80;
+    private double _height = SampleData.PcbHeight;
 
     [ObservableProperty]
-    private int _layerCount = 4;
+    private int _layerCount = SampleData.PcbLayerCount;
 
     [ObservableProperty]
-    private string _finishType = "HASL";
+    private string _finishType = SampleData.PcbFinishType;
 }

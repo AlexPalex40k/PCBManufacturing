@@ -28,4 +28,9 @@ public static class SampleData
             new("1.6 mm", 1.6),
             new("2.0 mm", 2.0)
         };
+
+    public static double PcbWidth => 100;
+    public static double PcbHeight => 80;
+    public static int PcbLayerCount => 4;
+    public static string PcbFinishType => "HASL";
 }
