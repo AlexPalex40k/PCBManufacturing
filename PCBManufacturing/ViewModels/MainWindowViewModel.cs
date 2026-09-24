@@ -38,7 +38,6 @@ public partial class MainWindowViewModel : ObservableObject
     public OrderViewModel Order { get; }
     public LocalizationManager Localization => LocalizationManager.Instance;
 
-
     /// <summary>
     /// Saves application state before shutdown.
     /// </summary>
@@ -66,5 +65,6 @@ public partial class MainWindowViewModel : ObservableObject
             : CultureInfo.GetCultureInfo("en");
 
         LocalizationManager.Instance.SetCulture(culture);
+        Preferences.RefreshValidation();
     }
 }

@@ -67,6 +67,14 @@ public partial class PreferencesViewModel : ObservableValidator
     public int ProductionDays => SelectedMaterial?.ProductionDays ?? 0;
 
     /// <summary>
+    /// Re-evaluates localized validation messages after the UI culture changes.
+    /// </summary>
+    public void RefreshValidation()
+    {
+        ValidateProperty(Postcode, nameof(Postcode));
+    }
+
+    /// <summary>
     /// Saves the current PCB preferences to persistent storage.
     /// </summary>
     public void SaveConfiguration()
@@ -112,13 +120,11 @@ public partial class PreferencesViewModel : ObservableValidator
             ?? Materials.FirstOrDefault();
 
         SelectedSolderMaskColor =
-            SolderMaskColors.FirstOrDefault(
-                x => x.Name == data?.SolderMaskColorName)
+            SolderMaskColors.FirstOrDefault(x => x.Name == data?.SolderMaskColorName)
             ?? SolderMaskColors.FirstOrDefault();
 
         SelectedBoardThickness =
-            BoardThicknesses.FirstOrDefault(
-                x => x.Millimeters == data?.BoardThickness)
+            BoardThicknesses.FirstOrDefault(x => x.Millimeters == data?.BoardThickness)
             ?? BoardThicknesses.FirstOrDefault();
 
         Postcode = data?.Postcode ?? string.Empty;

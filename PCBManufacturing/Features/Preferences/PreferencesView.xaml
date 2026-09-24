@@ -29,6 +29,8 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <TextBlock
@@ -84,9 +86,16 @@
                         Text="{Binding [Postcode], Source={StaticResource Localization}}" />
 
                     <TextBox
+                        x:Name="PostcodeTextBox"
                         Grid.Row="3"
                         Grid.Column="2"
                         Text="{Binding Postcode, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+
+                    <TextBlock
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Style="{StaticResource ValidationErrorTextStyle}"
+                        Text="{Binding ElementName=PostcodeTextBox, Path=(Validation.Errors)[0].ErrorContent}"/>
                 </Grid>
             </StackPanel>
         </Border>
