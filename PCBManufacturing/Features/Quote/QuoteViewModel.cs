@@ -22,19 +22,8 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
     {
         _configuration = configuration;
 
-        Parameters = new ObservableCollection<PcbParameter>
-        {
-            new("Board", "Width", $"{_configuration.Width} mm"),
-            new("Board", "Height", $"{_configuration.Height} mm"),
-            new("Board", "Layer count", _configuration.LayerCount.ToString()),
-
-            new("Fabrication", "Material", _configuration.Material?.Name ?? "-"),
-            new("Fabrication", "Board thickness",
-                _configuration.BoardThickness?.Name ?? "-"),
-            new("Fabrication", "Solder mask",
-                _configuration.SolderMaskColor?.Name ?? "-"),
-            new("Fabrication", "Surface finish", _configuration.FinishType)
-        };
+        Parameters = SampleData.PcbParameters;
+        UpdateParameters();
 
         ParametersView = CollectionViewSource.GetDefaultView(Parameters);
 
@@ -65,9 +54,19 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
     {
         switch (e.PropertyName)
         {
+            case nameof(PcbConfiguration.Material):
+                UpdateParameter("Material", _configuration.Material?.Name ?? "-");
+                break;
+
             case nameof(PcbConfiguration.SolderMaskColor):
                 UpdateParameter("Solder mask", _configuration.SolderMaskColor?.Name ?? "-");
                 OnPropertyChanged(nameof(SolderMaskColorCode));
+                break;
+
+            case nameof(PcbConfiguration.BoardThickness):
+                UpdateParameter(
+                    "Board thickness",
+                    _configuration.BoardThickness?.Name ?? "-");
                 break;
 
             case nameof(PcbConfiguration.Width):
@@ -92,6 +91,17 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
                 OnPropertyChanged(nameof(BoardDetails));
                 break;
         }
+    }
+
+    private void UpdateParameters()
+    {
+        UpdateParameter("Width", $"{_configuration.Width} mm");
+        UpdateParameter("Height", $"{_configuration.Height} mm");
+        UpdateParameter("Layer count", _configuration.LayerCount.ToString());
+        UpdateParameter("Material", _configuration.Material?.Name ?? "-");
+        UpdateParameter("Board thickness", _configuration.BoardThickness?.Name ?? "-");
+        UpdateParameter("Solder mask", _configuration.SolderMaskColor?.Name ?? "-");
+        UpdateParameter("Surface finish", _configuration.FinishType);
     }
 
     private void UpdateParameter(string name, string value)

@@ -15,11 +15,9 @@ public sealed class QuoteViewModelTests
 
         using var viewModel = new QuoteViewModel(configuration);
         var changedProperties = new List<string?>();
-        viewModel.PropertyChanged += (_, args) =>
-            changedProperties.Add(args.PropertyName);
+        viewModel.PropertyChanged += (_, args) => changedProperties.Add(args.PropertyName);
 
-        configuration.SolderMaskColor =
-            new SolderMaskColor("Blue", "#2563EB");
+        configuration.SolderMaskColor = new SolderMaskColor("Blue", "#2563EB");
 
         Assert.Equal("#2563EB", viewModel.SolderMaskColorCode);
         Assert.Contains(nameof(QuoteViewModel.SolderMaskColorCode), changedProperties);

@@ -8,6 +8,11 @@ namespace PCBManufacturing;
 /// </summary>
 public static class SampleData
 {
+    public static double PcbWidth => 100;
+    public static double PcbHeight => 80;
+    public static int PcbLayerCount => 4;
+    public static string PcbFinishType => "HASL";
+
     public static ObservableCollection<Material> Materials { get; } = new()
         {
             new("FR-4", 1.0m, 5),
@@ -29,8 +34,15 @@ public static class SampleData
             new("2.0 mm", 2.0)
         };
 
-    public static double PcbWidth => 100;
-    public static double PcbHeight => 80;
-    public static int PcbLayerCount => 4;
-    public static string PcbFinishType => "HASL";
+    public static ObservableCollection<PcbParameter> PcbParameters { get; } = new()
+    {
+        new("Board", "Width", $"{PcbWidth} mm"),
+        new("Board", "Height", $"{PcbHeight} mm"),
+        new("Board", "Layer count", PcbLayerCount.ToString()),
+
+        new("Fabrication", "Material", "-"),
+        new("Fabrication", "Board thickness", "-"),
+        new("Fabrication", "Solder mask", "-"),
+        new("Fabrication", "Surface finish", PcbFinishType)
+    };
 }
