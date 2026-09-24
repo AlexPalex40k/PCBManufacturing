@@ -172,98 +172,157 @@
         </Style.Triggers>
     </Style>
 
-
-
-    <Style TargetType="GroupBox">
-        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+    <Style TargetType="DataGrid">
         <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="RowBackground" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="RowHeight" Value="24" />
+        <Setter Property="ColumnHeaderHeight" Value="26" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="CanUserDeleteRows" Value="False" />
+        <Setter Property="CanUserResizeRows" Value="False" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+    </Style>
+
+    <Style TargetType="DataGridCell">
+        <Setter Property="Padding" Value="4,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    </Style>
+
+    <Style TargetType="DataGridRow">
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+    </Style>
+
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Padding" Value="6,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background"
+                Value="{DynamicResource PanelHeaderBrush}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource TextSecondaryBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource BorderBrush}" />
+        <Setter Property="BorderThickness"
+                Value="0,0,1,1" />
+        <Setter Property="FontWeight"
+                Value="Normal" />
+    </Style>
+
+    <Style
+        x:Key="DataGridGroupExpanderStyle"
+        TargetType="Expander">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="GroupBox">
+                <ControlTemplate TargetType="Expander">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="31" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Border
+                        <!--  Group header  -->
+                        <ToggleButton
+                            x:Name="HeaderToggle"
                             Grid.Row="0"
-                            Padding="10,0"
-                            Background="{DynamicResource PanelHeaderBrush}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter
-                                VerticalAlignment="Center"
-                                ContentSource="Header"
-                                TextElement.FontSize="11"
-                                TextElement.FontWeight="Bold" />
-                        </Border>
-                        <Border
-                            Grid.Row="1"
-                            Padding="{TemplateBinding Padding}"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="1,0,1,1">
-                            <ContentPresenter />
-                        </Border>
+                            Height="24"
+                            HorizontalContentAlignment="Stretch"
+                            Content="{TemplateBinding Header}"
+                            IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border
+                                        Background="{DynamicResource SurfaceAltBrush}"
+                                        BorderBrush="{DynamicResource BorderBrush}"
+                                        BorderThickness="0,1,0,1">
+                                        <Grid Margin="7,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="12" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <!--  Arrow  -->
+                                            <Path
+                                                x:Name="Arrow"
+                                                Grid.Column="0"
+                                                Width="6"
+                                                Height="6"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Data="M 0 0 L 6 3 L 0 6 Z"
+                                                Fill="{DynamicResource TextSecondaryBrush}">
+                                                <Path.RenderTransform>
+                                                    <RotateTransform Angle="90" CenterX="3" CenterY="3" />
+                                                </Path.RenderTransform>
+                                            </Path>
+                                            <!--  Group name  -->
+                                            <ContentPresenter
+                                                Grid.Column="1"
+                                                Margin="3,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Content="{TemplateBinding Content}"
+                                                TextElement.FontSize="11"
+                                                TextElement.FontWeight="SemiBold"
+                                                TextElement.Foreground="{DynamicResource TextPrimaryBrush}" />
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Setter TargetName="Arrow" Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <RotateTransform Angle="0" CenterX="3" CenterY="3" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                        <!--  Rows  -->
+                        <ContentPresenter
+                            x:Name="Content"
+                            Grid.Row="1" />
                     </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="False">
+                            <Setter TargetName="Content" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-
-    <Style TargetType="DataGrid">
-        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="GridLinesVisibility" Value="Horizontal" />
-        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource GridLineBrush}" />
-        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource GridLineBrush}" />
-        <Setter Property="RowBackground" Value="{DynamicResource SurfaceBrush}" />
-        <Setter Property="AlternatingRowBackground" Value="{DynamicResource SurfaceAltBrush}" />
-        <Setter Property="RowHeight" Value="30" />
-        <Setter Property="ColumnHeaderHeight" Value="29" />
-        <Setter Property="CanUserResizeRows" Value="False" />
-        <Setter Property="HeadersVisibility" Value="Column" />
-        <Setter Property="SelectionMode" Value="Single" />
-        <Setter Property="SelectionUnit" Value="FullRow" />
-        <Setter Property="AlternationCount" Value="2" />
+    <Style
+        x:Key="DataGridGroupItemStyle"
+        TargetType="GroupItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupItem">
+                    <Expander
+                        Header="{Binding Name}"
+                        IsExpanded="True"
+                        Style="{StaticResource DataGridGroupExpanderStyle}">
+                        <ItemsPresenter />
+                    </Expander>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
-    <Style TargetType="DataGridColumnHeader">
-        <Setter Property="Padding" Value="10,0" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="Background" Value="{DynamicResource PanelHeaderBrush}" />
+    <Style
+        x:Key="DataGridIndentedTextStyle"
+        TargetType="TextBlock">
+        <Setter Property="Margin" Value="16,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
-        <Setter Property="BorderThickness" Value="0,0,1,1" />
-        <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="FontSize" Value="12" />
-    </Style>
-
-    <Style TargetType="DataGridRow">
-        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource SelectionBrush}" />
-            </Trigger>
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{DynamicResource SelectionBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style TargetType="DataGridCell">
-        <Setter Property="Padding" Value="10,0" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
     <Style

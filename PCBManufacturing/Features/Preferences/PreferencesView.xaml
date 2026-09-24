@@ -10,88 +10,95 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-
-        <GroupBox
+        <Border
             Grid.Column="0"
-            Header="{Binding [Board preferences], Source={StaticResource Localization}}">
-
-            <Grid Margin="20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" />
-                    <ColumnDefinition Width="10" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
+            Style="{StaticResource CommonBorder}">
+            <StackPanel>
                 <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="0,0,16,10"
-                    VerticalAlignment="Center"
-                    Text="{Binding [Material], Source={StaticResource Localization}}" />
+                    Style="{StaticResource HeadingText}"
+                    Text="{Binding [Board preferences], Source={StaticResource Localization}}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <ComboBox
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="0,0,0,10"
-                    DisplayMemberPath="Name"
-                    ItemsSource="{Binding Materials}"
-                    SelectedItem="{Binding SelectedMaterial}" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,0,16,10"
+                        VerticalAlignment="Center"
+                        Text="{Binding [Material], Source={StaticResource Localization}}" />
+
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="0,0,0,10"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding Materials}"
+                        SelectedItem="{Binding SelectedMaterial}" />
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,0,16,10"
+                        VerticalAlignment="Center"
+                        Text="{Binding [Solder mask], Source={StaticResource Localization}}" />
+
+                    <ComboBox
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Margin="0,0,0,10"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding SolderMaskColors}"
+                        SelectedItem="{Binding SelectedSolderMaskColor}" />
+
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="0,0,16,10"
+                        VerticalAlignment="Center"
+                        Text="{Binding [Board thickness], Source={StaticResource Localization}}" />
+
+                    <ComboBox
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Margin="0,0,0,10"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding BoardThicknesses}"
+                        SelectedItem="{Binding SelectedBoardThickness}" />
+
+                    <TextBlock
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding [Postcode], Source={StaticResource Localization}}" />
+
+                    <TextBox
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Text="{Binding Postcode, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border
+            Grid.Column="2"
+            Style="{StaticResource CommonBorder}">
+
+            <StackPanel>
                 <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="0,0,16,10"
-                    VerticalAlignment="Center"
-                    Text="{Binding [Solder mask], Source={StaticResource Localization}}" />
+                    Style="{StaticResource HeadingText}"
+                    Text="{Binding [Summary], Source={StaticResource Localization}}" />
 
-                <ComboBox
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="0,0,0,10"
-                    DisplayMemberPath="Name"
-                    ItemsSource="{Binding SolderMaskColors}"
-                    SelectedItem="{Binding SelectedSolderMaskColor}" />
-
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Margin="0,0,16,10"
-                    VerticalAlignment="Center"
-                    Text="{Binding [Board thickness], Source={StaticResource Localization}}" />
-
-                <ComboBox
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Margin="0,0,0,10"
-                    DisplayMemberPath="Name"
-                    ItemsSource="{Binding BoardThicknesses}"
-                    SelectedItem="{Binding SelectedBoardThickness}" />
-
-                <TextBlock
-                    Grid.Row="3"
-                    Grid.Column="0"
-                    Margin="0,0,16,0"
-                    VerticalAlignment="Center"
-                    Text="{Binding [Postcode], Source={StaticResource Localization}}" />
-
-                <TextBox
-                    Grid.Row="3"
-                    Grid.Column="2"
-                    Text="{Binding Postcode, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
-            </Grid>
-
-        </GroupBox>
-        <GroupBox
-            Grid.Column="2" Header="{Binding [Summary], Source={StaticResource Localization}}">
-
-            <StackPanel Margin="20">
                 <TextBlock Margin="0,0,0,6">
                     <Run Text="{Binding [Material], Source={StaticResource Localization}, Mode=OneWay}" />
                     <Run Text=": " />
@@ -123,7 +130,7 @@
                     <Run Text="{Binding [days], Source={StaticResource Localization}, Mode=OneWay}" />
                 </TextBlock>
             </StackPanel>
-        </GroupBox>
+        </Border>
 
     </Grid>
 

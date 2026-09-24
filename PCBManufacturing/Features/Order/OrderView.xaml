@@ -10,11 +10,14 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <GroupBox
+        <Border
             Grid.Column="0"
-            Header="{Binding [Order Summary], Source={StaticResource Localization}}">
-
-            <Grid Margin="16">
+            Style="{StaticResource CommonBorder}">
+            <StackPanel>
+                <TextBlock
+                    Style="{StaticResource HeadingText}"
+                    Text="{Binding [Order Summary], Source={StaticResource Localization}}" />
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="160" />
                     <ColumnDefinition Width="*" />
@@ -121,7 +124,8 @@
                     Text="{Binding Postcode, Mode=OneWay}" />
 
             </Grid>
-        </GroupBox>
+                </StackPanel>
+        </Border>
 
         <StackPanel
             Grid.Column="2"

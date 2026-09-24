@@ -2,6 +2,7 @@
 using PCBManufacturing.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Data;
 
 namespace PCBManufacturing.Features.Quote;
 
@@ -23,31 +24,28 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
 
         Parameters = new ObservableCollection<PcbParameter>
         {
-            new(
-                "Dimensions",
-                "Width",
-                $"{_configuration.Width} mm"),
+            new("Board", "Width", $"{_configuration.Width} mm"),
+            new("Board", "Height", $"{_configuration.Height} mm"),
+            new("Board", "Layer count", _configuration.LayerCount.ToString()),
 
-            new(
-                "Dimensions",
-                "Height",
-                $"{_configuration.Height} mm"),
-
-            new(
-                "Layers",
-                "Layer count",
-                _configuration.LayerCount.ToString()),
-
-            new(
-                "Finish",
-                "Finish type",
-                _configuration.FinishType)
+            new("Fabrication", "Material", _configuration.Material?.Name ?? "-"),
+            new("Fabrication", "Board thickness",
+                _configuration.BoardThickness?.Name ?? "-"),
+            new("Fabrication", "Solder mask",
+                _configuration.SolderMaskColor?.Name ?? "-"),
+            new("Fabrication", "Surface finish", _configuration.FinishType)
         };
 
-        _configuration.PropertyChanged += OnConfigurationPropertyChanged;
+        ParametersView = CollectionViewSource.GetDefaultView(Parameters);
+
+        ParametersView.GroupDescriptions.Add(
+            new PropertyGroupDescription(nameof(PcbParameter.Group)));
     }
 
     public ObservableCollection<PcbParameter> Parameters { get; }
+
+    public ICollectionView ParametersView { get; }
+
 
     public string? SolderMaskColorCode => _configuration.SolderMaskColor?.ColorCode;
 

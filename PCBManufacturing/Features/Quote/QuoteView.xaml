@@ -11,43 +11,46 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <GroupBox
-            Grid.Column="0"
-            Header="{Binding [Parameters], Source={StaticResource Localization}}">
+        <Border
+            Grid.Column="0" 
+            Style="{StaticResource CommonBorder}">
+            <StackPanel>
+                <TextBlock Style="{StaticResource HeadingText}"
+                Text="{Binding [Parameters], Source={StaticResource Localization}}"/>
 
             <DataGrid
                 AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserDeleteRows="False"
-                HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding Parameters}">
+                ItemsSource="{Binding ParametersView}"
+                VirtualizingPanel.IsVirtualizingWhenGrouping="True">
 
+                <DataGrid.GroupStyle>
+                    <GroupStyle ContainerStyle="{StaticResource DataGridGroupItemStyle}" />
+                </DataGrid.GroupStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Group}"
-                        Header="{Binding [Group], Source={StaticResource Localization}}" />
-
-                    <DataGridTextColumn
-                        Width="*"
                         Binding="{Binding Name}"
-                        Header="{Binding [Parameter], Source={StaticResource Localization}}" />
-
+                        ElementStyle="{StaticResource DataGridIndentedTextStyle}"
+                        Header="{Binding [Parameter],
+                     Source={StaticResource Localization}}" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Value}"
-                        Header="{Binding [Value], Source={StaticResource Localization}}" />
+                        Header="{Binding [Value],
+                     Source={StaticResource Localization}}" />
                 </DataGrid.Columns>
-
             </DataGrid>
-        </GroupBox>
+            </StackPanel>
+        </Border>
 
-        <GroupBox
-            Grid.Column="2"
-            Header="{Binding [PCB Preview], Source={StaticResource Localization}}">
-
-            <Grid Margin="20">
+        <Border
+            Grid.Column="2" 
+            Style="{StaticResource CommonBorder}">
+            <StackPanel>
+            <TextBlock Style="{StaticResource HeadingText}"
+                       Text="{Binding [PCB Preview], Source={StaticResource Localization}}"/>
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -70,7 +73,8 @@
                     Text="{Binding BoardDetails, Mode=OneWay}" />
 
             </Grid>
-        </GroupBox>
+            </StackPanel>
+        </Border>
 
     </Grid>
 
