@@ -130,7 +130,7 @@
     <value>Параметры</value>
   </data>
   <data name="PCB Preview" xml:space="preserve">
-    <value>Предпросмотр PCB</value>
+    <value>Предпросмотр печатной платы</value>
   </data>
   <data name="Place Order" xml:space="preserve">
     <value>Разместить заказ</value>
@@ -215,5 +215,8 @@
   </data>
   <data name="Your choices update the quote instantly" xml:space="preserve">
     <value>Ваши настройки мгновенно обновляют расчет.</value>
+  </data>
+  <data name="PCB Manufacturing" xml:space="preserve">
+    <value>Изготовление печатных плат</value>
   </data>
 </root>

@@ -34,7 +34,7 @@
 
         <Border
             Grid.Row="0"
-            Padding="10,5"
+            Padding="10,2"
             Background="{DynamicResource TitleBarBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -44,31 +44,77 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Horizontal">
-                    <Border
-                        Width="20"
-                        Height="20"
+
+                    <Viewbox
+                        Width="24"
+                        Height="24"
                         Margin="0,0,9,0"
                         VerticalAlignment="Center"
-                        BorderBrush="#65CDEB"
-                        BorderThickness="1">
-                        <Grid>
+                        SnapsToDevicePixels="True"
+                        Stretch="Uniform">
+
+                        <Canvas
+                            Width="64"
+                            Height="64">
+
+                            <Path
+                                Data=" M 5,13 Q 5,8 10,8 L 34,8  L 34,5 Q 34,2 38,2 L 58,2 Q 62,2 62,6 L 62,58 Q 62,62 58,62 L 9,62  Q 5,62 5,58 Z"
+                                Fill="{StaticResource SuccessBrush}" />
+
+                            <Line
+                                Stroke="{StaticResource CopperBrush}"
+                                StrokeEndLineCap="Round"
+                                StrokeStartLineCap="Round"
+                                StrokeThickness="2.7"
+                                X1="20"
+                                X2="20"
+                                Y1="18"
+                                Y2="50" />
+
+                            <Line
+                                Stroke="{StaticResource CopperBrush}"
+                                StrokeEndLineCap="Round"
+                                StrokeStartLineCap="Round"
+                                StrokeThickness="2.7"
+                                X1="29"
+                                X2="29"
+                                Y1="18"
+                                Y2="50" />
+
+                            <Line
+                                Stroke="{StaticResource CopperBrush}"
+                                StrokeEndLineCap="Round"
+                                StrokeStartLineCap="Round"
+                                StrokeThickness="2.7"
+                                X1="38"
+                                X2="38"
+                                Y1="18"
+                                Y2="50" />
+
+                            <Line
+                                Stroke="{StaticResource CopperBrush}"
+                                StrokeEndLineCap="Round"
+                                StrokeStartLineCap="Round"
+                                StrokeThickness="2.7"
+                                X1="46"
+                                X2="46"
+                                Y1="18"
+                                Y2="50" />
+
                             <Rectangle
-                                Width="10"
-                                Height="10"
-                                Stroke="#65CDEB"
-                                StrokeThickness="1" />
-                            <Ellipse
-                                Width="3"
-                                Height="3"
-                                Fill="#65CDEB" />
-                        </Grid>
-                    </Border>
+                                Canvas.Left="14"
+                                Canvas.Top="24"
+                                Width="38"
+                                Height="20"
+                                Fill="#455A64"
+                                RadiusX="2"
+                                RadiusY="2" />
+
+                        </Canvas>
+                    </Viewbox>
                     <TextBlock
-                        VerticalAlignment="Center"
-                        FontSize="12"
-                        FontWeight="SemiBold"
-                        Foreground="{DynamicResource TitleTextBrush}"
-                        Text="PCB MANUFACTURING" />
+                        Style="{StaticResource HeadlineText}"
+                        Text="{Binding [PCB Manufacturing], Source={StaticResource Localization}}" />
                 </StackPanel>
 
                 <StackPanel
@@ -90,8 +136,8 @@
                         Text="RU" />
 
                     <TextBlock
-                        Margin="0,0,7,0"
                         MinWidth="70"
+                        Margin="0,0,7,0"
                         Foreground="{DynamicResource TitleTextBrush}"
                         Text="{Binding [Dark theme], Source={StaticResource Localization}}" />
                     <ToggleButton
@@ -119,7 +165,7 @@
                     Validation.ErrorTemplate="{x:Null}" />
             </TabItem>
 
-            <TabItem >
+            <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Ellipse
@@ -133,7 +179,7 @@
                 <ContentControl Content="{Binding Quote}" />
             </TabItem>
 
-            <TabItem >
+            <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Path

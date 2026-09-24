@@ -205,6 +205,15 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PCB Manufacturing.
+        /// </summary>
+        public static string PCB_Manufacturing {
+            get {
+                return ResourceManager.GetString("PCB Manufacturing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PCB Preview.
         /// </summary>
         public static string PCB_Preview {

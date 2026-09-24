@@ -216,4 +216,7 @@
   <data name="Your choices update the quote instantly" xml:space="preserve">
     <value>Your choices update the quote instantly.</value>
   </data>
+  <data name="PCB Manufacturing" xml:space="preserve">
+    <value>PCB Manufacturing</value>
+  </data>
 </root>
