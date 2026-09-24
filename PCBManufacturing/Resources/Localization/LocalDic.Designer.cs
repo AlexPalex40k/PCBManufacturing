@@ -304,7 +304,7 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Review the PCB configuration before placing the order.
+        ///   Looks up a localized string similar to Review the PCB configuration before placing the order..
         /// </summary>
         public static string Review_the_PCB_configuration_before_placing_the_order {
             get {

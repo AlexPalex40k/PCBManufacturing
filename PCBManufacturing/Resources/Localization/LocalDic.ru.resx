@@ -157,7 +157,7 @@
     <value>Заказ</value>
   </data>
   <data name="Review the PCB configuration before placing the order" xml:space="preserve">
-    <value>Перед размещением заказа проверьте конфигурацию печатной платы</value>
+    <value>Перед размещением заказа проверьте конфигурацию печатной платы.</value>
   </data>
   <data name="Order summary" xml:space="preserve">
     <value>Описание заказа</value>
@@ -214,6 +214,6 @@
     <value>Выберите варианты производства для вашей печатной платы.</value>
   </data>
   <data name="Your choices update the quote instantly" xml:space="preserve">
-    <value>Ваши настройки мгновенно обновляют расчет</value>
+    <value>Ваши настройки мгновенно обновляют расчет.</value>
   </data>
 </root>
