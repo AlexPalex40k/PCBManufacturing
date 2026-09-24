@@ -462,7 +462,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Grid Background="Transparent">
+                    <Grid
+                        x:Name="HeaderRoot"
+                        Background="Transparent">
                         <Border
                             x:Name="TabBorder"
                             Padding="{TemplateBinding Padding}"
@@ -488,7 +490,10 @@
                             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
                             <Setter Property="FontWeight" Value="SemiBold" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger
+                            SourceName="HeaderRoot"
+                            Property="IsMouseOver"
+                            Value="True">
                             <Setter TargetName="TabBorder" Property="Background" Value="{DynamicResource HoverBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>

@@ -40,6 +40,8 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
 
         ParametersView.GroupDescriptions.Add(
             new PropertyGroupDescription(nameof(PcbParameter.Group)));
+
+        _configuration.PropertyChanged += OnConfigurationPropertyChanged;
     }
 
     public ObservableCollection<PcbParameter> Parameters { get; }
@@ -64,6 +66,7 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
         switch (e.PropertyName)
         {
             case nameof(PcbConfiguration.SolderMaskColor):
+                UpdateParameter("Solder mask", _configuration.SolderMaskColor?.Name ?? "-");
                 OnPropertyChanged(nameof(SolderMaskColorCode));
                 break;
 
