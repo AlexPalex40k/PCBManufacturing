@@ -148,7 +148,9 @@
         </Border>
 
         <TabControl Grid.Row="1">
-            <TabItem>
+            <TabItem
+                Content="{Binding Preferences}"
+                Validation.ErrorTemplate="{x:Null}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Rectangle
@@ -159,13 +161,10 @@
                         <TextBlock Text="{Binding [Preferences], Source={StaticResource Localization}}" />
                     </StackPanel>
                 </TabItem.Header>
-
-                <ContentControl
-                    Content="{Binding Preferences}"
-                    Validation.ErrorTemplate="{x:Null}" />
             </TabItem>
 
-            <TabItem>
+            <TabItem
+                Content="{Binding Quote}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Ellipse
@@ -176,10 +175,11 @@
                         <TextBlock Text="{Binding [Quote], Source={StaticResource Localization}}" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl Content="{Binding Quote}" />
+
             </TabItem>
 
-            <TabItem>
+            <TabItem
+                Content="{Binding Order}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Path
@@ -193,9 +193,7 @@
                         <TextBlock Text="{Binding [Order], Source={StaticResource Localization}}" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl Content="{Binding Order}" />
             </TabItem>
         </TabControl>
-
     </Grid>
 </Window>
