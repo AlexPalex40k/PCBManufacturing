@@ -109,7 +109,7 @@
                             Width="8"
                             Height="8"
                             Margin="0,0,5,0"
-                            Fill="{DynamicResource PrimaryBrush}" />
+                            Fill="{DynamicResource BlueBrush}" />
                         <TextBlock Text="{Binding [Preferences], Source={StaticResource Localization}}" />
                     </StackPanel>
                 </TabItem.Header>

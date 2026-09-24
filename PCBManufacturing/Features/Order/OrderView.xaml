@@ -16,7 +16,7 @@
             <StackPanel>
                 <TextBlock
                     Style="{StaticResource HeadingText}"
-                    Text="{Binding [Order Summary], Source={StaticResource Localization}}" />
+                    Text="{Binding [Order summary], Source={StaticResource Localization}}" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="160" />

@@ -26,9 +26,11 @@
 
 
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource PrimaryBackgroundColor}" />
-	<SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource PrimaryColor}" />
+	<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
-    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource BlueColor}" />
+    <SolidColorBrush x:Key="SecondBorderBrush" Color="{StaticResource HoverColor}" />
+    <SolidColorBrush x:Key="BlueBrush" Color="{StaticResource BlueColor}" />
     <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource BlueHoverColor}" />
     <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource PrimaryTextColor}" />
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}" />
@@ -47,5 +49,7 @@
     <SolidColorBrush x:Key="SurfaceAltBrush" Color="{StaticResource SurfaceAltColor}" />
     <SolidColorBrush x:Key="AccentSurfaceBrush" Color="{StaticResource AccentSurfaceColor}" />
     <SolidColorBrush x:Key="AccentSurfaceHoverBrush" Color="{StaticResource AccentSurfaceHoverColor}" />
+
+    <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource BorderColor}" />
 
 </ResourceDictionary>
