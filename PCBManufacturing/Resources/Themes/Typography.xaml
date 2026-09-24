@@ -7,22 +7,15 @@
                 Value="{DynamicResource TextPrimaryBrush}" />
     </Style>
 
-    <Style x:Key="SectionTitleStyle"
-           TargetType="TextBlock">
-        <Setter Property="FontSize"
-                Value="18" />
-        <Setter Property="FontWeight"
-                Value="SemiBold" />
-        <Setter Property="Foreground"
-                Value="{DynamicResource TextPrimaryBrush}" />
-        <Setter Property="Margin"
-                Value="0,0,0,16" />
+    <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="SemiBold" /> 
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+        <Setter Property="Margin" Value="0,0,0,16" />
     </Style>
 
-    <Style x:Key="SecondaryTextStyle"
-           TargetType="TextBlock">
-        <Setter Property="Foreground"
-                Value="{DynamicResource TextSecondaryBrush}" />
+    <Style x:Key="SecondaryTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
     </Style>
 
     <Style x:Key="HeadingText" TargetType="TextBlock">
@@ -36,6 +29,23 @@
         <Setter Property="Padding" Value="10" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="4" />
+    </Style>
+
+    <Style x:Key="DataGridGroupItemStyle"
+        TargetType="GroupItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupItem">
+                    <Expander
+                        Header="{Binding Name}"
+                        IsExpanded="True"
+                        Style="{StaticResource DataGridGroupExpanderStyle}">
+                        <ItemsPresenter />
+                    </Expander>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>
