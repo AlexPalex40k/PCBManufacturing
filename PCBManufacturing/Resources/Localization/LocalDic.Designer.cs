@@ -61,11 +61,29 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Board preferences.
+        /// </summary>
+        public static string Board_preferences {
+            get {
+                return ResourceManager.GetString("Board preferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Board thickness.
         /// </summary>
         public static string Board_thickness {
             get {
                 return ResourceManager.GetString("Board thickness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose manufacturing options for your PCB..
+        /// </summary>
+        public static string Choose_manufacturing_options_for_your_PCB {
+            get {
+                return ResourceManager.GetString("Choose manufacturing options for your PCB", resourceCulture);
             }
         }
         
@@ -327,6 +345,15 @@ namespace PCBManufacturing.Resources.Localization {
         public static string Value {
             get {
                 return ResourceManager.GetString("Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your choices update the quote instantly..
+        /// </summary>
+        public static string Your_choices_update_the_quote_instantly {
+            get {
+                return ResourceManager.GetString("Your choices update the quote instantly", resourceCulture);
             }
         }
     }

@@ -207,4 +207,13 @@
   <data name="Postcode must contain 4 to 10 digits" xml:space="preserve">
     <value>Postcode must contain 4 to 10 digits.</value>
   </data>
+  <data name="Board preferences" xml:space="preserve">
+    <value>Board preferences</value>
+  </data>
+  <data name="Choose manufacturing options for your PCB" xml:space="preserve">
+    <value>Choose manufacturing options for your PCB.</value>
+  </data>
+  <data name="Your choices update the quote instantly" xml:space="preserve">
+    <value>Your choices update the quote instantly.</value>
+  </data>
 </root>

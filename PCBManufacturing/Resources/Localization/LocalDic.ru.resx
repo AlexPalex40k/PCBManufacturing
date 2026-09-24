@@ -207,4 +207,13 @@
   <data name="Postcode must contain 4 to 10 digits" xml:space="preserve">
     <value>Почтовый индекс должен содержать от 4 до 10 цифр.</value>
   </data>
+  <data name="Board preferences" xml:space="preserve">
+    <value>Свойства печатной платы</value>
+  </data>
+  <data name="Choose manufacturing options for your PCB" xml:space="preserve">
+    <value>Выберите варианты производства для вашей печатной платы.</value>
+  </data>
+  <data name="Your choices update the quote instantly" xml:space="preserve">
+    <value>Ваши настройки мгновенно обновляют расчет</value>
+  </data>
 </root>
