@@ -12,68 +12,76 @@
         </Grid.ColumnDefinitions>
 
         <Border
-            Grid.Column="0" 
+            Grid.Column="0"
             Style="{StaticResource CommonBorder}">
             <StackPanel>
-                <TextBlock Style="{StaticResource HeadingText}"
-                Text="{Binding [Parameters], Source={StaticResource Localization}}"/>
+                <TextBlock
+                    Style="{StaticResource HeadingText}"
+                    Text="{Binding [Parameters], Source={StaticResource Localization}}" />
 
-            <DataGrid
-                AutoGenerateColumns="False"
-                IsReadOnly="True"
-                ItemsSource="{Binding ParametersView}"
-                VirtualizingPanel.IsVirtualizingWhenGrouping="True">
+                <DataGrid
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding ParametersView}"
+                    VirtualizingPanel.IsVirtualizingWhenGrouping="True">
 
-                <DataGrid.GroupStyle>
-                    <GroupStyle ContainerStyle="{StaticResource DataGridGroupItemStyle}" />
-                </DataGrid.GroupStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Name}"
-                        ElementStyle="{StaticResource DataGridIndentedTextStyle}"
-                        Header="{Binding [Parameter],
-                     Source={StaticResource Localization}}" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Value}"
-                        Header="{Binding [Value],
-                     Source={StaticResource Localization}}" />
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource DataGridGroupItemStyle}" />
+                    </DataGrid.GroupStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Name}"
+                            ElementStyle="{StaticResource DataGridIndentedTextStyle}"
+                            Header="{Binding [Parameter], Source={StaticResource Localization}}" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Value}"
+                            ElementStyle="{StaticResource DataGridIndentedTextStyle}"
+                            Header="{Binding [Value], Source={StaticResource Localization}}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
         </Border>
 
         <Border
-            Grid.Column="2" 
+            Grid.Column="2"
+            ClipToBounds="True"
             Style="{StaticResource CommonBorder}">
-            <StackPanel>
-            <TextBlock Style="{StaticResource HeadingText}"
-                       Text="{Binding [PCB Preview], Source={StaticResource Localization}}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
                     Grid.Row="0"
-                    Margin="0,0,0,10"
-                    HorizontalAlignment="Center"
-                    FontSize="14"
-                    Text="{Binding BoardDimensions, Mode=OneWay}" />
+                    Style="{StaticResource HeadingText}"
+                    Text="{Binding [PCB Preview], Source={StaticResource Localization}}" />
 
-                <quote:PcbPreviewView Grid.Row="1" />
+                <Grid
+                    x:Name="ThisGrid"
+                    Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                <TextBlock
-                    Grid.Row="2"
-                    Margin="0,10,0,0"
-                    HorizontalAlignment="Center"
-                    Text="{Binding BoardDetails, Mode=OneWay}" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Style="{StaticResource PreviewText}"
+                        Text="{Binding BoardDimensions, Mode=OneWay}" />
 
+                    <quote:PcbPreviewView Grid.Row="1" />
+
+                    <TextBlock
+                        Grid.Row="2"
+                        Style="{StaticResource PreviewText}"
+                        Text="{Binding BoardDetails, Mode=OneWay}" />
+
+                </Grid>
             </Grid>
-            </StackPanel>
         </Border>
 
     </Grid>
