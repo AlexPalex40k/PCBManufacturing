@@ -219,4 +219,7 @@
   <data name="PCB Manufacturing" xml:space="preserve">
     <value>Изготовление печатных плат</value>
   </data>
+  <data name="Price" xml:space="preserve">
+    <value>Цена</value>
+  </data>
 </root>

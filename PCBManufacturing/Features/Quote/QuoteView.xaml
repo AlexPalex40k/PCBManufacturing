@@ -16,7 +16,7 @@
             Style="{StaticResource CommonBorder}">
             <StackPanel>
                 <TextBlock
-                    Style="{StaticResource HeadingText}"
+                    Style="{StaticResource SectionTitleStyle}"
                     Text="{Binding [Parameters], Source={StaticResource Localization}}" />
 
                 <DataGrid
@@ -25,21 +25,62 @@
                     ItemsSource="{Binding ParametersView}"
                     VirtualizingPanel.IsVirtualizingWhenGrouping="True">
 
-                    <DataGrid.GroupStyle>
-                        <GroupStyle ContainerStyle="{StaticResource DataGridGroupItemStyle}" />
-                    </DataGrid.GroupStyle>
                     <DataGrid.Columns>
+
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding Name}"
                             ElementStyle="{StaticResource DataGridIndentedTextStyle}"
                             Header="{Binding [Parameter], Source={StaticResource Localization}}" />
+
+                        <DataGridTemplateColumn
+                            Width="2*"
+                            Header="{Binding [Value], Source={StaticResource Localization}}">
+
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock
+                                            x:Name="ReadOnlyValue"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding Value}" />
+                                        <TextBox
+                                            x:Name="EditableValue"
+                                            Height="24"
+                                            Padding="4,0"
+                                            VerticalContentAlignment="Center"
+                                            Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Visibility="Collapsed" />
+
+                                    </Grid>
+
+                                    <DataTemplate.Triggers>
+
+                                        <DataTrigger
+                                            Binding="{Binding IsEditable}"
+                                            Value="True">
+
+                                            <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
+
+                                            <Setter TargetName="EditableValue" Property="Visibility" Value="Visible" />
+
+                                        </DataTrigger>
+
+                                    </DataTemplate.Triggers>
+
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding Value}"
-                            ElementStyle="{StaticResource DataGridIndentedTextStyle}"
-                            Header="{Binding [Value], Source={StaticResource Localization}}" />
+                            Binding="{Binding Price, StringFormat=€{0:N2}}"
+                            Header="{Binding [Price], Source={StaticResource Localization}}"
+                            IsReadOnly="True" />
+
                     </DataGrid.Columns>
+
                 </DataGrid>
             </StackPanel>
         </Border>
@@ -56,7 +97,7 @@
 
                 <TextBlock
                     Grid.Row="0"
-                    Style="{StaticResource HeadingText}"
+                    Style="{StaticResource SectionTitleStyle}"
                     Text="{Binding [PCB Preview], Source={StaticResource Localization}}" />
 
                 <Grid

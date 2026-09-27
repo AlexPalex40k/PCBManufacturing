@@ -7,4 +7,5 @@
 /// <param name="ColorCode">The hexadecimal color code used for PCB visualization.</param>
 public sealed record SolderMaskColor(
     string Name,
-    string ColorCode);
+    string ColorCode,
+    decimal Price);

@@ -29,9 +29,9 @@ public sealed class OrderViewModelTests
     {
         return new PcbConfiguration
         {
-            Material = new Material("FR-4", 1.0m, 5),
-            SolderMaskColor = new SolderMaskColor("Green", "#008C4A"),
-            BoardThickness = new BoardThickness("1.6 mm", 1.6),
+            Material = new Material("FR-4", 1.0m, 5, 20),
+            SolderMaskColor = new SolderMaskColor("Green", "#008C4A", 30),
+            BoardThickness = new BoardThickness("1.6 mm", 1.6, 1.2m),
             Postcode = "11000"
         };
     }
@@ -94,5 +94,25 @@ public sealed class OrderViewModelTests
 
         Assert.NotNull(dialogService.ErrorMessage);
         Assert.Null(dialogService.InformationMessage);
+    }
+
+    [Fact]
+    public void Price_DependsOnMaterialAndBoardThickness()
+    {
+        var configuration = new PcbConfiguration
+        {
+            Material = new Material(
+                "Aluminum",
+                1.3m,
+                7,
+                30m),
+
+            BoardThickness = new BoardThickness(
+                "1.6 mm",
+                1.6,
+                1.08m)
+        };
+
+        Assert.Equal(124.96m, configuration.Price);
     }
 }

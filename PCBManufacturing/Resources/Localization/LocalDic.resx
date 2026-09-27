@@ -219,4 +219,7 @@
   <data name="PCB Manufacturing" xml:space="preserve">
     <value>PCB Manufacturing</value>
   </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
 </root>

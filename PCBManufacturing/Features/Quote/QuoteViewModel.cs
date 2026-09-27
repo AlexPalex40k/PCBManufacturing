@@ -12,8 +12,10 @@ namespace PCBManufacturing.Features.Quote;
 public partial class QuoteViewModel : ObservableObject, IDisposable
 {
     private readonly PcbConfiguration _configuration;
+    private bool _isUpdatingParameters;
 
     private const double PreviewScale = 4;
+
 
     [ObservableProperty]
     private string _boardLabel = "PCB1";
@@ -22,21 +24,78 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
     {
         _configuration = configuration;
 
-        Parameters = SampleData.PcbParameters;
-        UpdateParameters();
+        Parameters = new ObservableCollection<QuoteParameterViewModel>
+        {
+            new(
+                QuoteParameterType.Width,
+                "Board",
+                "Width (mm)",
+                FormatNumber(_configuration.Width),
+                _configuration.WidthPrice,
+                true),
+
+            new(
+                QuoteParameterType.Height,
+                "Board",
+                "Height (mm)",
+                FormatNumber(_configuration.Height),
+                _configuration.HeightPrice,
+                true),
+
+            new(
+                QuoteParameterType.LayerCount,
+                "Board",
+                "Layer count",
+                _configuration.LayerCount.ToString(),
+                _configuration.LayerCountPrice,
+                true),
+
+            new(
+                QuoteParameterType.Material,
+                "Fabrication",
+                "Material",
+                _configuration.Material?.Name ?? "-",
+                _configuration.MaterialPrice,
+                false),
+
+            new(
+                QuoteParameterType.BoardThickness,
+                "Fabrication",
+                "Board thickness",
+                _configuration.BoardThickness?.Name ?? "-",
+                _configuration.BoardThicknessPrice,
+                false),
+
+            new(
+                QuoteParameterType.SolderMask,
+                "Fabrication",
+                "Solder mask",
+                _configuration.SolderMaskColor?.Name ?? "-",
+                _configuration.SolderMaskPrice,
+                false),
+
+            new(
+                QuoteParameterType.SurfaceFinish,
+                "Fabrication",
+                "Surface finish",
+                _configuration.FinishType,
+                _configuration.FinishPrice,
+                false)
+        };
+
+        foreach (var parameter in Parameters.Where(x => x.IsEditable))
+        {
+            parameter.PropertyChanged += OnParameterPropertyChanged;
+        }
 
         ParametersView = CollectionViewSource.GetDefaultView(Parameters);
-
-        ParametersView.GroupDescriptions.Add(
-            new PropertyGroupDescription(nameof(PcbParameter.Group)));
 
         _configuration.PropertyChanged += OnConfigurationPropertyChanged;
     }
 
-    public ObservableCollection<PcbParameter> Parameters { get; }
+    public ObservableCollection<QuoteParameterViewModel> Parameters { get; }
 
     public ICollectionView ParametersView { get; }
-
 
     public string? SolderMaskColorCode => _configuration.SolderMaskColor?.ColorCode;
 
@@ -48,77 +107,153 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
 
     public double PreviewHeight => _configuration.Height * PreviewScale;
 
+    public decimal TotalPrice => _configuration.Price;
+
+
+    private void OnParameterPropertyChanged(
+        object? sender,
+        PropertyChangedEventArgs e)
+    {
+        if (_isUpdatingParameters
+            || e.PropertyName != nameof(QuoteParameterViewModel.Value)
+            || sender is not QuoteParameterViewModel parameter)
+        {
+            return;
+        }
+
+        switch (parameter.Type)
+        {
+            case QuoteParameterType.Width:
+                if (double.TryParse(parameter.Value, out var width)
+                    && width > 0)
+                {
+                    _configuration.Width = width;
+                }
+
+                break;
+
+            case QuoteParameterType.Height:
+                if (double.TryParse(parameter.Value, out var height)
+                    && height > 0)
+                {
+                    _configuration.Height = height;
+                }
+
+                break;
+
+            case QuoteParameterType.LayerCount:
+                if (int.TryParse(parameter.Value, out var layerCount)
+                    && layerCount > 0)
+                {
+                    _configuration.LayerCount = layerCount;
+                }
+
+                break;
+        }
+    }
+
     private void OnConfigurationPropertyChanged(
         object? sender,
         PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
         {
-            case nameof(PcbConfiguration.Material):
-                UpdateParameter("Material", _configuration.Material?.Name ?? "-");
-                break;
-
-            case nameof(PcbConfiguration.SolderMaskColor):
-                UpdateParameter("Solder mask", _configuration.SolderMaskColor?.Name ?? "-");
-                OnPropertyChanged(nameof(SolderMaskColorCode));
-                break;
-
-            case nameof(PcbConfiguration.BoardThickness):
-                UpdateParameter(
-                    "Board thickness",
-                    _configuration.BoardThickness?.Name ?? "-");
-                break;
-
             case nameof(PcbConfiguration.Width):
-                UpdateParameter("Width", $"{_configuration.Width} mm");
+                UpdateParameter(
+                    QuoteParameterType.Width,
+                    FormatNumber(_configuration.Width),
+                    _configuration.WidthPrice);
+
                 OnPropertyChanged(nameof(BoardDimensions));
                 OnPropertyChanged(nameof(PreviewWidth));
                 break;
 
             case nameof(PcbConfiguration.Height):
-                UpdateParameter("Height", $"{_configuration.Height} mm");
+                UpdateParameter(
+                    QuoteParameterType.Height,
+                    FormatNumber(_configuration.Height),
+                    _configuration.HeightPrice);
+
                 OnPropertyChanged(nameof(BoardDimensions));
                 OnPropertyChanged(nameof(PreviewHeight));
                 break;
 
             case nameof(PcbConfiguration.LayerCount):
-                UpdateParameter("Layer count", _configuration.LayerCount.ToString());
+                UpdateParameter(
+                    QuoteParameterType.LayerCount,
+                    _configuration.LayerCount.ToString(),
+                    _configuration.LayerCountPrice);
+
                 OnPropertyChanged(nameof(BoardDetails));
                 break;
 
+            case nameof(PcbConfiguration.Material):
+                UpdateParameter(
+                    QuoteParameterType.Material,
+                    _configuration.Material?.Name ?? "-",
+                    _configuration.MaterialPrice);
+                break;
+
+            case nameof(PcbConfiguration.BoardThickness):
+                UpdateParameter(
+                    QuoteParameterType.BoardThickness,
+                    _configuration.BoardThickness?.Name ?? "-",
+                    _configuration.BoardThicknessPrice);
+                break;
+
+            case nameof(PcbConfiguration.SolderMaskColor):
+                UpdateParameter(
+                    QuoteParameterType.SolderMask,
+                    _configuration.SolderMaskColor?.Name ?? "-",
+                    _configuration.SolderMaskPrice);
+
+                OnPropertyChanged(nameof(SolderMaskColorCode));
+                break;
+
             case nameof(PcbConfiguration.FinishType):
-                UpdateParameter("Finish type", _configuration.FinishType);
+                UpdateParameter(
+                    QuoteParameterType.SurfaceFinish,
+                    _configuration.FinishType,
+                    _configuration.FinishPrice);
+
                 OnPropertyChanged(nameof(BoardDetails));
+                break;
+
+            case nameof(PcbConfiguration.Price):
+                OnPropertyChanged(nameof(TotalPrice));
                 break;
         }
     }
 
-    private void UpdateParameters()
+    private static string FormatNumber(double value)
     {
-        UpdateParameter("Width", $"{_configuration.Width} mm");
-        UpdateParameter("Height", $"{_configuration.Height} mm");
-        UpdateParameter("Layer count", _configuration.LayerCount.ToString());
-        UpdateParameter("Material", _configuration.Material?.Name ?? "-");
-        UpdateParameter("Board thickness", _configuration.BoardThickness?.Name ?? "-");
-        UpdateParameter("Solder mask", _configuration.SolderMaskColor?.Name ?? "-");
-        UpdateParameter("Surface finish", _configuration.FinishType);
+        return value.ToString("0.##");
     }
 
-    private void UpdateParameter(string name, string value)
+    private void UpdateParameter(
+        QuoteParameterType type,
+        string value,
+        decimal price)
     {
-        var parameter = Parameters.FirstOrDefault(x => x.Name == name);
+        var parameter =
+            Parameters.FirstOrDefault(x => x.Type == type);
 
         if (parameter == null)
         {
             return;
         }
 
-        var index = Parameters.IndexOf(parameter);
+        _isUpdatingParameters = true;
 
-        Parameters[index] = parameter with
+        try
         {
-            Value = value
-        };
+            parameter.Value = value;
+            parameter.Price = price;
+        }
+        finally
+        {
+            _isUpdatingParameters = false;
+        }
     }
 
     public void Dispose()

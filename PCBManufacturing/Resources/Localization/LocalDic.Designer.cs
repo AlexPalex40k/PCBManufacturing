@@ -277,6 +277,15 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price modifier.
         /// </summary>
         public static string Price_modifier {

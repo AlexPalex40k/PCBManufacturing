@@ -10,14 +10,14 @@ public sealed class QuoteViewModelTests
     {
         var configuration = new PcbConfiguration
         {
-            SolderMaskColor = new SolderMaskColor("Green", "#008C4A")
+            SolderMaskColor = new SolderMaskColor("Green", "#008C4A",0m)
         };
 
         using var viewModel = new QuoteViewModel(configuration);
         var changedProperties = new List<string?>();
         viewModel.PropertyChanged += (_, args) => changedProperties.Add(args.PropertyName);
 
-        configuration.SolderMaskColor = new SolderMaskColor("Blue", "#2563EB");
+        configuration.SolderMaskColor = new SolderMaskColor("Blue", "#2563EB", 0m);
 
         Assert.Equal("#2563EB", viewModel.SolderMaskColorCode);
         Assert.Contains(nameof(QuoteViewModel.SolderMaskColorCode), changedProperties);

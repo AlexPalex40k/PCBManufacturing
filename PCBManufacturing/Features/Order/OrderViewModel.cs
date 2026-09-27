@@ -45,6 +45,8 @@ public partial class OrderViewModel : ObservableObject, IDisposable
 
     public string Postcode => _configuration.Postcode;
 
+    public decimal Price => _configuration.Price;
+
     private void OnConfigurationPropertyChanged(
         object? sender,
         PropertyChangedEventArgs e)
@@ -53,6 +55,7 @@ public partial class OrderViewModel : ObservableObject, IDisposable
         {
             case nameof(PcbConfiguration.Material):
                 OnPropertyChanged(nameof(Material));
+                OnPropertyChanged(nameof(Price));
                 break;
 
             case nameof(PcbConfiguration.SolderMaskColor):
@@ -61,6 +64,7 @@ public partial class OrderViewModel : ObservableObject, IDisposable
 
             case nameof(PcbConfiguration.BoardThickness):
                 OnPropertyChanged(nameof(BoardThickness));
+                OnPropertyChanged(nameof(Price));
                 break;
 
             case nameof(PcbConfiguration.Width):
@@ -101,11 +105,10 @@ public partial class OrderViewModel : ObservableObject, IDisposable
             $"{LocalDic.Dimensions}: {Dimensions}\n" +
             $"{LocalDic.Layers}: {LayerCount}\n" +
             $"{LocalDic.Finish_type}: {FinishType}\n" +
+            $"{LocalDic.Price}: {Price:C2}\n" +
             $"{LocalDic.Postcode}: {Postcode}";
 
-        _dialogService.ShowInformation(
-            message,
-            LocalDic.Order_placed);
+        _dialogService.ShowInformation(message, LocalDic.Order_placed);
     }
 
     private bool IsOrderValid()

@@ -9,4 +9,5 @@
 public sealed record Material(
     string Name,
     decimal PriceModifier,
-    int ProductionDays);
+    int ProductionDays,
+    decimal Price);
