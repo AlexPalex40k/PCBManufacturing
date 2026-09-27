@@ -10,7 +10,6 @@
     <Color x:Key="CopperColor">#E2C457</Color>
 
     <Color x:Key="BlueColor">#3B82F6</Color>
-    <Color x:Key="BlueHoverColor">#60A5FA</Color>
     <Color x:Key="HoverColor">#244D5B</Color>
 
     <Color x:Key="BorderColor">#43454A</Color>
@@ -29,9 +28,7 @@
 	<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
 
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
-    <SolidColorBrush x:Key="SecondBorderBrush" Color="{StaticResource HoverColor}" />
     <SolidColorBrush x:Key="BlueBrush" Color="{StaticResource BlueColor}" />
-    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource BlueHoverColor}" />
     <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource PrimaryTextColor}" />
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}" />
     <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
@@ -40,7 +37,6 @@
     <SolidColorBrush x:Key="TitleTextBrush" Color="{StaticResource TitleTextColor}" />
     <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
     <SolidColorBrush x:Key="CopperBrush" Color="{StaticResource CopperColor}" />
-    <SolidColorBrush x:Key="InputBrush" Color="{StaticResource PrimaryColor}" />
 
     <SolidColorBrush x:Key="InputBackgroundBrush" Color="{StaticResource PrimaryColor}" />
     <SolidColorBrush x:Key="InputTextBrush" Color="{StaticResource InputTextColor}" />

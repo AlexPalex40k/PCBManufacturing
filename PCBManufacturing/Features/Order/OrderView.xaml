@@ -134,9 +134,15 @@
                 Text="{Binding [Ready to order], Source={StaticResource Localization}}" />
 
             <TextBlock
-                Margin="0,10,0,20"
+                Margin="0,10,0,10"
                 Text="{Binding [Review the PCB configuration before placing the order], Source={StaticResource Localization}}"
                 TextWrapping="Wrap" />
+
+            <TextBlock Margin="0,10,0,20">
+<Run Text="{Binding [Total price], Source={StaticResource Localization}, Mode=OneWay}"/>
+<Run Text=":"/>
+<Run Text="{Binding TotalPrice, StringFormat=€{0:N2}, Mode=OneWay}"/>
+            </TextBlock>
 
             <Button
                 HorizontalAlignment="Left"
