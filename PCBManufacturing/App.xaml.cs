@@ -2,6 +2,7 @@
 using PCBManufacturing.Services;
 using PCBManufacturing.ViewModels;
 using System.Windows;
+using PCBManufacturing.Views;
 
 namespace PCBManufacturing;
 

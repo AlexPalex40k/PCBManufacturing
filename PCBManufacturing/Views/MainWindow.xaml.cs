@@ -1,7 +1,7 @@
-﻿using PCBManufacturing.ViewModels;
-using System.Windows;
+﻿using System.Windows;
+using PCBManufacturing.ViewModels;
 
-namespace PCBManufacturing;
+namespace PCBManufacturing.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

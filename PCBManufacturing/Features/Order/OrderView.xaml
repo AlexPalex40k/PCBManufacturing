@@ -15,7 +15,7 @@
             Style="{StaticResource CommonBorder}">
             <StackPanel>
                 <TextBlock
-                    Style="{StaticResource HeadingText}"
+                    Style="{StaticResource SectionTitleStyle}"
                     Text="{Binding [Order summary], Source={StaticResource Localization}}" />
             <Grid>
                 <Grid.ColumnDefinitions>

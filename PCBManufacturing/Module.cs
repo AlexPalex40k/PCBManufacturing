@@ -5,6 +5,7 @@ using PCBManufacturing.Features.Quote;
 using PCBManufacturing.Models;
 using PCBManufacturing.Services;
 using PCBManufacturing.ViewModels;
+using PCBManufacturing.Views;
 
 namespace PCBManufacturing;
 
