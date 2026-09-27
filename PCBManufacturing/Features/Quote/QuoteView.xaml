@@ -1,0 +1,101 @@
+﻿<UserControl
+    x:Class="PCBManufacturing.Features.Quote.QuoteView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:quote="clr-namespace:PCBManufacturing.Features.Quote">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Grid.Column="0"
+            Style="{StaticResource CommonBorder}">
+            <StackPanel>
+                <TextBlock
+                    Style="{StaticResource SectionTitleStyle}"
+                    Text="{Binding [Parameters], Source={StaticResource Localization}}" />
+
+                <DataGrid
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding ParametersView}"
+                    VirtualizingPanel.IsVirtualizingWhenGrouping="True">
+
+                    <DataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource DataGridGroupItemStyle}" />
+                    </DataGrid.GroupStyle>
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn
+                            Width="*"
+                            ElementStyle="{StaticResource DataGridIndentedTextStyle}"
+                            Header="{Binding [Parameter], Source={StaticResource Localization}}">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding
+                                    Converter="{StaticResource LocalizationConverter}"
+                                    Mode="OneWay">
+                                    <Binding Path="NameKey" />
+                                    <Binding
+                                        Path="CurrentCulture"
+                                        Source="{StaticResource Localization}" />
+
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Value}"
+                            ElementStyle="{StaticResource DataGridIndentedTextStyle}"
+                            Header="{Binding [Value], Source={StaticResource Localization}}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+
+        <Border
+            Grid.Column="2"
+            ClipToBounds="True"
+            Style="{StaticResource CommonBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Style="{StaticResource SectionTitleStyle}"
+                    Text="{Binding [PCB Preview], Source={StaticResource Localization}}" />
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Style="{StaticResource PreviewText}"
+                        Text="{Binding BoardDimensions, Mode=OneWay}" />
+
+                    <quote:PcbPreviewView Grid.Row="1" />
+
+                    <TextBlock
+                        Grid.Row="2"
+                        Style="{StaticResource PreviewText}"
+                        Text="{Binding BoardDetails, Mode=OneWay}" />
+
+                </Grid>
+            </Grid>
+        </Border>
+
+    </Grid>
+
+</UserControl>
