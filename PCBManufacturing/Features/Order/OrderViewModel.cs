@@ -108,9 +108,7 @@ public partial class OrderViewModel : ObservableObject, IDisposable
             $"{LocalDic.Finish_type}: {FinishType}\n" +
             $"{LocalDic.Postcode}: {Postcode}";
 
-        _dialogService.ShowInformation(
-            message,
-            LocalDic.Order_placed);
+        _dialogService.ShowInformation(message, LocalDic.Order_placed);
     }
 
     private bool IsOrderValid()

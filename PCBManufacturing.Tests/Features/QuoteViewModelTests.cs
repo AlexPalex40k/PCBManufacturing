@@ -21,6 +21,6 @@ public sealed class QuoteViewModelTests
 
         Assert.Equal("#2563EB", viewModel.SolderMaskColorCode);
         Assert.Contains(nameof(QuoteViewModel.SolderMaskColorCode), changedProperties);
-        Assert.Contains(viewModel.Parameters, parameter => parameter.Name == "Solder mask" && parameter.Value == "Blue");
+        Assert.Contains(viewModel.Parameters, parameter => parameter.NameKey == "Solder mask" && parameter.Value == "Blue");
     }
 }

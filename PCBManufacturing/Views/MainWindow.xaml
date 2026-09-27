@@ -7,7 +7,7 @@
     xmlns:order="clr-namespace:PCBManufacturing.Features.Order"
     xmlns:preferences="clr-namespace:PCBManufacturing.Features.Preferences"
     xmlns:quote="clr-namespace:PCBManufacturing.Features.Quote"
-    Title="{Binding [PCB Manufacturing], Source={StaticResource Localization}}"
+    Title="PCB Manufacturing"
     MinWidth="500"
     MinHeight="300"
     Background="{DynamicResource WindowBackgroundBrush}"

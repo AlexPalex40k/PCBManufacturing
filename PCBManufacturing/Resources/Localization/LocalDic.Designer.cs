@@ -61,6 +61,15 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Board.
+        /// </summary>
+        public static string Board {
+            get {
+                return ResourceManager.GetString("Board", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Board preferences.
         /// </summary>
         public static string Board_preferences {
@@ -115,6 +124,15 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fabrication.
+        /// </summary>
+        public static string Fabrication {
+            get {
+                return ResourceManager.GetString("Fabrication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finish type.
         /// </summary>
         public static string Finish_type {
@@ -133,11 +151,29 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string Height {
+            get {
+                return ResourceManager.GetString("Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid order.
         /// </summary>
         public static string Invalid_order {
             get {
                 return ResourceManager.GetString("Invalid order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layer count.
+        /// </summary>
+        public static string Layer_count {
+            get {
+                return ResourceManager.GetString("Layer count", resourceCulture);
             }
         }
         
@@ -340,6 +376,15 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Surface finish.
+        /// </summary>
+        public static string Surface_finish {
+            get {
+                return ResourceManager.GetString("Surface finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thickness.
         /// </summary>
         public static string Thickness {
@@ -363,6 +408,15 @@ namespace PCBManufacturing.Resources.Localization {
         public static string Value {
             get {
                 return ResourceManager.GetString("Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        public static string Width {
+            get {
+                return ResourceManager.GetString("Width", resourceCulture);
             }
         }
         

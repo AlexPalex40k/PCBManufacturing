@@ -5,7 +5,7 @@
     xmlns:services="clr-namespace:PCBManufacturing.Services">
     <Application.Resources>
         <ResourceDictionary>
-            <ObjectDataProvider
+            <ObjectDataProvider 
                 x:Key="Localization"
                 ObjectInstance="{x:Static services:LocalizationManager.Instance}" />
             <ResourceDictionary.MergedDictionaries>

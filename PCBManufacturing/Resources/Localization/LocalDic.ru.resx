@@ -222,4 +222,22 @@
   <data name="Total price" xml:space="preserve">
     <value>Общая стоимость</value>
   </data>
+  <data name="Board" xml:space="preserve">
+    <value>Плата</value>
+  </data>
+  <data name="Fabrication" xml:space="preserve">
+    <value>Производство</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Ширина</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Высота</value>
+  </data>
+  <data name="Layer count" xml:space="preserve">
+    <value>Количество слоёв</value>
+  </data>
+  <data name="Surface finish" xml:space="preserve">
+    <value>Покрытие</value>
+  </data>
 </root>

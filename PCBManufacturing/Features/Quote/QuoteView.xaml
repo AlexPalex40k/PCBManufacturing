@@ -29,11 +29,25 @@
                         <GroupStyle ContainerStyle="{StaticResource DataGridGroupItemStyle}" />
                     </DataGrid.GroupStyle>
                     <DataGrid.Columns>
+
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding Name}"
                             ElementStyle="{StaticResource DataGridIndentedTextStyle}"
-                            Header="{Binding [Parameter], Source={StaticResource Localization}}" />
+                            Header="{Binding [Parameter], Source={StaticResource Localization}}">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding
+                                    Converter="{StaticResource LocalizationConverter}"
+                                    Mode="OneWay">
+                                    <Binding Path="NameKey" />
+                                    <Binding
+                                        Path="CurrentCulture"
+                                        Source="{StaticResource Localization}" />
+
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+
+                        </DataGridTextColumn>
+
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding Value}"
@@ -59,8 +73,7 @@
                     Style="{StaticResource SectionTitleStyle}"
                     Text="{Binding [PCB Preview], Source={StaticResource Localization}}" />
 
-                <Grid
-                    Grid.Row="1">
+                <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />

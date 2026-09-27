@@ -222,4 +222,22 @@
   <data name="Total price" xml:space="preserve">
     <value>Total price</value>
   </data>
+  <data name="Board" xml:space="preserve">
+    <value>Board</value>
+  </data>
+  <data name="Fabrication" xml:space="preserve">
+    <value>Fabrication</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Layer count" xml:space="preserve">
+    <value>Layer count</value>
+  </data>
+  <data name="Surface finish" xml:space="preserve">
+    <value>Surface finish</value>
+  </data>
 </root>

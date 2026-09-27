@@ -28,7 +28,7 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
         ParametersView = CollectionViewSource.GetDefaultView(Parameters);
 
         ParametersView.GroupDescriptions.Add(
-            new PropertyGroupDescription(nameof(PcbParameter.Group)));
+            new PropertyGroupDescription(nameof(PcbParameter.GroupKey)));
 
         _configuration.PropertyChanged += OnConfigurationPropertyChanged;
     }
@@ -104,9 +104,9 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
         UpdateParameter("Surface finish", _configuration.FinishType);
     }
 
-    private void UpdateParameter(string name, string value)
+    private void UpdateParameter(string nameKey, string value)
     {
-        var parameter = Parameters.FirstOrDefault(x => x.Name == name);
+        var parameter = Parameters.FirstOrDefault(x => x.NameKey == nameKey);
 
         if (parameter == null)
         {

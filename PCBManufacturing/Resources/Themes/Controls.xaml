@@ -1,6 +1,10 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:PCBManufacturing.Converters"
+    xmlns:services="clr-namespace:PCBManufacturing.Services">
+
+    <converters:LocalizationConverter x:Key="LocalizationConverter"/>
 
     <Style TargetType="TextBox">
         <Setter Property="Height" Value="28" />
@@ -344,9 +348,18 @@
             <Setter.Value>
                 <ControlTemplate TargetType="GroupItem">
                     <Expander
-                        Header="{Binding Name}"
                         IsExpanded="True"
                         Style="{StaticResource DataGridGroupExpanderStyle}">
+                        <Expander.Header>
+                            <MultiBinding
+                                Mode="OneWay"
+                                Converter="{StaticResource LocalizationConverter}">
+                                <Binding Path="Name" />
+                                <Binding
+                                    Path="CurrentCulture"
+                                    Source="{x:Static services:LocalizationManager.Instance}" />
+                            </MultiBinding>
+                        </Expander.Header>
                         <ItemsPresenter />
                     </Expander>
                 </ControlTemplate>
