@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PCBManufacturing.Services;
 using PCBManufacturing.ViewModels;
 using System.Windows;
 using PCBManufacturing.Views;
@@ -8,29 +7,68 @@ namespace PCBManufacturing;
 
 public partial class App : Application
 {
-    private readonly ServiceProvider _serviceProvider;
+    private readonly Mutex _namedMutex;
+    private readonly bool _isFirstInstance;
+
+    private readonly ServiceProvider? _serviceProvider;
 
     public App()
     {
-        _serviceProvider = Module.CreateServiceProvider();
+        var mutexName = BuildMutexName(Environment.UserName);
+        _namedMutex = new Mutex(true, mutexName, out _isFirstInstance);
+
+        if (_isFirstInstance)
+        {
+            _serviceProvider = Module.CreateServiceProvider();
+        }
     }
 
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
 
-        var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+        if (!_isFirstInstance)
+        {
+            Shutdown();
+            return;
+        }
+
+        var mainWindow = _serviceProvider!.GetRequiredService<MainWindow>();
+
         mainWindow.Show();
     }
 
     protected override void OnExit(ExitEventArgs e)
     {
-        var mainWindowViewModel = _serviceProvider.GetRequiredService<MainWindowViewModel>();
+        if (_isFirstInstance)
+        {
+            var serviceProvider = _serviceProvider!;
 
-        mainWindowViewModel.SaveState();
+            var mainWindowViewModel = serviceProvider.GetRequiredService<MainWindowViewModel>();
 
-        _serviceProvider.Dispose();
+            mainWindowViewModel.SaveState();
+
+            _namedMutex.ReleaseMutex();
+            serviceProvider.Dispose();
+        }
+
+        _namedMutex.Dispose();
 
         base.OnExit(e);
+    }
+
+    private static string BuildMutexName(string userName)
+    {
+        var applicationName =
+            typeof(App).Assembly.GetName().Name
+            ?? "PCBManufacturing";
+
+        var mutexName = $"{userName}-{applicationName}";
+
+        mutexName = mutexName.Replace('\\', '_');
+        mutexName = mutexName.Replace('.', '_');
+        mutexName = mutexName.Replace(' ', '_');
+
+        return $"Global\\{mutexName}";
     }
 }
