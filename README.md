@@ -7,16 +7,19 @@ The project was created as a technical assignment and demonstrates MVVM architec
 ## Screenshots
 
 ### Preferences
-![Preferences](images/PсbPreferences.png)
+![Preferences](PCBManufacturing/Images/PсbPreferences.png)
 
 ### Quote
-![Quote](images/PcbQuote.png)
+
+![Quote](PCBManufacturing/Images/PcbQuote.png)
 
 ### Order
-![Order](images/PcbOrder.png)
 
-### Quote Dark theme
-![OrderDark](images/PcbQuoteDark.png)
+![Order](PCBManufacturing/Images/PcbOrder.png)
+
+### Quote — Dark Theme
+
+![Quote Dark Theme](PCBManufacturing/Images/PcbQuoteDark.png)
 
 ## Features
 
