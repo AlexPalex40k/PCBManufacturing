@@ -60,7 +60,6 @@
                     Text="{Binding [PCB Preview], Source={StaticResource Localization}}" />
 
                 <Grid
-                    x:Name="ThisGrid"
                     Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

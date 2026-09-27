@@ -36,7 +36,6 @@ public partial class MainWindowViewModel : ObservableObject
 
     public QuoteViewModel Quote { get; }
     public OrderViewModel Order { get; }
-    public LocalizationManager Localization => LocalizationManager.Instance;
 
     /// <summary>
     /// Saves application state before shutdown.

@@ -95,4 +95,24 @@ public sealed class OrderViewModelTests
         Assert.NotNull(dialogService.ErrorMessage);
         Assert.Null(dialogService.InformationMessage);
     }
+
+    [Fact]
+    public void TotalPrice_WithValidConfiguration_ReturnsExpectedValue()
+    {
+        var configuration = new PcbConfiguration
+        {
+            Material = new Material("FR-4", 1.0m, 5),
+            BoardThickness = new BoardThickness("0.8 mm", 0.8),
+            Width = 100,
+            Height = 80,
+            LayerCount = 4
+        };
+
+        var viewModel = new OrderViewModel(
+            configuration,
+            new FakeDialogService(),
+            new PostcodeValidator());
+
+        Assert.Equal(236.80m, viewModel.TotalPrice);
+    }
 }

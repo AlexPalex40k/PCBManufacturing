@@ -87,7 +87,7 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
                 break;
 
             case nameof(PcbConfiguration.FinishType):
-                UpdateParameter("Finish type", _configuration.FinishType);
+                UpdateParameter("Surface finish", _configuration.FinishType);
                 OnPropertyChanged(nameof(BoardDetails));
                 break;
         }

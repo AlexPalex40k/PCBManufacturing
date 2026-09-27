@@ -252,7 +252,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource AccentSurfaceBrush}" />
         <Setter Property="BorderThickness" Value="1,0,1,0" />
         <Setter Property="FontWeight" Value="Bold" />
@@ -369,7 +369,7 @@
         <Setter Property="Height" Value="36" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="Background" Value="{DynamicResource AccentSurfaceBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>

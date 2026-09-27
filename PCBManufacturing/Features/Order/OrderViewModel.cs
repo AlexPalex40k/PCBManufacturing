@@ -56,6 +56,7 @@ public partial class OrderViewModel : ObservableObject, IDisposable
         {
             case nameof(PcbConfiguration.Material):
                 OnPropertyChanged(nameof(Material));
+                OnPropertyChanged(nameof(TotalPrice));
                 break;
 
             case nameof(PcbConfiguration.SolderMaskColor):
@@ -64,6 +65,7 @@ public partial class OrderViewModel : ObservableObject, IDisposable
 
             case nameof(PcbConfiguration.BoardThickness):
                 OnPropertyChanged(nameof(BoardThickness));
+                OnPropertyChanged(nameof(TotalPrice));
                 break;
 
             case nameof(PcbConfiguration.Width):
