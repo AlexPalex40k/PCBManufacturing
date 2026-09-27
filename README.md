@@ -50,5 +50,5 @@ The project was created as a technical assignment and demonstrates MVVM architec
 Clone the repository and open the repository directory:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/AlexPalex40k/PCBManufacturing.git
 cd PCBManufacturing
