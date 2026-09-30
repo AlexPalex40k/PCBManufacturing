@@ -120,7 +120,6 @@
                         Fill="{Binding SolderMaskColorCode, Mode=OneWay}"
                         Stroke="#E2C457"
                         StrokeThickness="3" />
-
                 </Grid>
 
                 <Grid
@@ -187,7 +186,6 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Fill="#E2C457" />
-
                 </Grid>
 
                 <Grid
@@ -195,7 +193,6 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="3"
                     VerticalAlignment="Center">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="14" />
                         <ColumnDefinition Width="*" />
@@ -223,10 +220,40 @@
                         Fill="{Binding SolderMaskColorCode, Mode=OneWay}"
                         Stroke="#E2C457"
                         StrokeThickness="3" />
-
                 </Grid>
-
             </Grid>
+
+            <!-- Layer stack -->
+            <Border
+                Margin="0,0,18,0"
+                Padding="6"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="#40000000"
+                CornerRadius="3">
+
+                <ItemsControl ItemsSource="{Binding PreviewLayers, Mode=OneWay}">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Width="30"
+                                Height="3"
+                                Margin="0,2"
+                                Background="#E2C457"
+                                CornerRadius="1" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </Border>
 
             <!-- PCB label -->
             <TextBlock

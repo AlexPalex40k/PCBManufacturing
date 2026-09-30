@@ -68,7 +68,7 @@
                                             <TextBox
                                                 Width="90"
                                                 KeyDown="BoardValueTextBox_OnKeyDown"
-                                                Text="{Binding DataContext.Width, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}" />
+                                                Text="{Binding DataContext.Width, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
                                             <TextBlock
                                                 Margin="6,0,0,0"
                                                 VerticalAlignment="Center"
@@ -84,7 +84,7 @@
                                             <TextBox
                                                 Width="90"
                                                 KeyDown="BoardValueTextBox_OnKeyDown"
-                                                Text="{Binding DataContext.Height, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}" />
+                                                Text="{Binding DataContext.Height, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
                                             <TextBlock
                                                 Margin="6,0,0,0"
                                                 VerticalAlignment="Center"
@@ -98,20 +98,26 @@
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Center"
                                             KeyDown="BoardValueTextBox_OnKeyDown"
-                                            Text="{Binding DataContext.LayerCount, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}"
+                                            Text="{Binding DataContext.LayerCount, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}"
                                             Visibility="Collapsed" />
                                     </Grid>
 
                                     <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding NameKey}" Value="Width">
+                                        <DataTrigger
+                                            Binding="{Binding NameKey}"
+                                            Value="Width">
                                             <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
                                             <Setter TargetName="WidthEditor" Property="Visibility" Value="Visible" />
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding NameKey}" Value="Height">
+                                        <DataTrigger
+                                            Binding="{Binding NameKey}"
+                                            Value="Height">
                                             <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
                                             <Setter TargetName="HeightEditor" Property="Visibility" Value="Visible" />
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding NameKey}" Value="Layer count">
+                                        <DataTrigger
+                                            Binding="{Binding NameKey}"
+                                            Value="Layer count">
                                             <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
                                             <Setter TargetName="LayerCountEditor" Property="Visibility" Value="Visible" />
                                         </DataTrigger>

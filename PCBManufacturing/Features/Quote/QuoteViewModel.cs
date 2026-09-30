@@ -2,6 +2,7 @@
 using PCBManufacturing.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Windows.Data;
 
 namespace PCBManufacturing.Features.Quote;
@@ -9,18 +10,32 @@ namespace PCBManufacturing.Features.Quote;
 /// <summary>
 /// Provides PCB manufacturing parameters and quote preview state.
 /// </summary>
-public partial class QuoteViewModel : ObservableObject, IDisposable
+public partial class QuoteViewModel : ObservableValidator, IDisposable
 {
     private readonly PcbConfiguration _configuration;
 
     private const double PreviewScale = 4;
+    private const int MinLayerCount = 1;
+    private const int MaxLayerCount = 64;
+    private const int MinBoardDimensions = 10;
+    private const int MaxBoardDimensions = 1000;
+    private const int MaxPreviewLayers = 20;
+
 
     [ObservableProperty]
     private string _boardLabel = "PCB1";
 
+    private double _width;
+    private double _height;
+    private int _layerCount;
+
     public QuoteViewModel(PcbConfiguration configuration)
     {
         _configuration = configuration;
+
+        _width = configuration.Width;
+        _height = configuration.Height;
+        _layerCount = configuration.LayerCount;
 
         Parameters = new ObservableCollection<PcbParameter>(SampleData.PcbParameters);
 
@@ -35,52 +50,68 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
     public ObservableCollection<PcbParameter> Parameters { get; }
 
     public ICollectionView ParametersView { get; }
-
+    [Range(MinBoardDimensions, MaxBoardDimensions)]
     public double Width
     {
-        get => _configuration.Width;
+        get => _width;
         set
         {
-            ValidateDimension(value, nameof(Width));
-            _configuration.Width = value;
-        }
-    }
-
-    public double Height
-    {
-        get => _configuration.Height;
-        set
-        {
-            ValidateDimension(value, nameof(Height));
-            _configuration.Height = value;
-        }
-    }
-
-    public int LayerCount
-    {
-        get => _configuration.LayerCount;
-        set
-        {
-            if (value <= 0)
+            if (!SetProperty(ref _width, value, true))
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(value),
-                    "Layer count must be greater than zero.");
+                return;
             }
 
-            _configuration.LayerCount = value;
+            if (!GetErrors(nameof(Width)).Any())
+            {
+                _configuration.Width = value;
+            }
+        }
+    }
+
+    [Range(MinBoardDimensions, MaxBoardDimensions)]
+    public double Height
+    {
+        get => _height;
+        set
+        {
+            if (!SetProperty(ref _height, value, true))
+            {
+                return;
+            }
+
+            if (!GetErrors(nameof(Height)).Any())
+            {
+                _configuration.Height = value;
+            }
+        }
+    }
+
+    [Range(MinLayerCount, MaxLayerCount)]
+    public int LayerCount
+    {
+        get => _layerCount;
+        set
+        {
+            if (!SetProperty(ref _layerCount, value, true))
+            {
+                return;
+            }
+
+            if (!GetErrors(nameof(LayerCount)).Any())
+            {
+                _configuration.LayerCount = value;
+            }
         }
     }
 
     public string? SolderMaskColorCode => _configuration.SolderMaskColor?.ColorCode;
-
     public string BoardDimensions => $"{_configuration.Width} × {_configuration.Height} mm";
-
     public string BoardDetails => $"{_configuration.LayerCount} Layers · {_configuration.FinishType}";
-
     public double PreviewWidth => _configuration.Width * PreviewScale;
-
     public double PreviewHeight => _configuration.Height * PreviewScale;
+
+
+    public IEnumerable<int> PreviewLayers => Enumerable.Range(1, Math.Min(_configuration.LayerCount, MaxPreviewLayers));
 
     private void OnConfigurationPropertyChanged(
         object? sender,
@@ -117,6 +148,7 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
                 UpdateParameter("Layer count", _configuration.LayerCount.ToString());
                 OnPropertyChanged(nameof(LayerCount));
                 OnPropertyChanged(nameof(BoardDetails));
+                OnPropertyChanged(nameof(PreviewLayers));
                 break;
 
             case nameof(PcbConfiguration.FinishType):
