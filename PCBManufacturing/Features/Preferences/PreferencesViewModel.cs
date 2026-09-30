@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PCBManufacturing.Models;
-using PCBManufacturing.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using PCBManufacturing.Resources.Localization;
@@ -13,7 +12,6 @@ namespace PCBManufacturing.Features.Preferences;
 public partial class PreferencesViewModel : ObservableValidator
 {
     private readonly PcbConfiguration _configuration;
-    private readonly IConfigurationStorage _configurationStorage;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(PriceModifier))]
@@ -26,7 +24,6 @@ public partial class PreferencesViewModel : ObservableValidator
     [ObservableProperty]
     private BoardThickness? _selectedBoardThickness;
 
-    //TODO ALEX check DataAnnotations validation
     [ObservableProperty]
     [NotifyDataErrorInfo]
     [Required(
@@ -42,18 +39,18 @@ public partial class PreferencesViewModel : ObservableValidator
     /// Initializes a new instance of the <see cref="PreferencesViewModel"/> class
     /// with predefined PCB manufacturing options.
     /// </summary>
-    public PreferencesViewModel(
-        PcbConfiguration configuration,
-        IConfigurationStorage configurationStorage)
+    public PreferencesViewModel(PcbConfiguration configuration)
     {
         _configuration = configuration;
-        _configurationStorage = configurationStorage;
 
         Materials = SampleData.Materials;
         SolderMaskColors = SampleData.SolderMaskColors;
         BoardThicknesses = SampleData.BoardThicknesses;
 
-        LoadConfiguration();
+        SelectedMaterial = _configuration.Material ?? Materials.FirstOrDefault();
+        SelectedBoardThickness = _configuration.BoardThickness ?? BoardThicknesses.FirstOrDefault();
+        SelectedSolderMaskColor = _configuration.SolderMaskColor ?? SolderMaskColors.FirstOrDefault();
+        Postcode = _configuration.Postcode;
     }
 
     public ObservableCollection<Material> Materials { get; }
@@ -74,23 +71,6 @@ public partial class PreferencesViewModel : ObservableValidator
         ValidateProperty(Postcode, nameof(Postcode));
     }
 
-    /// <summary>
-    /// Saves the current PCB preferences to persistent storage.
-    /// </summary>
-    public void SaveConfiguration()
-    {
-        var data = new PcbConfigurationData
-        {
-            MaterialName = SelectedMaterial?.Name,
-            SolderMaskColorName = SelectedSolderMaskColor?.Name,
-            BoardThickness = SelectedBoardThickness?.Millimeters,
-            Postcode = Postcode
-        };
-
-        _configurationStorage.Save(data);
-    }
-
-    //TODO ALEX check generated partial hooks
     partial void OnSelectedMaterialChanged(Material? value)
     {
         _configuration.Material = value;
@@ -109,24 +89,5 @@ public partial class PreferencesViewModel : ObservableValidator
     partial void OnPostcodeChanged(string value)
     {
         _configuration.Postcode = value;
-    }
-
-    private void LoadConfiguration()
-    {
-        var data = _configurationStorage.Load();
-
-        SelectedMaterial =
-            Materials.FirstOrDefault(x => x.Name == data?.MaterialName)
-            ?? Materials.FirstOrDefault();
-
-        SelectedSolderMaskColor =
-            SolderMaskColors.FirstOrDefault(x => x.Name == data?.SolderMaskColorName)
-            ?? SolderMaskColors.FirstOrDefault();
-
-        SelectedBoardThickness =
-            BoardThicknesses.FirstOrDefault(x => x.Millimeters == data?.BoardThickness)
-            ?? BoardThicknesses.FirstOrDefault();
-
-        Postcode = data?.Postcode ?? string.Empty;
     }
 }

@@ -1,7 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PCBManufacturing.Features.Order;
+using PCBManufacturing.Features.Preferences;
+using PCBManufacturing.Features.Quote;
+using PCBManufacturing.Models;
+using PCBManufacturing.Services;
 using PCBManufacturing.ViewModels;
-using System.Windows;
 using PCBManufacturing.Views;
+using System.Windows;
 
 namespace PCBManufacturing;
 
@@ -20,6 +25,9 @@ public partial class App : Application
         if (_isFirstInstance)
         {
             _serviceProvider = Module.CreateServiceProvider();
+
+            var configurationService = _serviceProvider.GetRequiredService<IPcbConfigurationService>();
+            configurationService.Load();
         }
     }
 
