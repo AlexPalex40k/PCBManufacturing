@@ -26,11 +26,9 @@ public partial class PreferencesViewModel : ObservableValidator
 
     [ObservableProperty]
     [NotifyDataErrorInfo]
-    [Required(
-        ErrorMessageResourceType = typeof(LocalDic),
+    [Required(ErrorMessageResourceType = typeof(LocalDic),
         ErrorMessageResourceName = "Postcode_is_required")]
-    [RegularExpression(
-        @"^\d{4,10}$",
+    [RegularExpression(@"^\d{4,10}$",
         ErrorMessageResourceType = typeof(LocalDic),
         ErrorMessageResourceName = "Postcode_must_contain_4_to_10_digits")]
     private string _postcode = string.Empty;
@@ -66,7 +64,7 @@ public partial class PreferencesViewModel : ObservableValidator
     /// <summary>
     /// Re-evaluates localized validation messages after the UI culture changes.
     /// </summary>
-    public void RefreshValidation()
+    public void RefreshLocalization()
     {
         ValidateProperty(Postcode, nameof(Postcode));
     }

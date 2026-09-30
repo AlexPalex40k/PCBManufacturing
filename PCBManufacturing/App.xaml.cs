@@ -1,8 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PCBManufacturing.Features.Order;
-using PCBManufacturing.Features.Preferences;
-using PCBManufacturing.Features.Quote;
-using PCBManufacturing.Models;
 using PCBManufacturing.Services;
 using PCBManufacturing.ViewModels;
 using PCBManufacturing.Views;

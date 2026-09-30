@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Data;
+using PCBManufacturing.Resources.Localization;
+using PCBManufacturing.Services;
 
 namespace PCBManufacturing.Features.Quote;
 
@@ -14,20 +16,19 @@ public partial class QuoteViewModel : ObservableValidator, IDisposable
 {
     private readonly PcbConfiguration _configuration;
 
-    private const double PreviewScale = 4;
     private const int MinLayerCount = 1;
     private const int MaxLayerCount = 64;
-    private const int MinBoardDimensions = 10;
-    private const int MaxBoardDimensions = 1000;
     private const int MaxPreviewLayers = 20;
-
-
-    [ObservableProperty]
-    private string _boardLabel = "PCB1";
+    private const double MinBoardDimension = 10;
+    private const double MaxBoardDimension = 1000;
+    private const double PreviewScale = 4;
 
     private double _width;
     private double _height;
     private int _layerCount;
+
+    [ObservableProperty]
+    private string _boardLabel = "PCB1";
 
     public QuoteViewModel(PcbConfiguration configuration)
     {
@@ -50,7 +51,7 @@ public partial class QuoteViewModel : ObservableValidator, IDisposable
     public ObservableCollection<PcbParameter> Parameters { get; }
 
     public ICollectionView ParametersView { get; }
-    [Range(MinBoardDimensions, MaxBoardDimensions)]
+    [Range(MinBoardDimension, MaxBoardDimension)]
     public double Width
     {
         get => _width;
@@ -68,7 +69,7 @@ public partial class QuoteViewModel : ObservableValidator, IDisposable
         }
     }
 
-    [Range(MinBoardDimensions, MaxBoardDimensions)]
+    [Range(MinBoardDimension, MaxBoardDimension)]
     public double Height
     {
         get => _height;
@@ -105,13 +106,22 @@ public partial class QuoteViewModel : ObservableValidator, IDisposable
     }
 
     public string? SolderMaskColorCode => _configuration.SolderMaskColor?.ColorCode;
+
     public string BoardDimensions => $"{_configuration.Width} × {_configuration.Height} mm";
-    public string BoardDetails => $"{_configuration.LayerCount} Layers · {_configuration.FinishType}";
+
     public double PreviewWidth => _configuration.Width * PreviewScale;
+
     public double PreviewHeight => _configuration.Height * PreviewScale;
 
+    public string BoardDetails => $"{_configuration.LayerCount} {GetLayerWord(_configuration.LayerCount)} · " +
+                                  $"{_configuration.FinishType}";
 
     public IEnumerable<int> PreviewLayers => Enumerable.Range(1, Math.Min(_configuration.LayerCount, MaxPreviewLayers));
+
+    public void RefreshLocalization()
+    {
+        OnPropertyChanged(nameof(BoardDetails));
+    }
 
     private void OnConfigurationPropertyChanged(
         object? sender,
@@ -186,14 +196,28 @@ public partial class QuoteViewModel : ObservableValidator, IDisposable
         };
     }
 
-    private static void ValidateDimension(double value, string propertyName)
+    private static string GetLayerWord(int count)
     {
-        if (!double.IsFinite(value) || value <= 0)
+        if (LocalizationManager.Instance.CurrentCulture.TwoLetterISOLanguageName != "ru")
         {
-            throw new ArgumentOutOfRangeException(
-                propertyName,
-                "Board dimensions must be greater than zero.");
+            return count == 1
+                ? LocalDic.Layer
+                : LocalDic.LayerMany;
         }
+
+        var lastTwoDigits = count % 100;
+
+        if (lastTwoDigits is >= 11 and <= 14)
+        {
+            return LocalDic.LayerMany;
+        }
+
+        return (count % 10) switch
+        {
+            1 => LocalDic.Layer,
+            2 or 3 or 4 => LocalDic.LayerFew,
+            _ => LocalDic.LayerMany
+        };
     }
 
     public void Dispose()

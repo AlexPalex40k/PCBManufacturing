@@ -169,11 +169,38 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Layer.
+        /// </summary>
+        public static string Layer {
+            get {
+                return ResourceManager.GetString("Layer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Layer count.
         /// </summary>
         public static string Layer_count {
             get {
                 return ResourceManager.GetString("Layer count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layers.
+        /// </summary>
+        public static string LayerFew {
+            get {
+                return ResourceManager.GetString("LayerFew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layers.
+        /// </summary>
+        public static string LayerMany {
+            get {
+                return ResourceManager.GetString("LayerMany", resourceCulture);
             }
         }
         

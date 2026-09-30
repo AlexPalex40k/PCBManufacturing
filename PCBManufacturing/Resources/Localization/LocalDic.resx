@@ -240,4 +240,13 @@
   <data name="Surface finish" xml:space="preserve">
     <value>Surface finish</value>
   </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Layer</value>
+  </data>
+  <data name="LayerFew" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="LayerMany" xml:space="preserve">
+    <value>Layers</value>
+  </data>
 </root>

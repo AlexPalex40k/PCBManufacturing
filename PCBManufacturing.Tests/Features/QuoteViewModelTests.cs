@@ -50,13 +50,44 @@ public sealed class QuoteViewModelTests
 
     [Theory]
     [InlineData(0)]
+    [InlineData(5)]
     [InlineData(-1)]
+    [InlineData(1001)]
     [InlineData(double.NaN)]
     [InlineData(double.PositiveInfinity)]
-    public void WidthChanged_WithInvalidValue_IsRejected(double value)
+    public void WidthChanged_WithInvalidValue_DoesNotUpdateConfiguration(
+        double value)
     {
-        using var viewModel = new QuoteViewModel(new PcbConfiguration());
+        var configuration = new PcbConfiguration
+        {
+            Width = 100
+        };
 
-        Assert.Throws<ArgumentOutOfRangeException>(() => viewModel.Width = value);
+        using var viewModel = new QuoteViewModel(configuration);
+
+        viewModel.Width = value;
+
+        Assert.True(viewModel.HasErrors);
+        Assert.Equal(100, configuration.Width);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(65)]
+    public void LayerCountChanged_WithInvalidValue_DoesNotUpdateConfiguration(
+        int value)
+    {
+        var configuration = new PcbConfiguration
+        {
+            LayerCount = 4
+        };
+
+        using var viewModel = new QuoteViewModel(configuration);
+
+        viewModel.LayerCount = value;
+
+        Assert.True(viewModel.HasErrors);
+        Assert.Equal(4, configuration.LayerCount);
     }
 }

@@ -15,7 +15,8 @@ The application follows the MVVM pattern and separates UI, presentation logic, a
 - **Resources** — localization resources and light/dark theme dictionaries.
 - **Tests** — unit tests for ViewModels, validation, and application logic.
 
-`PcbConfiguration` represents the shared PCB configuration. Changes made in Preferences are propagated to Quote and Order through `INotifyPropertyChanged`.
+`PcbConfiguration` represents the shared PCB configuration. Changes made in Preferences and Quote are propagated through the shared
+PcbConfiguration instance and reflected across application features.
 
 Dependencies are registered using `Microsoft.Extensions.DependencyInjection`, while `CommunityToolkit.Mvvm` is used for observable properties, commands, and validation.
 

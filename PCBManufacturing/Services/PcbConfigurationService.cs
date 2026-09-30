@@ -1,4 +1,5 @@
 ﻿using PCBManufacturing.Models;
+using PCBManufacturing.Resources.Localization;
 
 namespace PCBManufacturing.Services;
 
@@ -75,5 +76,7 @@ public sealed class PcbConfigurationService : IPcbConfigurationService
         _configuration.Width = SampleData.PcbWidth;
         _configuration.Height = SampleData.PcbHeight;
         _configuration.LayerCount = SampleData.PcbLayerCount;
+        _configuration.FinishType = SampleData.PcbFinishType;
+        _configuration.Postcode = string.Empty;
     }
 }

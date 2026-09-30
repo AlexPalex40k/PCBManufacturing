@@ -68,6 +68,7 @@ public partial class MainWindowViewModel : ObservableObject
             : CultureInfo.GetCultureInfo("en");
 
         LocalizationManager.Instance.SetCulture(culture);
-        PreferencesVm.RefreshValidation();
+        PreferencesVm.RefreshLocalization();
+        QuoteVm.RefreshLocalization();
     }
 }

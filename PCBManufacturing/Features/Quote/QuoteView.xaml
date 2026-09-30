@@ -42,10 +42,8 @@
                                     <Binding
                                         Path="CurrentCulture"
                                         Source="{StaticResource Localization}" />
-
                                 </MultiBinding>
                             </DataGridTextColumn.Binding>
-
                         </DataGridTextColumn>
 
                         <DataGridTemplateColumn

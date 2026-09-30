@@ -71,10 +71,12 @@ public partial class OrderViewModel : ObservableObject, IDisposable
             case nameof(PcbConfiguration.Width):
             case nameof(PcbConfiguration.Height):
                 OnPropertyChanged(nameof(Dimensions));
+                OnPropertyChanged(nameof(TotalPrice));
                 break;
 
             case nameof(PcbConfiguration.LayerCount):
                 OnPropertyChanged(nameof(LayerCount));
+                OnPropertyChanged(nameof(TotalPrice));
                 break;
 
             case nameof(PcbConfiguration.FinishType):
@@ -125,7 +127,7 @@ public partial class OrderViewModel : ObservableObject, IDisposable
         var layerModifier = _configuration.LayerCount * LayerFactor;
         var widthModifier = (decimal)_configuration.Width * DimensionFactor;
         var heightModifier = (decimal)_configuration.Height * DimensionFactor;
-        var thicknessModifier = (decimal)(_configuration.BoardThickness?.Millimeters / 1.5 ?? 1.6);
+        var thicknessModifier = (decimal)(_configuration.BoardThickness?.Millimeters / 1.5 ?? 1.0);
 
         return Math.Round(
             BasePrice

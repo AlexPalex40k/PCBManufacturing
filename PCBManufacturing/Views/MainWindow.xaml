@@ -164,7 +164,8 @@
             </TabItem>
 
             <TabItem
-                Content="{Binding QuoteVm}">
+                Content="{Binding QuoteVm}"
+                Validation.ErrorTemplate="{x:Null}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Ellipse

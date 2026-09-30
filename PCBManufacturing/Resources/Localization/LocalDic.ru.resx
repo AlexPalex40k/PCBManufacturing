@@ -240,4 +240,13 @@
   <data name="Surface finish" xml:space="preserve">
     <value>Покрытие</value>
   </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Слой</value>
+  </data>
+  <data name="LayerFew" xml:space="preserve">
+    <value>Слоя</value>
+  </data>
+  <data name="LayerMany" xml:space="preserve">
+    <value>Слоёв</value>
+  </data>
 </root>
