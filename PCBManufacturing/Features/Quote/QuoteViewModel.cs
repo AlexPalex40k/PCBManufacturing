@@ -23,12 +23,11 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
         _configuration = configuration;
 
         Parameters = new ObservableCollection<PcbParameter>(SampleData.PcbParameters);
-        UpdateParameters();
+
+        //UpdateParameters();
 
         ParametersView = CollectionViewSource.GetDefaultView(Parameters);
-
-        ParametersView.GroupDescriptions.Add(
-            new PropertyGroupDescription(nameof(PcbParameter.GroupKey)));
+        ParametersView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(PcbParameter.GroupKey)));
 
         _configuration.PropertyChanged += OnConfigurationPropertyChanged;
     }
@@ -99,9 +98,7 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
                 break;
 
             case nameof(PcbConfiguration.BoardThickness):
-                UpdateParameter(
-                    "Board thickness",
-                    _configuration.BoardThickness?.Name ?? "-");
+                UpdateParameter("Board thickness", _configuration.BoardThickness?.Name ?? "-");
                 break;
 
             case nameof(PcbConfiguration.Width):

@@ -13,9 +13,9 @@ public sealed class PcbConfigurationData
 
     public string Postcode { get; set; } = string.Empty;
 
-    public double? Width { get; set; }
+    public double Width { get; set; }
 
-    public double? Height { get; set; }
+    public double Height { get; set; }
 
-    public int? LayerCount { get; set; }
+    public int LayerCount { get; set; }
 }

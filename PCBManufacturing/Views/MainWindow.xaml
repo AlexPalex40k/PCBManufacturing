@@ -149,7 +149,7 @@
 
         <TabControl Grid.Row="1">
             <TabItem
-                Content="{Binding Preferences}"
+                Content="{Binding PreferencesVm}"
                 Validation.ErrorTemplate="{x:Null}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -164,7 +164,7 @@
             </TabItem>
 
             <TabItem
-                Content="{Binding Quote}">
+                Content="{Binding QuoteVm}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Ellipse
@@ -179,7 +179,7 @@
             </TabItem>
 
             <TabItem
-                Content="{Binding Order}">
+                Content="{Binding OrderVm}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Path
