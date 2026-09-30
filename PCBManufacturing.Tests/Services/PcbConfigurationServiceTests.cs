@@ -13,6 +13,7 @@ public sealed class PcbConfigurationServiceTests
             Material = SampleData.Materials[1],
             SolderMaskColor = SampleData.SolderMaskColors[2],
             BoardThickness = SampleData.BoardThicknesses[1],
+            SurfaceFinish = SampleData.SurfaceFinishes[2],
             Postcode = "11000",
             Width = 125.5,
             Height = 95,
@@ -27,6 +28,7 @@ public sealed class PcbConfigurationServiceTests
         Assert.Equal(configuration.Material.Name, saved.MaterialName);
         Assert.Equal(configuration.SolderMaskColor.Name, saved.SolderMaskColorName);
         Assert.Equal(configuration.BoardThickness.Millimeters, saved.BoardThickness);
+        Assert.Equal(configuration.SurfaceFinish.Name, saved.SurfaceFinishName);
         Assert.Equal(configuration.Postcode, saved.Postcode);
         Assert.Equal(configuration.Width, saved.Width);
         Assert.Equal(configuration.Height, saved.Height);
@@ -44,6 +46,7 @@ public sealed class PcbConfigurationServiceTests
                 MaterialName = SampleData.Materials[2].Name,
                 SolderMaskColorName = SampleData.SolderMaskColors[1].Name,
                 BoardThickness = SampleData.BoardThicknesses[2].Millimeters,
+                SurfaceFinishName = SampleData.SurfaceFinishes[3].Name,
                 Postcode = "12345",
                 Width = 140,
                 Height = 90.5,
@@ -57,6 +60,7 @@ public sealed class PcbConfigurationServiceTests
         Assert.Same(SampleData.Materials[2], configuration.Material);
         Assert.Same(SampleData.SolderMaskColors[1], configuration.SolderMaskColor);
         Assert.Same(SampleData.BoardThicknesses[2], configuration.BoardThickness);
+        Assert.Same(SampleData.SurfaceFinishes[3], configuration.SurfaceFinish);
         Assert.Equal("12345", configuration.Postcode);
         Assert.Equal(140, configuration.Width);
         Assert.Equal(90.5, configuration.Height);
@@ -84,6 +88,7 @@ public sealed class PcbConfigurationServiceTests
         Assert.Same(SampleData.Materials[0], configuration.Material);
         Assert.Same(SampleData.SolderMaskColors[0], configuration.SolderMaskColor);
         Assert.Same(SampleData.BoardThicknesses[0], configuration.BoardThickness);
+        Assert.Same(SampleData.SurfaceFinishes[0], configuration.SurfaceFinish);
         Assert.Equal(SampleData.PcbWidth, configuration.Width);
         Assert.Equal(SampleData.PcbHeight, configuration.Height);
         Assert.Equal(SampleData.PcbLayerCount, configuration.LayerCount);
