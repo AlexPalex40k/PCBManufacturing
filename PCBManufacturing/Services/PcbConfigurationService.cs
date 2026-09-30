@@ -1,5 +1,4 @@
 ﻿using PCBManufacturing.Models;
-using PCBManufacturing.Resources.Localization;
 
 namespace PCBManufacturing.Services;
 
@@ -44,6 +43,11 @@ public sealed class PcbConfigurationService : IPcbConfigurationService
                 x => Equals(x.Millimeters, data.BoardThickness))
             ?? SampleData.BoardThicknesses.FirstOrDefault();
 
+        _configuration.SurfaceFinish =
+            SampleData.SurfaceFinishes.FirstOrDefault(
+                x => x.Name == data.SurfaceFinishName)
+            ?? SampleData.SurfaceFinishes.FirstOrDefault();
+
         _configuration.Postcode = data.Postcode;
 
         _configuration.Width = data.Width;
@@ -58,6 +62,7 @@ public sealed class PcbConfigurationService : IPcbConfigurationService
             MaterialName = _configuration.Material?.Name,
             SolderMaskColorName = _configuration.SolderMaskColor?.Name,
             BoardThickness = _configuration.BoardThickness?.Millimeters,
+            SurfaceFinishName = _configuration.SurfaceFinish?.Name,
             Postcode = _configuration.Postcode,
 
             Width = _configuration.Width,
@@ -73,10 +78,10 @@ public sealed class PcbConfigurationService : IPcbConfigurationService
         _configuration.Material = SampleData.Materials.FirstOrDefault();
         _configuration.SolderMaskColor = SampleData.SolderMaskColors.FirstOrDefault();
         _configuration.BoardThickness = SampleData.BoardThicknesses.FirstOrDefault();
+        _configuration.SurfaceFinish = SampleData.SurfaceFinishes.FirstOrDefault();
         _configuration.Width = SampleData.PcbWidth;
         _configuration.Height = SampleData.PcbHeight;
         _configuration.LayerCount = SampleData.PcbLayerCount;
-        _configuration.FinishType = SampleData.PcbFinishType;
         _configuration.Postcode = string.Empty;
     }
 }

@@ -114,7 +114,7 @@ public partial class QuoteViewModel : ObservableValidator, IDisposable
     public double PreviewHeight => _configuration.Height * PreviewScale;
 
     public string BoardDetails => $"{_configuration.LayerCount} {GetLayerWord(_configuration.LayerCount)} · " +
-                                  $"{_configuration.FinishType}";
+                                  $"{_configuration.SurfaceFinish?.Name}";
 
     public IEnumerable<int> PreviewLayers => Enumerable.Range(1, Math.Min(_configuration.LayerCount, MaxPreviewLayers));
 
@@ -148,12 +148,14 @@ public partial class QuoteViewModel : ObservableValidator, IDisposable
                 OnPropertyChanged(nameof(BoardDimensions));
                 OnPropertyChanged(nameof(PreviewWidth));
                 break;
+
             case nameof(PcbConfiguration.Height):
                 UpdateParameter("Height", $"{_configuration.Height} mm");
                 OnPropertyChanged(nameof(Height));
                 OnPropertyChanged(nameof(BoardDimensions));
                 OnPropertyChanged(nameof(PreviewHeight));
                 break;
+
             case nameof(PcbConfiguration.LayerCount):
                 UpdateParameter("Layer count", _configuration.LayerCount.ToString());
                 OnPropertyChanged(nameof(LayerCount));
@@ -161,8 +163,8 @@ public partial class QuoteViewModel : ObservableValidator, IDisposable
                 OnPropertyChanged(nameof(PreviewLayers));
                 break;
 
-            case nameof(PcbConfiguration.FinishType):
-                UpdateParameter("Surface finish", _configuration.FinishType);
+            case nameof(PcbConfiguration.SurfaceFinish):
+                UpdateParameter("Surface finish", _configuration.SurfaceFinish?.Name ?? "-");
                 OnPropertyChanged(nameof(BoardDetails));
                 break;
         }
@@ -176,7 +178,7 @@ public partial class QuoteViewModel : ObservableValidator, IDisposable
         UpdateParameter("Material", _configuration.Material?.Name ?? "-");
         UpdateParameter("Board thickness", _configuration.BoardThickness?.Name ?? "-");
         UpdateParameter("Solder mask", _configuration.SolderMaskColor?.Name ?? "-");
-        UpdateParameter("Surface finish", _configuration.FinishType);
+        UpdateParameter("Surface finish", _configuration.SurfaceFinish?.Name ?? "-");
     }
 
     private void UpdateParameter(string nameKey, string value)

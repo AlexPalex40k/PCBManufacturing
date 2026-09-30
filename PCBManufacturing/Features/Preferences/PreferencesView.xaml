@@ -81,18 +81,33 @@
                     <TextBlock
                         Grid.Row="3"
                         Grid.Column="0"
+                        Margin="0,0,16,10"
+                        VerticalAlignment="Center"
+                        Text="{Binding [Surface finish], Source={StaticResource Localization}}" />
+
+                    <ComboBox
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Margin="0,0,0,10"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding SurfaceFinishes}"
+                        SelectedItem="{Binding SelectedSurfaceFinish}" />
+
+                    <TextBlock
+                        Grid.Row="4"
+                        Grid.Column="0"
                         Margin="0,0,16,0"
                         VerticalAlignment="Center"
                         Text="{Binding [Postcode], Source={StaticResource Localization}}" />
 
                     <TextBox
                         x:Name="PostcodeTextBox"
-                        Grid.Row="3"
+                        Grid.Row="4"
                         Grid.Column="2"
                         Text="{Binding Postcode, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                     <TextBlock
-                        Grid.Row="4"
+                        Grid.Row="5"
                         Grid.Column="2"
                         Style="{StaticResource ValidationErrorTextStyle}"
                         Text="{Binding ElementName=PostcodeTextBox, Path=(Validation.Errors)[0].ErrorContent}"/>
@@ -124,6 +139,12 @@
                     <Run Text="{Binding [Board thickness], Source={StaticResource Localization}, Mode=OneWay}" />
                     <Run Text=": " />
                     <Run Text="{Binding SelectedBoardThickness.Name, Mode=OneWay}" />
+                </TextBlock>
+
+                <TextBlock Margin="0,0,0,6">
+                    <Run Text="{Binding [Surface finish], Source={StaticResource Localization}, Mode=OneWay}" />
+                    <Run Text=": " />
+                    <Run Text="{Binding SelectedSurfaceFinish.Name, Mode=OneWay}" />
                 </TextBlock>
 
                 <TextBlock Margin="0,0,0,6">

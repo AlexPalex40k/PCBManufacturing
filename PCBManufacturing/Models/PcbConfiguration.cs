@@ -17,6 +17,9 @@ public partial class PcbConfiguration : ObservableObject
     private BoardThickness? _boardThickness;
 
     [ObservableProperty]
+    private SurfaceFinish? _surfaceFinish;
+
+    [ObservableProperty]
     private string _postcode = string.Empty;
 
     [ObservableProperty]
@@ -27,7 +30,4 @@ public partial class PcbConfiguration : ObservableObject
 
     [ObservableProperty]
     private int _layerCount = SampleData.PcbLayerCount;
-
-    [ObservableProperty]
-    private string _finishType = SampleData.PcbFinishType;
 }

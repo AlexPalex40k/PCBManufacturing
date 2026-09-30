@@ -25,6 +25,10 @@ public partial class PreferencesViewModel : ObservableValidator
     private BoardThickness? _selectedBoardThickness;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(PriceModifier))]
+    private SurfaceFinish? _selectedSurfaceFinish;
+
+    [ObservableProperty]
     [NotifyDataErrorInfo]
     [Required(ErrorMessageResourceType = typeof(LocalDic),
         ErrorMessageResourceName = "Postcode_is_required")]
@@ -44,10 +48,12 @@ public partial class PreferencesViewModel : ObservableValidator
         Materials = SampleData.Materials;
         SolderMaskColors = SampleData.SolderMaskColors;
         BoardThicknesses = SampleData.BoardThicknesses;
+        SurfaceFinishes = SampleData.SurfaceFinishes;
 
         SelectedMaterial = _configuration.Material ?? Materials.FirstOrDefault();
         SelectedBoardThickness = _configuration.BoardThickness ?? BoardThicknesses.FirstOrDefault();
         SelectedSolderMaskColor = _configuration.SolderMaskColor ?? SolderMaskColors.FirstOrDefault();
+        SelectedSurfaceFinish = _configuration.SurfaceFinish ?? SurfaceFinishes.FirstOrDefault();
         Postcode = _configuration.Postcode;
     }
 
@@ -57,7 +63,9 @@ public partial class PreferencesViewModel : ObservableValidator
 
     public ObservableCollection<BoardThickness> BoardThicknesses { get; }
 
-    public decimal PriceModifier => SelectedMaterial?.PriceModifier ?? 1.0m;
+    public ObservableCollection<SurfaceFinish> SurfaceFinishes { get; }
+
+    public decimal PriceModifier => (SelectedMaterial?.PriceModifier ?? 1m) * (SelectedSurfaceFinish?.PriceModifier ?? 1m);
 
     public int ProductionDays => SelectedMaterial?.ProductionDays ?? 0;
 
@@ -82,6 +90,11 @@ public partial class PreferencesViewModel : ObservableValidator
     partial void OnSelectedBoardThicknessChanged(BoardThickness? value)
     {
         _configuration.BoardThickness = value;
+    }
+
+    partial void OnSelectedSurfaceFinishChanged(SurfaceFinish? value)
+    {
+        _configuration.SurfaceFinish = value;
     }
 
     partial void OnPostcodeChanged(string value)

@@ -102,14 +102,14 @@
                         Grid.Row="5"
                         Grid.Column="0"
                         Margin="0,0,16,10"
-                        Text="{Binding [Finish type], Source={StaticResource Localization}}" />
+                        Text="{Binding [Surface finish], Source={StaticResource Localization}}" />
 
                     <TextBlock
                         Grid.Row="5"
                         Grid.Column="1"
                         Margin="0,0,0,10"
                         FontWeight="SemiBold"
-                        Text="{Binding FinishType, Mode=OneWay}" />
+                        Text="{Binding SurfaceFinish, Mode=OneWay}" />
 
                     <TextBlock
                         Grid.Row="6"

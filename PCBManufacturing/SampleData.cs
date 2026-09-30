@@ -11,7 +11,6 @@ public static class SampleData
     public static double PcbWidth => 100;
     public static double PcbHeight => 80;
     public static int PcbLayerCount => 4;
-    public static string PcbFinishType => "HASL";
 
     public static ObservableCollection<Material> Materials { get; } = new()
         {
@@ -34,6 +33,15 @@ public static class SampleData
             new("2.0 mm", 2.0)
         };
 
+    public static ObservableCollection<SurfaceFinish> SurfaceFinishes { get; } = new()
+        {
+            new("HASL", 1m),
+            new("Lead-Free HASL", 1.15m),
+            new("ENIG", 1.25m),
+            new("ENEPIG", 1.35m),
+            new("Hard Gold", 1.5m),
+        };
+
     public static ObservableCollection<PcbParameter> PcbParameters { get; } = new()
     {
         new("Board", "Width", $"{PcbWidth} mm"),
@@ -43,6 +51,6 @@ public static class SampleData
         new("Fabrication", "Material", "-"),
         new("Fabrication", "Board thickness", "-"),
         new("Fabrication", "Solder mask", "-"),
-        new("Fabrication", "Surface finish", PcbFinishType)
+        new("Fabrication", "Surface finish", "-")
     };
 }

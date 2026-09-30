@@ -133,15 +133,6 @@ namespace PCBManufacturing.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finish type.
-        /// </summary>
-        public static string Finish_type {
-            get {
-                return ResourceManager.GetString("Finish type", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Group.
         /// </summary>
         public static string Group {
