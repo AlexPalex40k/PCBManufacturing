@@ -24,7 +24,7 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
 
         Parameters = new ObservableCollection<PcbParameter>(SampleData.PcbParameters);
 
-        //UpdateParameters();
+        UpdateParameters();
 
         ParametersView = CollectionViewSource.GetDefaultView(Parameters);
         ParametersView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(PcbParameter.GroupKey)));

@@ -28,10 +28,23 @@ public sealed class PcbConfigurationService : IPcbConfigurationService
             return;
         }
 
-        _configuration.Material = _configuration.Material;
-        _configuration.SolderMaskColor = _configuration.SolderMaskColor;
-        _configuration.BoardThickness = _configuration.BoardThickness;
+        _configuration.Material =
+            SampleData.Materials.FirstOrDefault(
+                x => x.Name == data.MaterialName)
+            ?? SampleData.Materials.FirstOrDefault();
+
+        _configuration.SolderMaskColor =
+            SampleData.SolderMaskColors.FirstOrDefault(
+                x => x.Name == data.SolderMaskColorName)
+            ?? SampleData.SolderMaskColors.FirstOrDefault();
+
+        _configuration.BoardThickness =
+            SampleData.BoardThicknesses.FirstOrDefault(
+                x => Equals(x.Millimeters, data.BoardThickness))
+            ?? SampleData.BoardThicknesses.FirstOrDefault();
+
         _configuration.Postcode = data.Postcode;
+
         _configuration.Width = data.Width;
         _configuration.Height = data.Height;
         _configuration.LayerCount = data.LayerCount;
@@ -56,15 +69,9 @@ public sealed class PcbConfigurationService : IPcbConfigurationService
 
     private void ApplyDefaults()
     {
-        _configuration.Material =
-            SampleData.Materials.FirstOrDefault();
-
-        _configuration.SolderMaskColor =
-            SampleData.SolderMaskColors.FirstOrDefault();
-
-        _configuration.BoardThickness =
-            SampleData.BoardThicknesses.FirstOrDefault();
-
+        _configuration.Material = SampleData.Materials.FirstOrDefault();
+        _configuration.SolderMaskColor = SampleData.SolderMaskColors.FirstOrDefault();
+        _configuration.BoardThickness = SampleData.BoardThicknesses.FirstOrDefault();
         _configuration.Width = SampleData.PcbWidth;
         _configuration.Height = SampleData.PcbHeight;
         _configuration.LayerCount = SampleData.PcbLayerCount;
