@@ -48,11 +48,77 @@
 
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn
+                        <DataGridTemplateColumn
                             Width="*"
-                            Binding="{Binding Value}"
-                            ElementStyle="{StaticResource DataGridIndentedTextStyle}"
-                            Header="{Binding [Value], Source={StaticResource Localization}}" />
+                            Header="{Binding [Value], Source={StaticResource Localization}}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="16,0,0,0">
+                                        <TextBlock
+                                            x:Name="ReadOnlyValue"
+                                            VerticalAlignment="Center"
+                                            Foreground="{DynamicResource TextPrimaryBrush}"
+                                            Text="{Binding Value}" />
+
+                                        <StackPanel
+                                            x:Name="WidthEditor"
+                                            VerticalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Visibility="Collapsed">
+                                            <TextBox
+                                                Width="90"
+                                                KeyDown="BoardValueTextBox_OnKeyDown"
+                                                Text="{Binding DataContext.Width, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}" />
+                                            <TextBlock
+                                                Margin="6,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                                Text="mm" />
+                                        </StackPanel>
+
+                                        <StackPanel
+                                            x:Name="HeightEditor"
+                                            VerticalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Visibility="Collapsed">
+                                            <TextBox
+                                                Width="90"
+                                                KeyDown="BoardValueTextBox_OnKeyDown"
+                                                Text="{Binding DataContext.Height, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}" />
+                                            <TextBlock
+                                                Margin="6,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                                Text="mm" />
+                                        </StackPanel>
+
+                                        <TextBox
+                                            x:Name="LayerCountEditor"
+                                            Width="90"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            KeyDown="BoardValueTextBox_OnKeyDown"
+                                            Text="{Binding DataContext.LayerCount, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}"
+                                            Visibility="Collapsed" />
+                                    </Grid>
+
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding NameKey}" Value="Width">
+                                            <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="WidthEditor" Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding NameKey}" Value="Height">
+                                            <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="HeightEditor" Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding NameKey}" Value="Layer count">
+                                            <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="LayerCountEditor" Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

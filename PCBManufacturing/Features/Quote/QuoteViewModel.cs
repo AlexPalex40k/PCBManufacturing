@@ -22,7 +22,7 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
     {
         _configuration = configuration;
 
-        Parameters = SampleData.PcbParameters;
+        Parameters = new ObservableCollection<PcbParameter>(SampleData.PcbParameters);
         UpdateParameters();
 
         ParametersView = CollectionViewSource.GetDefaultView(Parameters);
@@ -37,6 +37,41 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
 
     public ICollectionView ParametersView { get; }
 
+    public double Width
+    {
+        get => _configuration.Width;
+        set
+        {
+            ValidateDimension(value, nameof(Width));
+            _configuration.Width = value;
+        }
+    }
+
+    public double Height
+    {
+        get => _configuration.Height;
+        set
+        {
+            ValidateDimension(value, nameof(Height));
+            _configuration.Height = value;
+        }
+    }
+
+    public int LayerCount
+    {
+        get => _configuration.LayerCount;
+        set
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    "Layer count must be greater than zero.");
+            }
+
+            _configuration.LayerCount = value;
+        }
+    }
 
     public string? SolderMaskColorCode => _configuration.SolderMaskColor?.ColorCode;
 
@@ -71,18 +106,19 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
 
             case nameof(PcbConfiguration.Width):
                 UpdateParameter("Width", $"{_configuration.Width} mm");
+                OnPropertyChanged(nameof(Width));
                 OnPropertyChanged(nameof(BoardDimensions));
                 OnPropertyChanged(nameof(PreviewWidth));
                 break;
-
             case nameof(PcbConfiguration.Height):
                 UpdateParameter("Height", $"{_configuration.Height} mm");
+                OnPropertyChanged(nameof(Height));
                 OnPropertyChanged(nameof(BoardDimensions));
                 OnPropertyChanged(nameof(PreviewHeight));
                 break;
-
             case nameof(PcbConfiguration.LayerCount):
                 UpdateParameter("Layer count", _configuration.LayerCount.ToString());
+                OnPropertyChanged(nameof(LayerCount));
                 OnPropertyChanged(nameof(BoardDetails));
                 break;
 
@@ -119,6 +155,16 @@ public partial class QuoteViewModel : ObservableObject, IDisposable
         {
             Value = value
         };
+    }
+
+    private static void ValidateDimension(double value, string propertyName)
+    {
+        if (!double.IsFinite(value) || value <= 0)
+        {
+            throw new ArgumentOutOfRangeException(
+                propertyName,
+                "Board dimensions must be greater than zero.");
+        }
     }
 
     public void Dispose()

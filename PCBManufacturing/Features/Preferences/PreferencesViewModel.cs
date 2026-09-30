@@ -84,7 +84,10 @@ public partial class PreferencesViewModel : ObservableValidator
             MaterialName = SelectedMaterial?.Name,
             SolderMaskColorName = SelectedSolderMaskColor?.Name,
             BoardThickness = SelectedBoardThickness?.Millimeters,
-            Postcode = Postcode
+            Postcode = Postcode,
+            Width = _configuration.Width,
+            Height = _configuration.Height,
+            LayerCount = _configuration.LayerCount
         };
 
         _configurationStorage.Save(data);
@@ -128,5 +131,25 @@ public partial class PreferencesViewModel : ObservableValidator
             ?? BoardThicknesses.FirstOrDefault();
 
         Postcode = data?.Postcode ?? string.Empty;
+
+        if (data?.Width is double width && IsValidDimension(width))
+        {
+            _configuration.Width = width;
+        }
+
+        if (data?.Height is double height && IsValidDimension(height))
+        {
+            _configuration.Height = height;
+        }
+
+        if (data?.LayerCount is > 0)
+        {
+            _configuration.LayerCount = data.LayerCount.Value;
+        }
+    }
+
+    private static bool IsValidDimension(double value)
+    {
+        return double.IsFinite(value) && value > 0;
     }
 }
