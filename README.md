@@ -25,7 +25,7 @@ The PCB configuration is persisted locally as JSON. Localization is based on `.r
 ## Screenshots
 
 ### Preferences
-![Preferences](PCBManufacturing/Images/PсbPreferences.png)
+![Preferences](PCBManufacturing/Images/PcbPreferences.png)
 
 ### Quote
 
