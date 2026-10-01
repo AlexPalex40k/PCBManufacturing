@@ -13,7 +13,7 @@
 
         <Border
             Grid.Column="0"
-            Style="{StaticResource CommonBorder}">
+            Style="{StaticResource SectionBorder}">
             <StackPanel>
                 <TextBlock
                     Style="{StaticResource SectionTitleStyle}"
@@ -42,17 +42,80 @@
                                     <Binding
                                         Path="CurrentCulture"
                                         Source="{StaticResource Localization}" />
-
                                 </MultiBinding>
                             </DataGridTextColumn.Binding>
-
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn
+                        <DataGridTemplateColumn
                             Width="*"
-                            Binding="{Binding Value}"
-                            ElementStyle="{StaticResource DataGridIndentedTextStyle}"
-                            Header="{Binding [Value], Source={StaticResource Localization}}" />
+                            Header="{Binding [Value], Source={StaticResource Localization}}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock
+                                            x:Name="ReadOnlyValue"
+                                            Style="{StaticResource DataGridIndentedTextStyle}"
+                                            Text="{Binding Value}" />
+
+                                        <StackPanel
+                                            x:Name="WidthEditor"
+                                            VerticalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Visibility="Collapsed">
+                                            <TextBox
+                                                Style="{StaticResource DataGridValueTextBoxStyle}"
+                                                KeyDown="BoardValueTextBox_OnKeyDown"
+                                                Text="{Binding DataContext.Width, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
+                                            <TextBlock
+                                                Style="{StaticResource DataGridUnitTextStyle}"
+                                                Text="mm" />
+                                        </StackPanel>
+
+                                        <StackPanel
+                                            x:Name="HeightEditor"
+                                            VerticalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Visibility="Collapsed">
+                                            <TextBox
+                                                Style="{StaticResource DataGridValueTextBoxStyle}"
+                                                KeyDown="BoardValueTextBox_OnKeyDown"
+                                                Text="{Binding DataContext.Height, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}" />
+                                            <TextBlock
+                                                Style="{StaticResource DataGridUnitTextStyle}"
+                                                Text="mm" />
+                                        </StackPanel>
+
+                                        <TextBox
+                                            x:Name="LayerCountEditor"
+                                            Style="{StaticResource DataGridValueTextBoxStyle}"
+                                            KeyDown="BoardValueTextBox_OnKeyDown"
+                                            Text="{Binding DataContext.LayerCount, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}"
+                                            Visibility="Collapsed" />
+                                    </Grid>
+
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding NameKey}"
+                                            Value="Width">
+                                            <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="WidthEditor" Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding NameKey}"
+                                            Value="Height">
+                                            <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="HeightEditor" Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding NameKey}"
+                                            Value="Layer count">
+                                            <Setter TargetName="ReadOnlyValue" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="LayerCountEditor" Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
@@ -61,7 +124,7 @@
         <Border
             Grid.Column="2"
             ClipToBounds="True"
-            Style="{StaticResource CommonBorder}">
+            Style="{StaticResource SectionBorder}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

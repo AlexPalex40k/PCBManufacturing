@@ -11,5 +11,13 @@ public sealed class PcbConfigurationData
 
     public double? BoardThickness { get; set; }
 
+    public string? SurfaceFinishName { get; set; }
+
     public string Postcode { get; set; } = string.Empty;
+
+    public double Width { get; set; }
+
+    public double Height { get; set; }
+
+    public int LayerCount { get; set; }
 }

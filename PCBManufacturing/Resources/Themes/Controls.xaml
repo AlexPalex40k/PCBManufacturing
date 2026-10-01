@@ -4,7 +4,7 @@
     xmlns:converters="clr-namespace:PCBManufacturing.Converters"
     xmlns:services="clr-namespace:PCBManufacturing.Services">
 
-    <converters:LocalizationConverter x:Key="LocalizationConverter"/>
+    <converters:LocalizationConverter x:Key="LocalizationConverter" />
 
     <Style TargetType="TextBox">
         <Setter Property="Height" Value="28" />
@@ -39,7 +39,7 @@
                             <Setter TargetName="TextBoxBorder" Property="BorderBrush" Value="{DynamicResource ErrorBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.55" />
+                            <Setter Property="Opacity" Value="0.6" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -51,7 +51,7 @@
         x:Key="ValidationErrorTextStyle"
         TargetType="TextBlock">
 
-        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="Margin" Value="0,6,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}" />
         <Setter Property="TextWrapping" Value="Wrap" />
 
@@ -167,7 +167,7 @@
 
     <Style TargetType="ComboBoxItem">
         <Setter Property="MinHeight" Value="26" />
-        <Setter Property="Padding" Value="7,4" />
+        <Setter Property="Padding" Value="6" />
         <Setter Property="Foreground" Value="{DynamicResource InputTextBrush}" />
         <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}" />
 
@@ -196,14 +196,14 @@
 
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.55" />
+                <Setter Property="Opacity" Value="0.6" />
             </Trigger>
         </Style.Triggers>
 
     </Style>
 
     <Style
-        x:Key="CommonBorder"
+        x:Key="SectionBorder"
         TargetType="Border">
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Padding" Value="10" />
@@ -227,7 +227,7 @@
     </Style>
 
     <Style TargetType="DataGridCell">
-        <Setter Property="Padding" Value="8,0" />
+        <Setter Property="Padding" Value="6,0" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
@@ -252,7 +252,7 @@
     </Style>
 
     <Style TargetType="DataGridColumnHeader">
-        <Setter Property="Padding" Value="8,0" />
+        <Setter Property="Padding" Value="6,0" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}" />
@@ -308,8 +308,8 @@
                                                 Margin="3,0,0,0"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Content}"
-                                                TextElement.FontSize="11"
-                                                TextElement.FontWeight="Bold"
+                                                TextElement.FontSize="12"
+                                                TextElement.FontWeight="SemiBold"
                                                 TextElement.Foreground="{DynamicResource TextPrimaryBrush}" />
                                         </Grid>
                                     </Border>
@@ -352,8 +352,8 @@
                         Style="{StaticResource DataGridGroupExpanderStyle}">
                         <Expander.Header>
                             <MultiBinding
-                                Mode="OneWay"
-                                Converter="{StaticResource LocalizationConverter}">
+                                Converter="{StaticResource LocalizationConverter}"
+                                Mode="OneWay">
                                 <Binding Path="Name" />
                                 <Binding
                                     Path="CurrentCulture"
@@ -376,11 +376,27 @@
     </Style>
 
     <Style
+        x:Key="DataGridValueTextBoxStyle"
+        BasedOn="{StaticResource {x:Type TextBox}}"
+        TargetType="TextBox">
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="BorderThickness" Value="1" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
         x:Key="PrimaryButtonStyle"
         TargetType="Button">
         <Setter Property="MinWidth" Value="150" />
         <Setter Property="Height" Value="36" />
-        <Setter Property="Padding" Value="5" />
+        <Setter Property="Padding" Value="6" />
         <Setter Property="Background" Value="{DynamicResource AccentSurfaceBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
         <Setter Property="Cursor" Value="Hand" />
@@ -438,7 +454,7 @@
 
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.5" />
+                <Setter Property="Opacity" Value="0.6" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -451,6 +467,7 @@
         <Setter Property="Height" Value="18" />
         <Setter Property="Background" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Margin" Value="6 0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -465,8 +482,8 @@
                             Margin="2"
                             HorizontalAlignment="Left"
                             Fill="{DynamicResource PrimaryBrush}" />
-
                     </Border>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Track" Property="Background" Value="{DynamicResource BlueBrush}" />
@@ -489,11 +506,12 @@
 
     <Style TargetType="TabItem">
         <Setter Property="Height" Value="32" />
-        <Setter Property="MinWidth" Value="116" />
+        <Setter Property="MinWidth" Value="120" />
         <Setter Property="Padding" Value="16,0" />
         <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
         <Setter Property="Background" Value="{DynamicResource SurfaceAltBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -534,6 +552,21 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style
+        x:Key="FormComboBoxStyle"
+        BasedOn="{StaticResource {x:Type ComboBox}}"
+        TargetType="ComboBox">
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+
+    <Style
+        x:Key="TitleBarTextStyle"
+        BasedOn="{StaticResource {x:Type TextBlock}}"
+        TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TitleTextBrush}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
 </ResourceDictionary>

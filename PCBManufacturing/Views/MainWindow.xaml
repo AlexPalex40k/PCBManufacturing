@@ -48,7 +48,7 @@
                     <Viewbox
                         Width="24"
                         Height="24"
-                        Margin="0,0,9,0"
+                        Margin="0,0,12,0"
                         VerticalAlignment="Center"
                         SnapsToDevicePixels="True"
                         Stretch="Uniform">
@@ -122,23 +122,20 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
                     <TextBlock
-                        Margin="0,0,6,0"
-                        Foreground="{DynamicResource TitleTextBrush}"
+                        Style="{StaticResource TitleBarTextStyle}"
                         Text="EN" />
                     <ToggleButton
-                        Margin="0,0,6,0"
                         IsChecked="{Binding IsRussian}"
                         Style="{StaticResource SwitchToggleStyle}"
                         ToolTip="English / Русский" />
                     <TextBlock
                         Margin="0,0,18,0"
-                        Foreground="{DynamicResource TitleTextBrush}"
+                        Style="{StaticResource TitleBarTextStyle}"
                         Text="RU" />
 
                     <TextBlock
                         MinWidth="70"
-                        Margin="0,0,7,0"
-                        Foreground="{DynamicResource TitleTextBrush}"
+                        Style="{StaticResource TitleBarTextStyle}"
                         Text="{Binding [Dark theme], Source={StaticResource Localization}}" />
                     <ToggleButton
                         IsChecked="{Binding IsDarkTheme}"
@@ -149,14 +146,13 @@
 
         <TabControl Grid.Row="1">
             <TabItem
-                Content="{Binding Preferences}"
-                Validation.ErrorTemplate="{x:Null}">
+                Content="{Binding PreferencesVm}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Rectangle
                             Width="8"
                             Height="8"
-                            Margin="0,0,5,0"
+                            Margin="0,0,6,0"
                             Fill="{DynamicResource BlueBrush}" />
                         <TextBlock Text="{Binding [Preferences], Source={StaticResource Localization}}" />
                     </StackPanel>
@@ -164,28 +160,27 @@
             </TabItem>
 
             <TabItem
-                Content="{Binding Quote}">
+                Content="{Binding QuoteVm}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Ellipse
                             Width="8"
                             Height="8"
-                            Margin="0,0,5,0"
+                            Margin="0,0,6,0"
                             Fill="{DynamicResource CopperBrush}" />
                         <TextBlock Text="{Binding [Quote], Source={StaticResource Localization}}" />
                     </StackPanel>
                 </TabItem.Header>
-
             </TabItem>
 
             <TabItem
-                Content="{Binding Order}">
+                Content="{Binding OrderVm}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Path
                             Width="9"
                             Height="9"
-                            Margin="0,0,7,0"
+                            Margin="0,0,6,0"
                             Data="M 0,4 L 3,7 L 8,0"
                             Stretch="Fill"
                             Stroke="{DynamicResource SuccessBrush}"

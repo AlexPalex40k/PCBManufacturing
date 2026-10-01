@@ -12,7 +12,7 @@
 
         <Border
             Grid.Column="0"
-            Style="{StaticResource CommonBorder}">
+            Style="{StaticResource SectionBorder}">
             <StackPanel>
                 <TextBlock
                     Style="{StaticResource SectionTitleStyle}"
@@ -36,91 +36,85 @@
                     <TextBlock
                         Grid.Row="0"
                         Grid.Column="0"
-                        Margin="0,0,16,10"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Material], Source={StaticResource Localization}}" />
 
                     <TextBlock
                         Grid.Row="0"
                         Grid.Column="1"
-                        Margin="0,0,0,10"
-                        FontWeight="SemiBold"
+                        Style="{StaticResource OrderValueTextStyle}"
                         Text="{Binding Material, Mode=OneWay}" />
 
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="0"
-                        Margin="0,0,16,10"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Solder mask], Source={StaticResource Localization}}" />
 
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="1"
-                        Margin="0,0,0,10"
-                        FontWeight="SemiBold"
+                        Style="{StaticResource OrderValueTextStyle}"
                         Text="{Binding SolderMask, Mode=OneWay}" />
 
                     <TextBlock
                         Grid.Row="2"
                         Grid.Column="0"
-                        Margin="0,0,16,10"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Board thickness], Source={StaticResource Localization}}" />
 
                     <TextBlock
                         Grid.Row="2"
                         Grid.Column="1"
-                        Margin="0,0,0,10"
-                        FontWeight="SemiBold"
+                        Style="{StaticResource OrderValueTextStyle}"
                         Text="{Binding BoardThickness, Mode=OneWay}" />
 
                     <TextBlock
                         Grid.Row="3"
                         Grid.Column="0"
-                        Margin="0,0,16,10"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Dimensions], Source={StaticResource Localization}}" />
 
                     <TextBlock
                         Grid.Row="3"
                         Grid.Column="1"
-                        Margin="0,0,0,10"
-                        FontWeight="SemiBold"
+                        Style="{StaticResource OrderValueTextStyle}"
                         Text="{Binding Dimensions, Mode=OneWay}" />
 
                     <TextBlock
                         Grid.Row="4"
                         Grid.Column="0"
-                        Margin="0,0,16,10"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Layers], Source={StaticResource Localization}}" />
 
                     <TextBlock
                         Grid.Row="4"
                         Grid.Column="1"
-                        Margin="0,0,0,10"
-                        FontWeight="SemiBold"
+                        Style="{StaticResource OrderValueTextStyle}"
                         Text="{Binding LayerCount, Mode=OneWay}" />
 
                     <TextBlock
                         Grid.Row="5"
                         Grid.Column="0"
-                        Margin="0,0,16,10"
-                        Text="{Binding [Finish type], Source={StaticResource Localization}}" />
+                        Style="{StaticResource FormLabelTextStyle}"
+                        Text="{Binding [Surface finish], Source={StaticResource Localization}}" />
 
                     <TextBlock
                         Grid.Row="5"
                         Grid.Column="1"
-                        Margin="0,0,0,10"
-                        FontWeight="SemiBold"
-                        Text="{Binding FinishType, Mode=OneWay}" />
+                        Style="{StaticResource OrderValueTextStyle}"
+                        Text="{Binding SurfaceFinish, Mode=OneWay}" />
 
                     <TextBlock
                         Grid.Row="6"
                         Grid.Column="0"
-                        Margin="0,0,16,0"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Postcode], Source={StaticResource Localization}}" />
 
                     <TextBlock
                         Grid.Row="6"
                         Grid.Column="1"
-                        FontWeight="SemiBold"
+                        Style="{StaticResource OrderValueTextStyle}"
                         Text="{Binding Postcode, Mode=OneWay}" />
 
                 </Grid>

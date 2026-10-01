@@ -12,7 +12,7 @@
 
         <Border
             Grid.Column="0"
-            Style="{StaticResource CommonBorder}">
+            Style="{StaticResource SectionBorder}">
             <StackPanel>
                 <TextBlock
                     Style="{StaticResource SectionTitleStyle}"
@@ -36,14 +36,13 @@
                     <TextBlock
                         Grid.Row="0"
                         Grid.Column="0"
-                        Margin="0,0,16,10"
-                        VerticalAlignment="Center"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Material], Source={StaticResource Localization}}" />
 
                     <ComboBox
                         Grid.Row="0"
                         Grid.Column="2"
-                        Margin="0,0,0,10"
+                        Style="{StaticResource FormComboBoxStyle}"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Materials}"
                         SelectedItem="{Binding SelectedMaterial}" />
@@ -51,14 +50,13 @@
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="0"
-                        Margin="0,0,16,10"
-                        VerticalAlignment="Center"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Solder mask], Source={StaticResource Localization}}" />
 
                     <ComboBox
                         Grid.Row="1"
                         Grid.Column="2"
-                        Margin="0,0,0,10"
+                        Style="{StaticResource FormComboBoxStyle}"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding SolderMaskColors}"
                         SelectedItem="{Binding SelectedSolderMaskColor}" />
@@ -66,14 +64,13 @@
                     <TextBlock
                         Grid.Row="2"
                         Grid.Column="0"
-                        Margin="0,0,16,10"
-                        VerticalAlignment="Center"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Board thickness], Source={StaticResource Localization}}" />
 
                     <ComboBox
                         Grid.Row="2"
                         Grid.Column="2"
-                        Margin="0,0,0,10"
+                        Style="{StaticResource FormComboBoxStyle}"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding BoardThicknesses}"
                         SelectedItem="{Binding SelectedBoardThickness}" />
@@ -81,18 +78,31 @@
                     <TextBlock
                         Grid.Row="3"
                         Grid.Column="0"
-                        Margin="0,0,16,0"
-                        VerticalAlignment="Center"
+                        Style="{StaticResource FormLabelTextStyle}"
+                        Text="{Binding [Surface finish], Source={StaticResource Localization}}" />
+
+                    <ComboBox
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Style="{StaticResource FormComboBoxStyle}"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding SurfaceFinishes}"
+                        SelectedItem="{Binding SelectedSurfaceFinish}" />
+
+                    <TextBlock
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Style="{StaticResource FormLabelTextStyle}"
                         Text="{Binding [Postcode], Source={StaticResource Localization}}" />
 
                     <TextBox
                         x:Name="PostcodeTextBox"
-                        Grid.Row="3"
+                        Grid.Row="4"
                         Grid.Column="2"
                         Text="{Binding Postcode, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
 
                     <TextBlock
-                        Grid.Row="4"
+                        Grid.Row="5"
                         Grid.Column="2"
                         Style="{StaticResource ValidationErrorTextStyle}"
                         Text="{Binding ElementName=PostcodeTextBox, Path=(Validation.Errors)[0].ErrorContent}"/>
@@ -101,38 +111,44 @@
         </Border>
         <Border
             Grid.Column="2"
-            Style="{StaticResource CommonBorder}">
+            Style="{StaticResource SectionBorder}">
 
             <StackPanel>
                 <TextBlock
                     Style="{StaticResource SectionTitleStyle}"
                     Text="{Binding [Summary], Source={StaticResource Localization}}" />
 
-                <TextBlock Margin="0,0,0,6">
+                <TextBlock Style="{StaticResource SummaryItemTextStyle}">
                     <Run Text="{Binding [Material], Source={StaticResource Localization}, Mode=OneWay}" />
                     <Run Text=": " />
                     <Run Text="{Binding SelectedMaterial.Name, Mode=OneWay}" />
                 </TextBlock>
 
-                <TextBlock Margin="0,0,0,6">
+                <TextBlock Style="{StaticResource SummaryItemTextStyle}">
                     <Run Text="{Binding [Solder mask], Source={StaticResource Localization}, Mode=OneWay}" />
                     <Run Text=": " />
                     <Run Text="{Binding SelectedSolderMaskColor.Name, Mode=OneWay}" />
                 </TextBlock>
 
-                <TextBlock Margin="0,0,0,6">
+                <TextBlock Style="{StaticResource SummaryItemTextStyle}">
                     <Run Text="{Binding [Board thickness], Source={StaticResource Localization}, Mode=OneWay}" />
                     <Run Text=": " />
                     <Run Text="{Binding SelectedBoardThickness.Name, Mode=OneWay}" />
                 </TextBlock>
 
-                <TextBlock Margin="0,0,0,6">
+                <TextBlock Style="{StaticResource SummaryItemTextStyle}">
+                    <Run Text="{Binding [Surface finish], Source={StaticResource Localization}, Mode=OneWay}" />
+                    <Run Text=": " />
+                    <Run Text="{Binding SelectedSurfaceFinish.Name, Mode=OneWay}" />
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource SummaryItemTextStyle}">
                     <Run Text="{Binding [Price modifier], Source={StaticResource Localization}, Mode=OneWay}" />
                     <Run Text=": ×" />
                     <Run Text="{Binding PriceModifier, Mode=OneWay}" />
                 </TextBlock>
 
-                <TextBlock>
+                <TextBlock Style="{StaticResource SummaryItemTextStyle}">
                     <Run Text="{Binding [Production time], Source={StaticResource Localization}, Mode=OneWay}" />
                     <Run Text=": " />
                     <Run Text="{Binding ProductionDays, Mode=OneWay}" />

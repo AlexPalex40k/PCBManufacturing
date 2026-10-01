@@ -42,7 +42,7 @@ public partial class OrderViewModel : ObservableObject, IDisposable
 
     public string LayerCount => _configuration.LayerCount.ToString();
 
-    public string FinishType => _configuration.FinishType;
+    public string SurfaceFinish => _configuration.SurfaceFinish?.Name ?? string.Empty;
 
     public string Postcode => _configuration.Postcode;
 
@@ -71,14 +71,17 @@ public partial class OrderViewModel : ObservableObject, IDisposable
             case nameof(PcbConfiguration.Width):
             case nameof(PcbConfiguration.Height):
                 OnPropertyChanged(nameof(Dimensions));
+                OnPropertyChanged(nameof(TotalPrice));
                 break;
 
             case nameof(PcbConfiguration.LayerCount):
                 OnPropertyChanged(nameof(LayerCount));
+                OnPropertyChanged(nameof(TotalPrice));
                 break;
 
-            case nameof(PcbConfiguration.FinishType):
-                OnPropertyChanged(nameof(FinishType));
+            case nameof(PcbConfiguration.SurfaceFinish):
+                OnPropertyChanged(nameof(SurfaceFinish));
+                OnPropertyChanged(nameof(TotalPrice));
                 break;
 
             case nameof(PcbConfiguration.Postcode):
@@ -105,7 +108,7 @@ public partial class OrderViewModel : ObservableObject, IDisposable
             $"{LocalDic.Board_thickness}: {BoardThickness}\n" +
             $"{LocalDic.Dimensions}: {Dimensions}\n" +
             $"{LocalDic.Layers}: {LayerCount}\n" +
-            $"{LocalDic.Finish_type}: {FinishType}\n" +
+            $"{LocalDic.Surface_finish}: {SurfaceFinish}\n" +
             $"{LocalDic.Postcode}: {Postcode}";
 
         _dialogService.ShowInformation(message, LocalDic.Order_placed);
@@ -116,6 +119,7 @@ public partial class OrderViewModel : ObservableObject, IDisposable
         return _configuration.Material != null
                && _configuration.SolderMaskColor != null
                && _configuration.BoardThickness != null
+               && _configuration.SurfaceFinish != null
                && _postcodeValidator.IsValid(_configuration.Postcode);
     }
 
@@ -125,7 +129,8 @@ public partial class OrderViewModel : ObservableObject, IDisposable
         var layerModifier = _configuration.LayerCount * LayerFactor;
         var widthModifier = (decimal)_configuration.Width * DimensionFactor;
         var heightModifier = (decimal)_configuration.Height * DimensionFactor;
-        var thicknessModifier = (decimal)(_configuration.BoardThickness?.Millimeters / 1.5 ?? 1.6);
+        var thicknessModifier = (decimal)(_configuration.BoardThickness?.Millimeters / 1.5 ?? 1.0);
+        var surfaceFinishModifier = _configuration.SurfaceFinish?.PriceModifier ?? 1m;
 
         return Math.Round(
             BasePrice
@@ -133,7 +138,8 @@ public partial class OrderViewModel : ObservableObject, IDisposable
             * layerModifier
             * widthModifier
             * heightModifier
-            * thicknessModifier,
+            * thicknessModifier
+            * surfaceFinishModifier,
             2);
     }
 

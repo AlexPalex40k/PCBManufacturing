@@ -25,17 +25,6 @@ public sealed class OrderViewModelTests
         Assert.Null(dialogService.ErrorMessage);
     }
 
-    private static PcbConfiguration CreateValidConfiguration()
-    {
-        return new PcbConfiguration
-        {
-            Material = new Material("FR-4", 1.0m, 5),
-            SolderMaskColor = new SolderMaskColor("Green", "#008C4A"),
-            BoardThickness = new BoardThickness("1.6 mm", 1.6),
-            Postcode = "11000"
-        };
-    }
-
     [Fact]
     public void PlaceOrderCommand_WithInvalidPostcode_ShowsError()
     {
@@ -114,5 +103,38 @@ public sealed class OrderViewModelTests
             new PostcodeValidator());
 
         Assert.Equal(236.80m, viewModel.TotalPrice);
+    }
+
+    [Fact]
+    public void TotalPrice_WithSurfaceFinish_AppliesPriceModifier()
+    {
+        var configuration = new PcbConfiguration
+        {
+            Material = new Material("FR-4", 1.0m, 5),
+            BoardThickness = new BoardThickness("0.8 mm", 0.8),
+            SurfaceFinish = new SurfaceFinish("ENIG", 1.25m),
+            Width = 100,
+            Height = 80,
+            LayerCount = 4
+        };
+
+        var viewModel = new OrderViewModel(
+            configuration,
+            new FakeDialogService(),
+            new PostcodeValidator());
+
+        Assert.Equal(296.00m, viewModel.TotalPrice);
+    }
+
+    private static PcbConfiguration CreateValidConfiguration()
+    {
+        return new PcbConfiguration
+        {
+            Material = new Material("FR-4", 1.0m, 5),
+            SolderMaskColor = new SolderMaskColor("Green", "#008C4A"),
+            BoardThickness = new BoardThickness("1.6 mm", 1.6),
+            SurfaceFinish = new SurfaceFinish("HASL", 1.0m),
+            Postcode = "11000"
+        };
     }
 }

@@ -23,4 +23,71 @@ public sealed class QuoteViewModelTests
         Assert.Contains(nameof(QuoteViewModel.SolderMaskColorCode), changedProperties);
         Assert.Contains(viewModel.Parameters, parameter => parameter.NameKey == "Solder mask" && parameter.Value == "Blue");
     }
+
+    [Fact]
+    public void BoardValuesChanged_UpdatesSharedConfigurationAndPreview()
+    {
+        var configuration = new PcbConfiguration();
+
+        using var viewModel = new QuoteViewModel(configuration);
+
+        viewModel.Width = 120.5;
+        viewModel.Height = 75;
+        viewModel.LayerCount = 6;
+
+        Assert.Equal(120.5, configuration.Width);
+        Assert.Equal(75, configuration.Height);
+        Assert.Equal(6, configuration.LayerCount);
+        Assert.Equal(
+            $"{configuration.Width} × {configuration.Height} mm",
+            viewModel.BoardDimensions);
+        Assert.Equal(482, viewModel.PreviewWidth);
+        Assert.Equal(300, viewModel.PreviewHeight);
+        Assert.Contains(
+            viewModel.Parameters,
+            parameter => parameter.NameKey == "Layer count" && parameter.Value == "6");
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(5)]
+    [InlineData(-1)]
+    [InlineData(1001)]
+    [InlineData(double.NaN)]
+    [InlineData(double.PositiveInfinity)]
+    public void WidthChanged_WithInvalidValue_DoesNotUpdateConfiguration(
+        double value)
+    {
+        var configuration = new PcbConfiguration
+        {
+            Width = 100
+        };
+
+        using var viewModel = new QuoteViewModel(configuration);
+
+        viewModel.Width = value;
+
+        Assert.True(viewModel.HasErrors);
+        Assert.Equal(100, configuration.Width);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(65)]
+    public void LayerCountChanged_WithInvalidValue_DoesNotUpdateConfiguration(
+        int value)
+    {
+        var configuration = new PcbConfiguration
+        {
+            LayerCount = 4
+        };
+
+        using var viewModel = new QuoteViewModel(configuration);
+
+        viewModel.LayerCount = value;
+
+        Assert.True(viewModel.HasErrors);
+        Assert.Equal(4, configuration.LayerCount);
+    }
 }

@@ -16,6 +16,10 @@ public static class Module
         var services = new ServiceCollection();
 
         services.AddSingleton<PcbConfiguration>();
+        services.AddSingleton<IThemeService, ThemeService>();
+        services.AddSingleton<IConfigurationStorage, JsonConfigurationStorage>();
+        services.AddSingleton<IPcbConfigurationService, PcbConfigurationService>();
+
         services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<IPostcodeValidator, PostcodeValidator>();
 
@@ -24,9 +28,6 @@ public static class Module
         services.AddSingleton<PreferencesViewModel>();
         services.AddSingleton<QuoteViewModel>();
         services.AddSingleton<OrderViewModel>();
-
-        services.AddSingleton<IThemeService, ThemeService>();
-        services.AddSingleton<IConfigurationStorage, JsonConfigurationStorage>();
 
         return services.BuildServiceProvider();
     }

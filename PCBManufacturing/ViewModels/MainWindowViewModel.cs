@@ -13,6 +13,7 @@ namespace PCBManufacturing.ViewModels;
 public partial class MainWindowViewModel : ObservableObject
 {
     private readonly IThemeService _themeService;
+    private readonly IPcbConfigurationService _configurationService;
 
     [ObservableProperty]
     private bool _isDarkTheme;
@@ -21,28 +22,31 @@ public partial class MainWindowViewModel : ObservableObject
     private bool _isRussian;
 
     public MainWindowViewModel(
-        PreferencesViewModel preferences, 
-        QuoteViewModel quote, 
-        OrderViewModel order,
-        IThemeService themeService)
+        IPcbConfigurationService configurationService,
+        IThemeService themeService,
+        PreferencesViewModel preferencesVm,
+        QuoteViewModel quoteVm,
+        OrderViewModel orderVm)
     {
-        Preferences = preferences;
-        Quote = quote;
-        Order = order;
+        _configurationService = configurationService;
+
         _themeService = themeService;
+
+        PreferencesVm = preferencesVm;
+        QuoteVm = quoteVm;
+        OrderVm = orderVm;
     }
 
-    public PreferencesViewModel Preferences { get; }
-
-    public QuoteViewModel Quote { get; }
-    public OrderViewModel Order { get; }
+    public PreferencesViewModel PreferencesVm { get; }
+    public QuoteViewModel QuoteVm { get; }
+    public OrderViewModel OrderVm { get; }
 
     /// <summary>
     /// Saves application state before shutdown.
     /// </summary>
     public void SaveState()
     {
-        Preferences.SaveConfiguration();
+        _configurationService.Save();
     }
 
     partial void OnIsDarkThemeChanged(bool value)
@@ -64,6 +68,7 @@ public partial class MainWindowViewModel : ObservableObject
             : CultureInfo.GetCultureInfo("en");
 
         LocalizationManager.Instance.SetCulture(culture);
-        Preferences.RefreshValidation();
+        PreferencesVm.RefreshLocalization();
+        QuoteVm.RefreshLocalization();
     }
 }

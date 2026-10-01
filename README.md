@@ -15,11 +15,11 @@ The application follows the MVVM pattern and separates UI, presentation logic, a
 - **Resources** — localization resources and light/dark theme dictionaries.
 - **Tests** — unit tests for ViewModels, validation, and application logic.
 
-`PcbConfiguration` represents the shared PCB configuration. Changes made in Preferences are propagated to Quote and Order through `INotifyPropertyChanged`.
+`PcbConfiguration` represents the shared PCB configuration. Changes made in Preferences and Quote are propagated through the shared `PcbConfiguration` instance and reflected across application features.
 
 Dependencies are registered using `Microsoft.Extensions.DependencyInjection`, while `CommunityToolkit.Mvvm` is used for observable properties, commands, and validation.
 
-User preferences are persisted locally as JSON. Localization is based on `.resx` resources, and light/dark themes are implemented with WPF `ResourceDictionary` files.
+The PCB configuration is persisted locally as JSON. Localization is based on `.resx` resources, and light/dark themes are implemented with WPF `ResourceDictionary` files.
 
 
 ## Screenshots
@@ -45,10 +45,12 @@ User preferences are persisted locally as JSON. Localization is based on `.resx`
   - material
   - solder mask color
   - board thickness
+  - surface finish
   - postcode
+- Editable board dimensions and layer count
 - Quote overview with grouped PCB parameters
-- PCB preview that reacts to the selected configuration
-- Simple order price calculation
+- Dynamic PCB preview based on board dimensions, layer count, and solder mask
+- Price calculation based on the selected PCB configuration
 - Order validation and confirmation
 - Light and dark themes
 - English and Russian localization
@@ -56,7 +58,7 @@ User preferences are persisted locally as JSON. Localization is based on `.resx`
 - Single-instance application behavior
 - Unit tests for application logic
 
-## Build Instructions
+## Framework Versions
 
 ### Application
 
@@ -65,17 +67,19 @@ User preferences are persisted locally as JSON. Localization is based on `.resx`
 - CommunityToolkit.Mvvm 8.4.2
 - Microsoft.Extensions.DependencyInjection 8.0.1
 
-### Requirements
-
-- Windows
-- .NET 8 SDK
-
 ### Tests
 
 - xUnit 2.5.3
 - xunit.runner.visualstudio 2.5.3
 - Microsoft.NET.Test.Sdk 17.8.0
 - coverlet.collector 6.0.0
+
+## Build Instructions
+
+### Requirements
+
+- Windows
+- .NET 8 SDK
 
 ### Build from the command line
 
