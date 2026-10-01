@@ -122,23 +122,20 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
                     <TextBlock
-                        Margin="0,0,6,0"
-                        Foreground="{DynamicResource TitleTextBrush}"
+                        Style="{StaticResource TitleBarTextStyle}"
                         Text="EN" />
                     <ToggleButton
-                        Margin="0,0,6,0"
                         IsChecked="{Binding IsRussian}"
                         Style="{StaticResource SwitchToggleStyle}"
                         ToolTip="English / Русский" />
                     <TextBlock
                         Margin="0,0,18,0"
-                        Foreground="{DynamicResource TitleTextBrush}"
+                        Style="{StaticResource TitleBarTextStyle}"
                         Text="RU" />
 
                     <TextBlock
                         MinWidth="70"
-                        Margin="0,0,7,0"
-                        Foreground="{DynamicResource TitleTextBrush}"
+                        Style="{StaticResource TitleBarTextStyle}"
                         Text="{Binding [Dark theme], Source={StaticResource Localization}}" />
                     <ToggleButton
                         IsChecked="{Binding IsDarkTheme}"
@@ -149,8 +146,7 @@
 
         <TabControl Grid.Row="1">
             <TabItem
-                Content="{Binding PreferencesVm}"
-                Validation.ErrorTemplate="{x:Null}">
+                Content="{Binding PreferencesVm}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Rectangle
@@ -164,8 +160,7 @@
             </TabItem>
 
             <TabItem
-                Content="{Binding QuoteVm}"
-                Validation.ErrorTemplate="{x:Null}">
+                Content="{Binding QuoteVm}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Ellipse
