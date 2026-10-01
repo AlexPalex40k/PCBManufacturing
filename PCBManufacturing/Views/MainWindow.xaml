@@ -48,7 +48,7 @@
                     <Viewbox
                         Width="24"
                         Height="24"
-                        Margin="0,0,9,0"
+                        Margin="0,0,12,0"
                         VerticalAlignment="Center"
                         SnapsToDevicePixels="True"
                         Stretch="Uniform">
@@ -152,7 +152,7 @@
                         <Rectangle
                             Width="8"
                             Height="8"
-                            Margin="0,0,5,0"
+                            Margin="0,0,6,0"
                             Fill="{DynamicResource BlueBrush}" />
                         <TextBlock Text="{Binding [Preferences], Source={StaticResource Localization}}" />
                     </StackPanel>
@@ -166,12 +166,11 @@
                         <Ellipse
                             Width="8"
                             Height="8"
-                            Margin="0,0,5,0"
+                            Margin="0,0,6,0"
                             Fill="{DynamicResource CopperBrush}" />
                         <TextBlock Text="{Binding [Quote], Source={StaticResource Localization}}" />
                     </StackPanel>
                 </TabItem.Header>
-
             </TabItem>
 
             <TabItem
@@ -181,7 +180,7 @@
                         <Path
                             Width="9"
                             Height="9"
-                            Margin="0,0,7,0"
+                            Margin="0,0,6,0"
                             Data="M 0,4 L 3,7 L 8,0"
                             Stretch="Fill"
                             Stroke="{DynamicResource SuccessBrush}"
